@@ -9,21 +9,24 @@
 /* Begin PBXBuildFile section */
 		59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E182C3487E600D0D4C4 /* AppDelegate.swift */; };
 		59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */; };
-		59624E1D2C3487E600D0D4C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E1C2C3487E600D0D4C4 /* ViewController.swift */; };
-		59624E202C3487E600D0D4C4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 59624E1F2C3487E600D0D4C4 /* Base */; };
 		59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59624E212C3487E800D0D4C4 /* Assets.xcassets */; };
 		59624E252C3487E800D0D4C4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 59624E242C3487E800D0D4C4 /* Base */; };
+		59624E2D2C348C2D00D0D4C4 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E2C2C348C2D00D0D4C4 /* WelcomeViewController.swift */; };
+		59624E352C35D92E00D0D4C4 /* myNetworkPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 59624E342C35D92E00D0D4C4 /* myNetworkPackage */; };
+		59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */; };
+		59624E3F2C35EA0600D0D4C4 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E3E2C35EA0500D0D4C4 /* NavigationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		59624E152C3487E600D0D4C4 /* HerCycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HerCycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59624E182C3487E600D0D4C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		59624E1C2C3487E600D0D4C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		59624E1F2C3487E600D0D4C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59624E212C3487E800D0D4C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59624E242C3487E800D0D4C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59624E262C3487E800D0D4C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59624E2C2C348C2D00D0D4C4 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTrackingCalendarView.swift; sourceTree = "<group>"; };
+		59624E3E2C35EA0500D0D4C4 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59624E352C35D92E00D0D4C4 /* myNetworkPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +60,64 @@
 		59624E172C3487E600D0D4C4 /* HerCycle */ = {
 			isa = PBXGroup;
 			children = (
-				59624E182C3487E600D0D4C4 /* AppDelegate.swift */,
-				59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */,
-				59624E1C2C3487E600D0D4C4 /* ViewController.swift */,
-				59624E1E2C3487E600D0D4C4 /* Main.storyboard */,
-				59624E212C3487E800D0D4C4 /* Assets.xcassets */,
-				59624E232C3487E800D0D4C4 /* LaunchScreen.storyboard */,
-				59624E262C3487E800D0D4C4 /* Info.plist */,
+				59624E422C35F39C00D0D4C4 /* Views */,
+				59624E402C35EB5400D0D4C4 /* NavigationManager */,
+				59624E302C35D81E00D0D4C4 /* Supporting */,
+				59624E312C35D88800D0D4C4 /* Resources */,
 			);
 			path = HerCycle;
+			sourceTree = "<group>";
+		};
+		59624E302C35D81E00D0D4C4 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				59624E182C3487E600D0D4C4 /* AppDelegate.swift */,
+				59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */,
+				59624E232C3487E800D0D4C4 /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		59624E312C35D88800D0D4C4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				59624E212C3487E800D0D4C4 /* Assets.xcassets */,
+				59624E262C3487E800D0D4C4 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		59624E322C35D91300D0D4C4 /* UIKitViews */ = {
+			isa = PBXGroup;
+			children = (
+				59624E2C2C348C2D00D0D4C4 /* WelcomeViewController.swift */,
+			);
+			path = UIKitViews;
+			sourceTree = "<group>";
+		};
+		59624E402C35EB5400D0D4C4 /* NavigationManager */ = {
+			isa = PBXGroup;
+			children = (
+				59624E3E2C35EA0500D0D4C4 /* NavigationManager.swift */,
+			);
+			path = NavigationManager;
+			sourceTree = "<group>";
+		};
+		59624E412C35F37500D0D4C4 /* SwiftUIViews */ = {
+			isa = PBXGroup;
+			children = (
+				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
+			);
+			path = SwiftUIViews;
+			sourceTree = "<group>";
+		};
+		59624E422C35F39C00D0D4C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				59624E322C35D91300D0D4C4 /* UIKitViews */,
+				59624E412C35F37500D0D4C4 /* SwiftUIViews */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +136,9 @@
 			dependencies = (
 			);
 			name = HerCycle;
+			packageProductDependencies = (
+				59624E342C35D92E00D0D4C4 /* myNetworkPackage */,
+			);
 			productName = HerCycle;
 			productReference = 59624E152C3487E600D0D4C4 /* HerCycle.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +167,9 @@
 				Base,
 			);
 			mainGroup = 59624E0C2C3487E600D0D4C4;
+			packageReferences = (
+				59624E332C35D92D00D0D4C4 /* XCRemoteSwiftPackageReference "NetWorking-Package" */,
+			);
 			productRefGroup = 59624E162C3487E600D0D4C4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +186,6 @@
 			files = (
 				59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */,
 				59624E252C3487E800D0D4C4 /* Base in Resources */,
-				59624E202C3487E600D0D4C4 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +196,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59624E1D2C3487E600D0D4C4 /* ViewController.swift in Sources */,
+				59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */,
+				59624E2D2C348C2D00D0D4C4 /* WelcomeViewController.swift in Sources */,
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
+				59624E3F2C35EA0600D0D4C4 /* NavigationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		59624E1E2C3487E600D0D4C4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				59624E1F2C3487E600D0D4C4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		59624E232C3487E800D0D4C4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,10 +345,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HerCycle/Info.plist;
+				INFOPLIST_FILE = HerCycle/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,10 +371,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HerCycle/Info.plist;
+				INFOPLIST_FILE = HerCycle/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -361,6 +411,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		59624E332C35D92D00D0D4C4 /* XCRemoteSwiftPackageReference "NetWorking-Package" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AnaIoramashvili/NetWorking-Package";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		59624E342C35D92E00D0D4C4 /* myNetworkPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59624E332C35D92D00D0D4C4 /* XCRemoteSwiftPackageReference "NetWorking-Package" */;
+			productName = myNetworkPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 59624E0D2C3487E600D0D4C4 /* Project object */;
 }

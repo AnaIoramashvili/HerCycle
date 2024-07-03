@@ -1,0 +1,15 @@
+{
+  "originHash" : "6ee883d7e9b2137f2120375a37576bd4b7421b57cbb57d59246274dc8eaa4e09",
+  "pins" : [
+    {
+      "identity" : "networking-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AnaIoramashvili/NetWorking-Package",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1d43175b3a0fcfe88b568c0e5795507868b1cdbb"
+      }
+    }
+  ],
+  "version" : 3
+}
