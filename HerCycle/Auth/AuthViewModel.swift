@@ -17,6 +17,8 @@ protocol AuthenticationFromProtocol {
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
+    @Published var userData: UserData?
+
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -70,5 +72,18 @@ class AuthViewModel: ObservableObject {
         guard let snapshot = try? await Firestore.firestore().collection("user").document(uid).getDocument() else { return }
         self.currentUser = try? snapshot.data(as: User.self)
         
+    }
+    
+    func saveUserData(_ data: UserData) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let encodedData = try Firestore.Encoder().encode(data)
+        try await Firestore.firestore().collection("userData").document(uid).setData(encodedData)
+        self.userData = data
+    }
+
+    func fetchUserData() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("userData").document(uid).getDocument() else { return }
+        self.userData = try? snapshot.data(as: UserData.self)
     }
 }

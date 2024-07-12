@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
-    @State private var currentPassword = ""
-    
+
     var body: some View {
         if let user = viewModel.currentUser {
             List {
@@ -19,7 +19,7 @@ struct ProfileView: View {
                         Text(user.initials)
                             .font(.title)
                             .bold()
-                            .foregroundStyle(.white)
+                            .foregroundColor(.white)
                             .frame(width: 70, height: 70)
                             .background(Color(.systemGray3))
                             .clipShape(Circle())
@@ -29,53 +29,54 @@ struct ProfileView: View {
                                 .bold()
                             Text(user.email)
                                 .font(.footnote)
-                                .foregroundStyle(.gray)
+                                .foregroundColor(.gray)
                         }
                     }
                 }
                 
-                Section("General") {
-                    HStack {
-                        SettingRowView(imageName: "gear",
-                                       title: "Version",
-                                       tintColor: Color(.systemGray))
-                        Spacer()
-                        
-                        Text("1.0.0")
-                            .font(.subheadline)
-                            .foregroundStyle(.gray)
+                Section("Cycle Information") {
+                    if let userData = viewModel.userData {
+                        HStack {
+                            Text("Cycle Length")
+                            Spacer()
+                            Text("\(userData.cycleLength) days")
+                        }
+                        HStack {
+                            Text("Period Length")
+                            Spacer()
+                            Text("\(userData.periodLength) days")
+                        }
+                        HStack {
+                            Text("Last Period Start")
+                            Spacer()
+                            Text(userData.lastPeriodStartDate, style: .date)
+                        }
                     }
                 }
                 
-                Section("Acclount") {
+                Section("Account") {
                     Button(action: {
                         viewModel.signOut()
-                    }, label: {
+                    }) {
                         SettingRowView(imageName: "arrow.left.circle.fill",
                                        title: "Sign Out",
                                        tintColor: .red)
-                    })
-                    
-                    Button(action: {
-//                        Task {
-//                            do {
-//                                try await viewModel.deleteAccount(currentPassword: currentPassword)
-//                            } catch {
-//                                print("Failed to delete account: \(error.localizedDescription)")
-//                            }
-//                        }
-                        print("sss")
-                    }, label: {
-                        SettingRowView(imageName: "xmark.circle.fill",
-                                       title: "Delite Account",
-                                       tintColor: .red)
-                    })
+                    }
+                }
+            }
+            .onAppear {
+                Task {
+                    await viewModel.fetchUserData()
                 }
             }
         }
     }
 }
 
-#Preview {
-    ProfileView()
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView()
+            .environmentObject(AuthViewModel())
+    }
 }
+

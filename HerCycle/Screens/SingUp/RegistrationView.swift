@@ -5,7 +5,6 @@
 //  Created by Ana on 7/11/24.
 //
 
-
 import SwiftUI
 
 struct RegistrationView: View {
@@ -17,6 +16,7 @@ struct RegistrationView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     @State private var isRotating = false
+    @State private var navigateToQuestionPage1 = false
     
     var body: some View {
         NavigationStack {
@@ -27,7 +27,7 @@ struct RegistrationView: View {
                     Spacer()
                     
                     VStack {
-                        Image(.logo)
+                        Image("logo")
                             .resizable()
                             .foregroundColor(.gray)
                             .scaledToFill()
@@ -83,6 +83,7 @@ struct RegistrationView: View {
                                 try await viewModel.createUser(withEmail: email,
                                                                password: password,
                                                                fullName: fullName)
+                                navigateToQuestionPage1 = true
                             }
                         }, label: {
                             Text("SIGN UP")
@@ -120,6 +121,9 @@ struct RegistrationView: View {
                 .padding()
             }
         }
+        .navigationDestination(isPresented: $navigateToQuestionPage1) {
+            QuestionPage1()
+        }
     }
 }
 
@@ -136,6 +140,8 @@ extension RegistrationView: AuthenticationFromProtocol {
     }
 }
 
-#Preview {
-    RegistrationView()
+struct RegistrationView_Previews: PreviewProvider {
+    static var previews: some View {
+        RegistrationView()
+    }
 }

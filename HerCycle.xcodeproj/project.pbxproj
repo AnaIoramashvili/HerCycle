@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		592E18E52C41C531007BA699 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E42C41C531007BA699 /* UserData.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA03E2C3F3D3100DC13DE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03D2C3F3D3100DC13DE /* FirebaseAuth */; };
 		595FA0402C3F3D3100DC13DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03F2C3F3D3100DC13DE /* FirebaseFirestore */; };
@@ -24,6 +25,10 @@
 		595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A22C402BEB00DC13DE /* RegistrationView.swift */; };
 		595FA0A62C402C1000DC13DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A52C402C1000DC13DE /* ContentView.swift */; };
 		595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A92C4051C900DC13DE /* LoadingView.swift */; };
+		595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B62C415D2000DC13DE /* QuestionPage1.swift */; };
+		595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B82C415D3100DC13DE /* QuestionPage2.swift */; };
+		595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */; };
+		595FA0BD2C417F2300DC13DE /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BC2C417F2300DC13DE /* CalendarViewController.swift */; };
 		59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E182C3487E600D0D4C4 /* AppDelegate.swift */; };
 		59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */; };
 		59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59624E212C3487E800D0D4C4 /* Assets.xcassets */; };
@@ -33,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		592E18E42C41C531007BA699 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -46,6 +52,10 @@
 		595FA0A22C402BEB00DC13DE /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		595FA0A52C402C1000DC13DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		595FA0A92C4051C900DC13DE /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		595FA0B62C415D2000DC13DE /* QuestionPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage1.swift; sourceTree = "<group>"; };
+		595FA0B82C415D3100DC13DE /* QuestionPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage2.swift; sourceTree = "<group>"; };
+		595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage3.swift; sourceTree = "<group>"; };
+		595FA0BC2C417F2300DC13DE /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		59624E152C3487E600D0D4C4 /* HerCycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HerCycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59624E182C3487E600D0D4C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				595FA0932C402B0F00DC13DE /* User.swift */,
+				592E18E42C41C531007BA699 /* UserData.swift */,
 			);
 			name = Model;
 			path = Components;
@@ -117,9 +128,10 @@
 		595FA09D2C402BA700DC13DE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				595FA09E2C402BBF00DC13DE /* OnboardingView.swift */,
-				595FA0A02C402BD300DC13DE /* LoginView.swift */,
-				595FA0A82C4051B000DC13DE /* Registration */,
+				595FA0B02C41583800DC13DE /* OnBoarding */,
+				595FA0AF2C41582200DC13DE /* LogIn */,
+				595FA0A82C4051B000DC13DE /* SingUp */,
+				595FA0B52C415C4500DC13DE /* QuestionsPages */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -140,13 +152,40 @@
 			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
-		595FA0A82C4051B000DC13DE /* Registration */ = {
+		595FA0A82C4051B000DC13DE /* SingUp */ = {
 			isa = PBXGroup;
 			children = (
 				595FA0A22C402BEB00DC13DE /* RegistrationView.swift */,
 				595FA0A92C4051C900DC13DE /* LoadingView.swift */,
 			);
-			path = Registration;
+			path = SingUp;
+			sourceTree = "<group>";
+		};
+		595FA0AF2C41582200DC13DE /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				595FA0A02C402BD300DC13DE /* LoginView.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		595FA0B02C41583800DC13DE /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				595FA09E2C402BBF00DC13DE /* OnboardingView.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		595FA0B52C415C4500DC13DE /* QuestionsPages */ = {
+			isa = PBXGroup;
+			children = (
+				595FA0B62C415D2000DC13DE /* QuestionPage1.swift */,
+				595FA0B82C415D3100DC13DE /* QuestionPage2.swift */,
+				595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */,
+				595FA0BC2C417F2300DC13DE /* CalendarViewController.swift */,
+			);
+			path = QuestionsPages;
 			sourceTree = "<group>";
 		};
 		59624E0C2C3487E600D0D4C4 = {
@@ -284,13 +323,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				595FA0BD2C417F2300DC13DE /* CalendarViewController.swift in Sources */,
 				595FA08F2C402AA100DC13DE /* InputView.swift in Sources */,
 				595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
 				59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */,
+				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
 				595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */,
+				595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */,
 				595FA0942C402B0F00DC13DE /* User.swift in Sources */,
 				595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */,
 				595FA0992C402B5600DC13DE /* ProfileView.swift in Sources */,
@@ -298,6 +340,8 @@
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
 				595FA0972C402B4C00DC13DE /* HomeView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
+				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,
+				592E18E52C41C531007BA699 /* UserData.swift in Sources */,
 				595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
