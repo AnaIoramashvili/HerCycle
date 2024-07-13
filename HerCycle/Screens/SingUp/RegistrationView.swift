@@ -14,9 +14,11 @@ struct RegistrationView: View {
     @State private var confirmPassword = ""
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var coordinator: AppCoordinator
     
     @State private var isRotating = false
-    @State private var navigateToQuestionPage1 = false
+    @State private var showAlert = false
+    @State private var errorMessage = ""
     
     var body: some View {
         NavigationStack {
@@ -80,10 +82,15 @@ struct RegistrationView: View {
                         
                         Button(action: {
                             Task {
-                                try await viewModel.createUser(withEmail: email,
-                                                               password: password,
-                                                               fullName: fullName)
-                                navigateToQuestionPage1 = true
+                                do {
+                                    try await viewModel.createUser(withEmail: email,
+                                                                   password: password,
+                                                                   fullName: fullName)
+                                    await coordinator.userDidLogin()
+                                } catch {
+                                    errorMessage = error.localizedDescription
+                                    showAlert = true
+                                }
                             }
                         }, label: {
                             Text("SIGN UP")
@@ -121,15 +128,14 @@ struct RegistrationView: View {
                 .padding()
             }
         }
-        .navigationDestination(isPresented: $navigateToQuestionPage1) {
-            QuestionPage1()
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
         }
     }
 }
 
 // MARK: - AuthenticationFormProtocol
-
-extension RegistrationView: AuthenticationFromProtocol {
+extension RegistrationView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty
         && email.contains("@")
@@ -143,5 +149,7 @@ extension RegistrationView: AuthenticationFromProtocol {
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         RegistrationView()
+            .environmentObject(AuthViewModel())
+            .environmentObject(AppCoordinator(window: UIWindow()))
     }
 }

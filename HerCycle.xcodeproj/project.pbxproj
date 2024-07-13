@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		592E18E52C41C531007BA699 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E42C41C531007BA699 /* UserData.swift */; };
+		592E18E72C42C65B007BA699 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E62C42C65B007BA699 /* AppCoordinator.swift */; };
+		592E18E92C42C699007BA699 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E82C42C699007BA699 /* MainTabBarController.swift */; };
+		592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18EA2C42C6B0007BA699 /* HomeViewController.swift */; };
+		592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA03E2C3F3D3100DC13DE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03D2C3F3D3100DC13DE /* FirebaseAuth */; };
 		595FA0402C3F3D3100DC13DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03F2C3F3D3100DC13DE /* FirebaseFirestore */; };
@@ -17,18 +21,14 @@
 		595FA08F2C402AA100DC13DE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08E2C402AA100DC13DE /* InputView.swift */; };
 		595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0902C402AB600DC13DE /* SettingRowView.swift */; };
 		595FA0942C402B0F00DC13DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0932C402B0F00DC13DE /* User.swift */; };
-		595FA0972C402B4C00DC13DE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0962C402B4C00DC13DE /* HomeView.swift */; };
-		595FA0992C402B5600DC13DE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0982C402B5600DC13DE /* ProfileView.swift */; };
 		595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */; };
 		595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09E2C402BBF00DC13DE /* OnboardingView.swift */; };
 		595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A02C402BD300DC13DE /* LoginView.swift */; };
 		595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A22C402BEB00DC13DE /* RegistrationView.swift */; };
-		595FA0A62C402C1000DC13DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A52C402C1000DC13DE /* ContentView.swift */; };
 		595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A92C4051C900DC13DE /* LoadingView.swift */; };
 		595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B62C415D2000DC13DE /* QuestionPage1.swift */; };
 		595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B82C415D3100DC13DE /* QuestionPage2.swift */; };
 		595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */; };
-		595FA0BD2C417F2300DC13DE /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BC2C417F2300DC13DE /* CalendarViewController.swift */; };
 		59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E182C3487E600D0D4C4 /* AppDelegate.swift */; };
 		59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */; };
 		59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59624E212C3487E800D0D4C4 /* Assets.xcassets */; };
@@ -39,23 +39,23 @@
 
 /* Begin PBXFileReference section */
 		592E18E42C41C531007BA699 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		592E18E62C42C65B007BA699 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		592E18E82C42C699007BA699 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		592E18EA2C42C6B0007BA699 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		595FA0902C402AB600DC13DE /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
 		595FA0932C402B0F00DC13DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		595FA0962C402B4C00DC13DE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		595FA0982C402B5600DC13DE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		595FA09E2C402BBF00DC13DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		595FA0A02C402BD300DC13DE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		595FA0A22C402BEB00DC13DE /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		595FA0A52C402C1000DC13DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		595FA0A92C4051C900DC13DE /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		595FA0B62C415D2000DC13DE /* QuestionPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage1.swift; sourceTree = "<group>"; };
 		595FA0B82C415D3100DC13DE /* QuestionPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage2.swift; sourceTree = "<group>"; };
 		595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage3.swift; sourceTree = "<group>"; };
-		595FA0BC2C417F2300DC13DE /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		59624E152C3487E600D0D4C4 /* HerCycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HerCycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59624E182C3487E600D0D4C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +81,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		592E18EE2C4302B0007BA699 /* AppCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				592E18E62C42C65B007BA699 /* AppCoordinator.swift */,
+			);
+			path = AppCoordinator;
+			sourceTree = "<group>";
+		};
+		592E18EF2C4302C3007BA699 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		592E18F12C4302E8007BA699 /* UIkitViews */ = {
+			isa = PBXGroup;
+			children = (
+				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
+				592E18EA2C42C6B0007BA699 /* HomeViewController.swift */,
+				592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */,
+			);
+			path = UIkitViews;
+			sourceTree = "<group>";
+		};
 		595FA08C2C402A7C00DC13DE /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,15 +134,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		595FA0952C402B2A00DC13DE /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				595FA0962C402B4C00DC13DE /* HomeView.swift */,
-				595FA0982C402B5600DC13DE /* ProfileView.swift */,
-			);
-			path = Scenes;
-			sourceTree = "<group>";
-		};
 		595FA09A2C402B6B00DC13DE /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,14 +151,6 @@
 				595FA0B52C415C4500DC13DE /* QuestionsPages */,
 			);
 			path = Screens;
-			sourceTree = "<group>";
-		};
-		595FA0A42C402BFB00DC13DE /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				595FA0A52C402C1000DC13DE /* ContentView.swift */,
-			);
-			path = Root;
 			sourceTree = "<group>";
 		};
 		595FA0A72C404F9100DC13DE /* LaunchScreen */ = {
@@ -183,7 +192,6 @@
 				595FA0B62C415D2000DC13DE /* QuestionPage1.swift */,
 				595FA0B82C415D3100DC13DE /* QuestionPage2.swift */,
 				595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */,
-				595FA0BC2C417F2300DC13DE /* CalendarViewController.swift */,
 			);
 			path = QuestionsPages;
 			sourceTree = "<group>";
@@ -210,11 +218,11 @@
 				595FA08C2C402A7C00DC13DE /* App */,
 				595FA08D2C402A8A00DC13DE /* Components */,
 				595FA0922C402AC800DC13DE /* Model */,
-				595FA0952C402B2A00DC13DE /* Scenes */,
 				595FA09A2C402B6B00DC13DE /* Auth */,
 				595FA09D2C402BA700DC13DE /* Screens */,
-				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
-				595FA0A42C402BFB00DC13DE /* Root */,
+				592E18EF2C4302C3007BA699 /* Calendar */,
+				592E18EE2C4302B0007BA699 /* AppCoordinator */,
+				592E18F12C4302E8007BA699 /* UIkitViews */,
 				595FA0A72C404F9100DC13DE /* LaunchScreen */,
 				59624E302C35D81E00D0D4C4 /* Supporting */,
 				59624E312C35D88800D0D4C4 /* Resources */,
@@ -323,22 +331,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				595FA0BD2C417F2300DC13DE /* CalendarViewController.swift in Sources */,
 				595FA08F2C402AA100DC13DE /* InputView.swift in Sources */,
+				592E18E92C42C699007BA699 /* MainTabBarController.swift in Sources */,
 				595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
 				59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */,
+				592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */,
+				592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */,
 				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
+				592E18E72C42C65B007BA699 /* AppCoordinator.swift in Sources */,
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
 				595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */,
 				595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */,
 				595FA0942C402B0F00DC13DE /* User.swift in Sources */,
 				595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */,
-				595FA0992C402B5600DC13DE /* ProfileView.swift in Sources */,
-				595FA0A62C402C1000DC13DE /* ContentView.swift in Sources */,
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
-				595FA0972C402B4C00DC13DE /* HomeView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
 				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,
 				592E18E52C41C531007BA699 /* UserData.swift in Sources */,

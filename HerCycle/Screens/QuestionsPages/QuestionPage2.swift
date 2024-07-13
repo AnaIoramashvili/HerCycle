@@ -11,63 +11,66 @@ struct QuestionPage2: View {
     @State private var periodLength: Int? = nil
     @State private var navigateToNextPage = false
     @EnvironmentObject var viewModel: AuthViewModel
-
+    @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
-        VStack {
-            Image("Woman2")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 250)
-
-            Text("How long does your period last on average?")
-                .font(.title2)
-                .multilineTextAlignment(.center)
-                .padding()
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(1...10, id: \.self) { day in
-                        Circle()
-                            .fill(day == periodLength ? Color.pink : Color.color3)
-                            .frame(width: 60, height: 60)
-                            .overlay(Text("\(day)").foregroundColor(.white).font(.headline))
-                            .onTapGesture {
-                                periodLength = day
-                            }
-                    }
-                }
-                .padding()
-            }
-            
-            HStack {
-                Text("days")
+        ZStack {
+            Color.background
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Image("Woman2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 250)
+                
+                Text("How long does your period last on average?")
+                    .font(.title2)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.gray)
-            }
-
-            Button(action: {
-                // Save data and navigate to next question page
-                if let periodLength = periodLength {
-                    savePeriodLength(periodLength)
-                    navigateToNextPage = true
+                    .padding()
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(1...10, id: \.self) { day in
+                            Circle()
+                                .fill(day == periodLength ? Color.pink : Color.color3)
+                                .frame(width: 60, height: 60)
+                                .overlay(Text("\(day)").foregroundColor(.white).font(.headline))
+                                .onTapGesture {
+                                    periodLength = day
+                                }
+                        }
+                    }
+                    .padding()
                 }
-            }) {
-                Text("Continue")
-                    .bold()
-                    .frame(width: 200, height: 50)
-                    .background(Color.pink)
-                    .foregroundColor(.white)
-                    .cornerRadius(25)
+                
+                HStack {
+                    Text("days")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray)
+                }
+                
+                Button(action: {
+                    if let periodLength = periodLength {
+                        savePeriodLength(periodLength)
+                        navigateToNextPage = true
+                    }
+                }) {
+                    Text("Continue")
+                        .bold()
+                        .frame(width: 200, height: 50)
+                        .background(Color.color1)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                }
+                .padding()
+                .disabled(periodLength == nil)
+                
+                .navigationDestination(isPresented: $navigateToNextPage) {
+                    QuestionPage3().environmentObject(viewModel).environmentObject(coordinator)
+                }
             }
             .padding()
-            .disabled(periodLength == nil)
-
-            .navigationDestination(isPresented: $navigateToNextPage) {
-                QuestionPage3()
-            }
         }
-        .padding()
     }
 
     func savePeriodLength(_ length: Int) {
@@ -79,9 +82,3 @@ struct QuestionPage2: View {
         }
     }
 }
-
-
-#Preview {
-    QuestionPage2()
-}
-

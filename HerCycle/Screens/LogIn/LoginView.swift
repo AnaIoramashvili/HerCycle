@@ -11,8 +11,11 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var coordinator: AppCoordinator
     
     @State private var isRotating = false
+    @State private var showAlert = false
+    @State private var errorMessage = ""
     
     var body: some View {
         NavigationStack {
@@ -52,7 +55,13 @@ struct LoginView: View {
                         
                         Button(action: {
                             Task {
-                                try await viewModel.signIn(withEmail: email, password: password)
+                                do {
+                                    try await viewModel.signIn(withEmail: email, password: password)
+                                    await coordinator.userDidLogin()
+                                } catch {
+                                    errorMessage = error.localizedDescription
+                                    showAlert = true
+                                }
                             }
                         }, label: {
                             Text("LOG IN")
@@ -73,7 +82,7 @@ struct LoginView: View {
                                 .navigationBarBackButtonHidden()
                         } label: {
                             HStack(spacing: 3) {
-                                Text("Don’t have an account?")
+                                Text("Don't have an account?")
                                     .foregroundColor(.black)
                                 Text("Sign Up")
                                     .bold()
@@ -91,12 +100,14 @@ struct LoginView: View {
                 .padding()
             }
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
 // MARK: - AuthenticationFormProtocol
-
-extension LoginView: AuthenticationFromProtocol {
+extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty && email.contains("@") && !password.isEmpty && password.count > 5
     }
@@ -104,4 +115,6 @@ extension LoginView: AuthenticationFromProtocol {
 
 #Preview {
     LoginView()
+        .environmentObject(AuthViewModel())
+        .environmentObject(AppCoordinator(window: UIWindow()))
 }

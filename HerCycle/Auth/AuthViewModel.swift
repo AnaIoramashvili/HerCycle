@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-protocol AuthenticationFromProtocol {
+protocol AuthenticationFormProtocol {
     var formIsValid: Bool { get }
 }
 
@@ -19,13 +19,19 @@ class AuthViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var userData: UserData?
 
-    
     init() {
         self.userSession = Auth.auth().currentUser
         
         Task {
             await fetchUser()
         }
+    }
+    
+    func checkSession() async -> Bool {
+        if userSession == nil {
+            self.userSession = Auth.auth().currentUser
+        }
+        return userSession != nil
     }
     
     func signIn(withEmail email: String, password: String) async throws {
@@ -35,6 +41,7 @@ class AuthViewModel: ObservableObject {
             await fetchUser()
         } catch {
             print("Failed to sign in user \(error.localizedDescription)")
+            throw error
         }
     }
     
@@ -48,34 +55,31 @@ class AuthViewModel: ObservableObject {
             await fetchUser()
         } catch {
             print("Failed to create user \(error.localizedDescription)")
+            throw error
         }
     }
     
-    func signOut() {
+    func signOut() async {
         do {
             try Auth.auth().signOut()
             self.userSession = nil
             self.currentUser = nil
+            self.userData = nil
         } catch {
-            print("feiled")
+            print("Failed to sign out: \(error.localizedDescription)")
         }
     }
-    
-    func deleteAccount() async throws {
-        
-    }
-    
-    
     
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("user").document(uid).getDocument() else { return }
         self.currentUser = try? snapshot.data(as: User.self)
         
+        await fetchUserData()
     }
     
     func saveUserData(_ data: UserData) async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { throw NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user"]) }
         let encodedData = try Firestore.Encoder().encode(data)
         try await Firestore.firestore().collection("userData").document(uid).setData(encodedData)
         self.userData = data
