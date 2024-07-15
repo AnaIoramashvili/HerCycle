@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		592E18E52C41C531007BA699 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E42C41C531007BA699 /* UserData.swift */; };
 		592E18E72C42C65B007BA699 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E62C42C65B007BA699 /* AppCoordinator.swift */; };
 		592E18E92C42C699007BA699 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18E82C42C699007BA699 /* MainTabBarController.swift */; };
 		592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18EA2C42C6B0007BA699 /* HomeViewController.swift */; };
 		592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */; };
+		592E18F42C451C15007BA699 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F32C451C15007BA699 /* User.swift */; };
+		592E18F62C451C32007BA699 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F52C451C32007BA699 /* UserData.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA03E2C3F3D3100DC13DE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03D2C3F3D3100DC13DE /* FirebaseAuth */; };
 		595FA0402C3F3D3100DC13DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03F2C3F3D3100DC13DE /* FirebaseFirestore */; };
@@ -20,7 +21,6 @@
 		595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08A2C402A4C00DC13DE /* HerCycle.swift */; };
 		595FA08F2C402AA100DC13DE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08E2C402AA100DC13DE /* InputView.swift */; };
 		595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0902C402AB600DC13DE /* SettingRowView.swift */; };
-		595FA0942C402B0F00DC13DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0932C402B0F00DC13DE /* User.swift */; };
 		595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */; };
 		595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09E2C402BBF00DC13DE /* OnboardingView.swift */; };
 		595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A02C402BD300DC13DE /* LoginView.swift */; };
@@ -38,16 +38,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		592E18E42C41C531007BA699 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		592E18E62C42C65B007BA699 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		592E18E82C42C699007BA699 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		592E18EA2C42C6B0007BA699 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		592E18F32C451C15007BA699 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		592E18F52C451C32007BA699 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		595FA0902C402AB600DC13DE /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
-		595FA0932C402B0F00DC13DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		595FA09E2C402BBF00DC13DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		595FA0A02C402BD300DC13DE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -97,14 +97,23 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		592E18F12C4302E8007BA699 /* UIkitViews */ = {
+		592E18F12C4302E8007BA699 /* UIKitViews */ = {
 			isa = PBXGroup;
 			children = (
 				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
 				592E18EA2C42C6B0007BA699 /* HomeViewController.swift */,
 				592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */,
 			);
-			path = UIkitViews;
+			path = UIKitViews;
+			sourceTree = "<group>";
+		};
+		592E18F22C451BFF007BA699 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				592E18F32C451C15007BA699 /* User.swift */,
+				592E18F52C451C32007BA699 /* UserData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		595FA08C2C402A7C00DC13DE /* App */ = {
@@ -124,31 +133,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		595FA0922C402AC800DC13DE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				595FA0932C402B0F00DC13DE /* User.swift */,
-				592E18E42C41C531007BA699 /* UserData.swift */,
-			);
-			name = Model;
-			path = Components;
-			sourceTree = "<group>";
-		};
-		595FA09A2C402B6B00DC13DE /* Auth */ = {
+		595FA09A2C402B6B00DC13DE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */,
 			);
-			path = Auth;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		595FA09D2C402BA700DC13DE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				595FA0B02C41583800DC13DE /* OnBoarding */,
+				595FA08D2C402A8A00DC13DE /* Components */,
 				595FA0AF2C41582200DC13DE /* LogIn */,
 				595FA0A82C4051B000DC13DE /* SingUp */,
-				595FA0B52C415C4500DC13DE /* QuestionsPages */,
+				595FA0B52C415C4500DC13DE /* QuestionPages */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -186,14 +186,14 @@
 			path = OnBoarding;
 			sourceTree = "<group>";
 		};
-		595FA0B52C415C4500DC13DE /* QuestionsPages */ = {
+		595FA0B52C415C4500DC13DE /* QuestionPages */ = {
 			isa = PBXGroup;
 			children = (
 				595FA0B62C415D2000DC13DE /* QuestionPage1.swift */,
 				595FA0B82C415D3100DC13DE /* QuestionPage2.swift */,
 				595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */,
 			);
-			path = QuestionsPages;
+			path = QuestionPages;
 			sourceTree = "<group>";
 		};
 		59624E0C2C3487E600D0D4C4 = {
@@ -216,13 +216,12 @@
 			isa = PBXGroup;
 			children = (
 				595FA08C2C402A7C00DC13DE /* App */,
-				595FA08D2C402A8A00DC13DE /* Components */,
-				595FA0922C402AC800DC13DE /* Model */,
-				595FA09A2C402B6B00DC13DE /* Auth */,
+				592E18F22C451BFF007BA699 /* Model */,
+				595FA09A2C402B6B00DC13DE /* ViewModel */,
 				595FA09D2C402BA700DC13DE /* Screens */,
 				592E18EF2C4302C3007BA699 /* Calendar */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
-				592E18F12C4302E8007BA699 /* UIkitViews */,
+				592E18F12C4302E8007BA699 /* UIKitViews */,
 				595FA0A72C404F9100DC13DE /* LaunchScreen */,
 				59624E302C35D81E00D0D4C4 /* Supporting */,
 				59624E312C35D88800D0D4C4 /* Resources */,
@@ -344,13 +343,13 @@
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
 				595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */,
 				595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */,
-				595FA0942C402B0F00DC13DE /* User.swift in Sources */,
 				595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */,
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
 				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,
-				592E18E52C41C531007BA699 /* UserData.swift in Sources */,
 				595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */,
+				592E18F62C451C32007BA699 /* UserData.swift in Sources */,
+				592E18F42C451C15007BA699 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

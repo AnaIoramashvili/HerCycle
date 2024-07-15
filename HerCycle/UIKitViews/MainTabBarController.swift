@@ -26,11 +26,16 @@ class MainTabBarController: UITabBarController {
     
     private func setupTabBar() {
         let homeViewController = HomeViewController()
-        homeViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        let homeNavController = UINavigationController(rootViewController: homeViewController)
+        homeNavController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
         let profileViewController = ProfileViewController(authViewModel: coordinator.authViewModel, coordinator: coordinator)
-        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 1)
+        let profileNavController = UINavigationController(rootViewController: profileViewController)
+        profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 1)
         
-        viewControllers = [homeViewController, profileViewController]
+        viewControllers = [homeNavController, profileNavController]
+        
+        tabBar.tintColor = .systemPink
+        tabBar.unselectedItemTintColor = .gray
     }
 }
