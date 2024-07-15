@@ -20,35 +20,20 @@ struct OnboardingView: View {
     
     var body: some View {
         ZStack {
-            gradientBackground
+            GradientBackground()
             
             VStack {
-                HStack {
-                    if currentPage > 0 {
-                        backButton
-                    }
-                    Spacer()
-                }
-                .padding(.horizontal)
-                .padding(.top, 50)
+                NavigationControls(currentPage: $currentPage)
                 
                 TabView(selection: $currentPage) {
                     ForEach(0..<pages.count, id: \.self) { index in
-                        pageView(for: pages[index])
+                        PageView(page: pages[index])
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
-                VStack {
-                    pageControl
-                    
-                    if currentPage == pages.count - 1 {
-                        getStartedButton
-                    } else {
-                        continueButton
-                    }
-                }
-                .padding(.bottom, 50)
+                NavigationButtons(currentPage: $currentPage, pageCount: pages.count, hasSeenOnboarding: $hasSeenOnboarding, showLoginView: $showLoginView)
+                    .padding(.bottom, 50)
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -56,15 +41,21 @@ struct OnboardingView: View {
             LoginView()
         }
     }
-    
-    var gradientBackground: some View {
+}
+
+struct GradientBackground: View {
+    var body: some View {
         LinearGradient(gradient: Gradient(colors: [.white, Color("Color1"), Color("Color2"), Color("Color3")]),
                        startPoint: .top,
                        endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
     }
+}
+
+struct PageView: View {
+    let page: OnboardingPage
     
-    func pageView(for page: OnboardingPage) -> some View {
+    var body: some View {
         VStack {
             if !page.imageName.isEmpty {
                 VStack(spacing: 20) {
@@ -106,8 +97,27 @@ struct OnboardingView: View {
             }
         }
     }
+}
+
+struct NavigationControls: View {
+    @Binding var currentPage: Int
     
-    var backButton: some View {
+    var body: some View {
+        HStack {
+            if currentPage > 0 {
+                BackButton(currentPage: $currentPage)
+            }
+            Spacer()
+        }
+        .padding(.horizontal)
+        .padding(.top, 50)
+    }
+}
+
+struct BackButton: View {
+    @Binding var currentPage: Int
+    
+    var body: some View {
         Button(action: {
             if currentPage > 0 {
                 currentPage -= 1
@@ -117,10 +127,34 @@ struct OnboardingView: View {
                 .foregroundColor(.white)
         }
     }
+}
+
+struct NavigationButtons: View {
+    @Binding var currentPage: Int
+    let pageCount: Int
+    @Binding var hasSeenOnboarding: Bool
+    @Binding var showLoginView: Bool
     
-    var pageControl: some View {
+    var body: some View {
+        VStack {
+            PageControl(currentPage: $currentPage, pageCount: pageCount)
+            
+            if currentPage == pageCount - 1 {
+                GetStartedButton(hasSeenOnboarding: $hasSeenOnboarding, showLoginView: $showLoginView)
+            } else {
+                ContinueButton(currentPage: $currentPage)
+            }
+        }
+    }
+}
+
+struct PageControl: View {
+    @Binding var currentPage: Int
+    let pageCount: Int
+    
+    var body: some View {
         HStack(spacing: 8) {
-            ForEach(0..<pages.count, id: \.self) { index in
+            ForEach(0..<pageCount, id: \.self) { index in
                 Circle()
                     .fill(currentPage == index ? Color.white : Color.white.opacity(0.5))
                     .frame(width: 8, height: 8)
@@ -128,12 +162,14 @@ struct OnboardingView: View {
         }
         .padding(.bottom)
     }
+}
+
+struct ContinueButton: View {
+    @Binding var currentPage: Int
     
-    var continueButton: some View {
+    var body: some View {
         Button(action: {
-            if currentPage < pages.count - 1 {
-                currentPage += 1
-            }
+            currentPage += 1
         }) {
             Text("Continue")
                 .foregroundColor(.pink)
@@ -144,8 +180,13 @@ struct OnboardingView: View {
         }
         .padding(.horizontal)
     }
+}
+
+struct GetStartedButton: View {
+    @Binding var hasSeenOnboarding: Bool
+    @Binding var showLoginView: Bool
     
-    var getStartedButton: some View {
+    var body: some View {
         Button(action: {
             hasSeenOnboarding = true
             showLoginView = true

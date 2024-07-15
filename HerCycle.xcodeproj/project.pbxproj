@@ -13,6 +13,10 @@
 		592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */; };
 		592E18F42C451C15007BA699 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F32C451C15007BA699 /* User.swift */; };
 		592E18F62C451C32007BA699 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F52C451C32007BA699 /* UserData.swift */; };
+		592E18FA2C45A412007BA699 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F92C45A412007BA699 /* CalendarViewController.swift */; };
+		592E18FC2C45A4C2007BA699 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18FB2C45A4C2007BA699 /* ChatViewController.swift */; };
+		592E18FE2C45AA88007BA699 /* CalendarHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18FD2C45AA88007BA699 /* CalendarHostingController.swift */; };
+		592E19002C45AAAB007BA699 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18FF2C45AAAB007BA699 /* CalendarView.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA03E2C3F3D3100DC13DE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03D2C3F3D3100DC13DE /* FirebaseAuth */; };
 		595FA0402C3F3D3100DC13DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 595FA03F2C3F3D3100DC13DE /* FirebaseFirestore */; };
@@ -25,7 +29,6 @@
 		595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09E2C402BBF00DC13DE /* OnboardingView.swift */; };
 		595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A02C402BD300DC13DE /* LoginView.swift */; };
 		595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A22C402BEB00DC13DE /* RegistrationView.swift */; };
-		595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A92C4051C900DC13DE /* LoadingView.swift */; };
 		595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B62C415D2000DC13DE /* QuestionPage1.swift */; };
 		595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B82C415D3100DC13DE /* QuestionPage2.swift */; };
 		595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */; };
@@ -44,6 +47,10 @@
 		592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		592E18F32C451C15007BA699 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		592E18F52C451C32007BA699 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		592E18F92C45A412007BA699 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		592E18FB2C45A4C2007BA699 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		592E18FD2C45AA88007BA699 /* CalendarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHostingController.swift; sourceTree = "<group>"; };
+		592E18FF2C45AAAB007BA699 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -52,7 +59,6 @@
 		595FA09E2C402BBF00DC13DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		595FA0A02C402BD300DC13DE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		595FA0A22C402BEB00DC13DE /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		595FA0A92C4051C900DC13DE /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		595FA0B62C415D2000DC13DE /* QuestionPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage1.swift; sourceTree = "<group>"; };
 		595FA0B82C415D3100DC13DE /* QuestionPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage2.swift; sourceTree = "<group>"; };
 		595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage3.swift; sourceTree = "<group>"; };
@@ -89,20 +95,16 @@
 			path = AppCoordinator;
 			sourceTree = "<group>";
 		};
-		592E18EF2C4302C3007BA699 /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
 		592E18F12C4302E8007BA699 /* UIKitViews */ = {
 			isa = PBXGroup;
 			children = (
 				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
 				592E18EA2C42C6B0007BA699 /* HomeViewController.swift */,
 				592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */,
+				592E18F92C45A412007BA699 /* CalendarViewController.swift */,
+				592E18FD2C45AA88007BA699 /* CalendarHostingController.swift */,
+				592E18FB2C45A4C2007BA699 /* ChatViewController.swift */,
+				592E18FF2C45AAAB007BA699 /* CalendarView.swift */,
 			);
 			path = UIKitViews;
 			sourceTree = "<group>";
@@ -165,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				595FA0A22C402BEB00DC13DE /* RegistrationView.swift */,
-				595FA0A92C4051C900DC13DE /* LoadingView.swift */,
 			);
 			path = SingUp;
 			sourceTree = "<group>";
@@ -219,8 +220,8 @@
 				592E18F22C451BFF007BA699 /* Model */,
 				595FA09A2C402B6B00DC13DE /* ViewModel */,
 				595FA09D2C402BA700DC13DE /* Screens */,
-				592E18EF2C4302C3007BA699 /* Calendar */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
+				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
 				592E18F12C4302E8007BA699 /* UIKitViews */,
 				595FA0A72C404F9100DC13DE /* LaunchScreen */,
 				59624E302C35D81E00D0D4C4 /* Supporting */,
@@ -330,7 +331,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592E18FA2C45A412007BA699 /* CalendarViewController.swift in Sources */,
 				595FA08F2C402AA100DC13DE /* InputView.swift in Sources */,
+				592E19002C45AAAB007BA699 /* CalendarView.swift in Sources */,
 				592E18E92C42C699007BA699 /* MainTabBarController.swift in Sources */,
 				595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
@@ -339,11 +342,12 @@
 				592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */,
 				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
 				592E18E72C42C65B007BA699 /* AppCoordinator.swift in Sources */,
+				592E18FC2C45A4C2007BA699 /* ChatViewController.swift in Sources */,
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
+				592E18FE2C45AA88007BA699 /* CalendarHostingController.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
 				595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */,
 				595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */,
-				595FA0AA2C4051C900DC13DE /* LoadingView.swift in Sources */,
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
 				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,

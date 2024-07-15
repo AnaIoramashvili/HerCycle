@@ -29,11 +29,19 @@ class MainTabBarController: UITabBarController {
         let homeNavController = UINavigationController(rootViewController: homeViewController)
         homeNavController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
+        let calendarViewController = CalendarViewController()
+        let calendarNavController = UINavigationController(rootViewController: calendarViewController)
+        calendarNavController.tabBarItem = UITabBarItem(title: "Calendar", image: UIImage(systemName: "calendar"), tag: 1)
+        
+        let chatViewController = ChatViewController()
+        let chatNavController = UINavigationController(rootViewController: chatViewController)
+        chatNavController.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message"), tag: 2)
+        
         let profileViewController = ProfileViewController(authViewModel: coordinator.authViewModel, coordinator: coordinator)
         let profileNavController = UINavigationController(rootViewController: profileViewController)
-        profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 1)
+        profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 3)
         
-        viewControllers = [homeNavController, profileNavController]
+        viewControllers = [homeNavController, calendarNavController, chatNavController, profileNavController]
         
         tabBar.tintColor = .systemPink
         tabBar.unselectedItemTintColor = .gray
