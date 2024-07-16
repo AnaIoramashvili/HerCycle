@@ -22,6 +22,9 @@
 		592E190E2C45C609007BA699 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 592E190D2C45C609007BA699 /* FirebaseFirestoreSwift */; };
 		592E19102C45C609007BA699 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 592E190F2C45C609007BA699 /* FirebaseStorage */; };
 		592E19132C45C6B6007BA699 /* myNetworkPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 592E19122C45C6B6007BA699 /* myNetworkPackage */; };
+		592E19172C468695007BA699 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19162C468695007BA699 /* ChatViewModel.swift */; };
+		592E19192C4686CD007BA699 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19182C4686CD007BA699 /* Message.swift */; };
+		592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08A2C402A4C00DC13DE /* HerCycle.swift */; };
 		595FA08F2C402AA100DC13DE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08E2C402AA100DC13DE /* InputView.swift */; };
@@ -51,6 +54,9 @@
 		592E18FB2C45A4C2007BA699 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		592E18FD2C45AA88007BA699 /* CalendarHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHostingController.swift; sourceTree = "<group>"; };
 		592E18FF2C45AAAB007BA699 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		592E19162C468695007BA699 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		592E19182C4686CD007BA699 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -101,7 +107,6 @@
 				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
 				592E18EA2C42C6B0007BA699 /* HomeViewController.swift */,
 				592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */,
-				592E18FB2C45A4C2007BA699 /* ChatViewController.swift */,
 			);
 			path = UIKitViews;
 			sourceTree = "<group>";
@@ -124,6 +129,18 @@
 				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
 			);
 			name = Calendar;
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		592E19152C46866A007BA699 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				592E18FB2C45A4C2007BA699 /* ChatViewController.swift */,
+				592E19162C468695007BA699 /* ChatViewModel.swift */,
+				592E19182C4686CD007BA699 /* Message.swift */,
+				592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */,
+			);
+			name = Chat;
 			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
@@ -231,6 +248,7 @@
 				595FA09D2C402BA700DC13DE /* Screens */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
 				592E18F12C4302E8007BA699 /* UIKitViews */,
+				592E19152C46866A007BA699 /* Chat */,
 				592E19142C45D03F007BA699 /* Calendar */,
 				595FA0A72C404F9100DC13DE /* LaunchScreen */,
 				59624E302C35D81E00D0D4C4 /* Supporting */,
@@ -347,9 +365,12 @@
 				595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
 				59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */,
+				592E19192C4686CD007BA699 /* Message.swift in Sources */,
 				592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */,
 				592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */,
 				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
+				592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */,
+				592E19172C468695007BA699 /* ChatViewModel.swift in Sources */,
 				592E18E72C42C65B007BA699 /* AppCoordinator.swift in Sources */,
 				592E18FC2C45A4C2007BA699 /* ChatViewController.swift in Sources */,
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,

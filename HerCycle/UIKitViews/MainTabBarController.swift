@@ -29,7 +29,7 @@ class MainTabBarController: UITabBarController {
         let homeNavController = UINavigationController(rootViewController: homeViewController)
         homeNavController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         
-        let calendarViewController = CalendarViewController()
+        let calendarViewController = CalendarViewController(authViewModel: coordinator.authViewModel)
         let calendarNavController = UINavigationController(rootViewController: calendarViewController)
         calendarNavController.tabBarItem = UITabBarItem(title: "Calendar", image: UIImage(systemName: "calendar"), tag: 1)
         

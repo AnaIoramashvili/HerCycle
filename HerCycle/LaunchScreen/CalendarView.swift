@@ -7,34 +7,28 @@
 
 import SwiftUI
 
-enum PeriodType {
-    case period, ovulation
+enum PeriodType: String {
+    case period = "Period"
+    case ovulation = "Ovulation"
 }
 
-
-import SwiftUI
-
 struct CalendarView: View {
-    @Binding var selectedDate: Date
-    @Binding var markedDays: [Date: PeriodType]
-    @Binding var selectedPeriodType: PeriodType?
-    
-    var onPreviousMonth: () -> Void
-    var onNextMonth: () -> Void
-    var onDaySelected: (Date) -> Void
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var selectedDate: Date = Date()
+    @State private var markedDays: [Date: PeriodType] = [:]
     
     private let calendar = Calendar.current
     
     var body: some View {
         VStack {
             HStack {
-                Button(action: onPreviousMonth) {
+                Button(action: previousMonth) {
                     Image(systemName: "chevron.left")
                 }
                 Text(monthYearString(from: selectedDate))
                     .font(.title)
                     .padding()
-                Button(action: onNextMonth) {
+                Button(action: nextMonth) {
                     Image(systemName: "chevron.right")
                 }
             }
@@ -55,9 +49,7 @@ struct CalendarView: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 10) {
                 ForEach(daysInMonth(for: selectedDate), id: \.self) { date in
                     if let date = date {
-                        DayView(date: date, periodType: markedDays[date]) {
-                            onDaySelected(date)
-                        }
+                        DayView(date: date, periodType: markedDays[date])
                     } else {
                         Color.clear
                     }
@@ -65,17 +57,14 @@ struct CalendarView: View {
             }
             .padding()
             
-            // Period type buttons
+            // Legend
             HStack(spacing: 20) {
-                PeriodButton(color: .red, label: "Period", isSelected: selectedPeriodType == .period) {
-                    selectedPeriodType = .period
-                }
-                PeriodButton(color: .blue, label: "Ovulation", isSelected: selectedPeriodType == .ovulation) {
-                    selectedPeriodType = .ovulation
-                }
+                LegendItem(color: .red, label: "Period")
+                LegendItem(color: .purple, label: "Ovulation")
             }
             .padding()
         }
+        .onAppear(perform: loadUserData)
     }
     
     private func monthYearString(from date: Date) -> String {
@@ -97,75 +86,107 @@ struct CalendarView: View {
         return days
     }
     
-    private func toggleMarkedDay(_ date: Date) {
-        if let selectedType = selectedPeriodType {
-            markedDays[date] = selectedType
-        }
-    }
-    
     private func previousMonth() {
         selectedDate = calendar.date(byAdding: .month, value: -1, to: selectedDate)!
+        updateMarkedDays()
     }
     
     private func nextMonth() {
         selectedDate = calendar.date(byAdding: .month, value: 1, to: selectedDate)!
+        updateMarkedDays()
     }
     
     private func weekdaySymbol(for index: Int) -> String {
         let weekdays = calendar.shortWeekdaySymbols
         return weekdays[index]
     }
+    
+    private func loadUserData() {
+        guard let userData = authViewModel.userData else { return }
+        updateMarkedDays(using: userData)
+    }
+    
+    private func updateMarkedDays() {
+        guard let userData = authViewModel.userData else { return }
+        updateMarkedDays(using: userData)
+    }
+    
+    private func updateMarkedDays(using userData: UserData) {
+        let cycleLength = userData.cycleLength
+        let periodLength = userData.periodLength
+        let lastPeriodStartDate = userData.lastPeriodStartDate
+        
+        markedDays.removeAll()
+        
+        // Mark periods and ovulations for the next 6 months
+        var currentPeriodStart = lastPeriodStartDate
+        let endDate = calendar.date(byAdding: .month, value: 6, to: Date())!
+        
+        while currentPeriodStart <= endDate {
+            // Mark period days
+            for day in 0..<periodLength {
+                if let date = calendar.date(byAdding: .day, value: day, to: currentPeriodStart) {
+                    markedDays[date] = .period
+                }
+            }
+            
+            // Mark ovulation day (14 days before the next period)
+            if let ovulationDate = calendar.date(byAdding: .day, value: cycleLength - 14, to: currentPeriodStart) {
+                markedDays[ovulationDate] = .ovulation
+            }
+            
+            // Move to next cycle
+            currentPeriodStart = calendar.date(byAdding: .day, value: cycleLength, to: currentPeriodStart)!
+        }
+    }
 }
 
 struct DayView: View {
     let date: Date
     let periodType: PeriodType?
-    let action: () -> Void
     
     private let calendar = Calendar.current
     
     var body: some View {
-        Button(action: action) {
-            Text("\(calendar.component(.day, from: date))")
-                .frame(width: 40, height: 40)
-                .background(getColorForPeriodType())
-                .clipShape(Circle())
-                .foregroundColor(.primary)
-        }
+        Text("\(calendar.component(.day, from: date))")
+            .frame(width: 40, height: 40)
+            .background(backgroundForPeriodType())
+            .clipShape(Circle())
+            .foregroundColor(foregroundForPeriodType())
     }
     
-    private func getColorForPeriodType() -> Color {
+    private func backgroundForPeriodType() -> Color {
         switch periodType {
         case .period:
             return .red
         case .ovulation:
-            return .blue
+            return .purple
         case .none:
             return .clear
         }
     }
-}
-
-struct PeriodButton: View {
-    let color: Color
-    let label: String
-    let isSelected: Bool
-    let action: () -> Void
     
-    var body: some View {
-        Text(label)
-            .foregroundColor(isSelected ? .white : color)
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 15).stroke(color, lineWidth: 1))
-            .background(isSelected ? color : Color.clear)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            .onTapGesture {
-                action()
-            }
+    private func foregroundForPeriodType() -> Color {
+        switch periodType {
+        case .period, .ovulation:
+            return .white
+        case .none:
+            return .primary
+        }
     }
 }
 
-
-//#Preview {
-//    CalendarView()
-//}
+struct LegendItem: View {
+    let color: Color
+    let label: String
+    
+    var body: some View {
+        HStack {
+            Circle()
+                .fill(color)
+                .frame(width: 20, height: 20)
+            Text(label)
+                .font(.caption)
+        }
+    }
+}
