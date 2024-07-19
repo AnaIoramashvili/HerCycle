@@ -12,6 +12,8 @@ struct OnboardingView: View {
     @State private var showLoginView = false
     @Binding var hasSeenOnboarding: Bool
     
+    
+    //modelshi gatana
     let pages = [
         OnboardingPage(title: "Accurate Predictions", subtitle: "Our expert-backed algorithms bring you accurate menstrual cycle predictions.", imageName: "Period1"),
         OnboardingPage(title: "Cycle Harmony", subtitle: "Based on your inputs and data, you'll have guidance and knowledge relevant to your unique patterns.", imageName: "Period2"),

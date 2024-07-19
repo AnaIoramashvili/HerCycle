@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum PeriodType: String {
-    case period = "Period"
-    case ovulation = "Ovulation"
-}
-
 struct CalendarView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var selectedDate: Date = Date()
@@ -21,50 +16,64 @@ struct CalendarView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button(action: previousMonth) {
-                    Image(systemName: "chevron.left")
-                }
-                Text(monthYearString(from: selectedDate))
-                    .font(.title)
-                    .padding()
-                Button(action: nextMonth) {
-                    Image(systemName: "chevron.right")
-                }
-            }
-            .padding()
-            
-            // Weekday labels
-            HStack {
-                ForEach(0..<7, id: \.self) { index in
-                    Text(weekdaySymbol(for: (index + calendar.firstWeekday - 1) % 7))
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.secondary)
-                }
-            }
-            .padding(.horizontal)
-            
-            // Calendar days
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 10) {
-                ForEach(daysInMonth(for: selectedDate), id: \.self) { date in
-                    if let date = date {
-                        DayView(date: date, periodType: markedDays[date])
-                    } else {
-                        Color.clear
-                    }
-                }
-            }
-            .padding()
-            
-            // Legend
-            HStack(spacing: 20) {
-                LegendItem(color: .red, label: "Period")
-                LegendItem(color: .purple, label: "Ovulation")
-            }
-            .padding()
+            monthHeader
+            weekdayHeader
+            calendarGrid
+            legend
         }
         .onAppear(perform: loadUserData)
+        .onChange(of: selectedDate) { _, _ in
+            updateMarkedDays()
+        }
+    }
+    
+    private var monthHeader: some View {
+        HStack {
+            Button(action: previousMonth) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.blue)
+            }
+            Spacer()
+            Text(monthYearString(from: selectedDate))
+                .font(.title2)
+            Spacer()
+            Button(action: nextMonth) {
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.blue)
+            }
+        }
+        .padding()
+    }
+    
+    private var weekdayHeader: some View {
+        HStack {
+            ForEach(calendar.shortWeekdaySymbols, id: \.self) { day in
+                Text(day)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.gray)
+            }
+        }
+    }
+    
+    private var calendarGrid: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 8) {
+            ForEach(daysInMonth(), id: \.self) { date in
+                if let date = date {
+                    DayView(date: date, periodType: periodTypeForDate(date))
+                } else {
+                    Color.clear
+                }
+            }
+        }
+        .padding()
+    }
+    
+    private var legend: some View {
+        HStack(spacing: 20) {
+            LegendItem(color: .red, label: "Period")
+            LegendItem(color: .purple, label: "Ovulation")
+        }
+        .padding()
     }
     
     private func monthYearString(from date: Date) -> String {
@@ -73,14 +82,19 @@ struct CalendarView: View {
         return formatter.string(from: date)
     }
     
-    private func daysInMonth(for date: Date) -> [Date?] {
-        let range = calendar.range(of: .day, in: .month, for: date)!
-        let firstDayOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
-        let firstWeekday = calendar.component(.weekday, from: firstDayOfMonth)
+    private func daysInMonth() -> [Date?] {
+        guard let range = calendar.range(of: .day, in: .month, for: selectedDate) else { return [] }
+        let firstDayOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: selectedDate))!
         
-        var days: [Date?] = Array(repeating: nil, count: firstWeekday - 1)
-        days += range.map { day -> Date? in
-            calendar.date(bySetting: .day, value: day, of: date)
+        let firstWeekday = calendar.component(.weekday, from: firstDayOfMonth)
+        let leadingSpaces = (firstWeekday - calendar.firstWeekday + 7) % 7
+        
+        var days: [Date?] = Array(repeating: nil, count: leadingSpaces)
+        
+        for day in range {
+            if let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth) {
+                days.append(date)
+            }
         }
         
         return days
@@ -88,17 +102,10 @@ struct CalendarView: View {
     
     private func previousMonth() {
         selectedDate = calendar.date(byAdding: .month, value: -1, to: selectedDate)!
-        updateMarkedDays()
     }
     
     private func nextMonth() {
         selectedDate = calendar.date(byAdding: .month, value: 1, to: selectedDate)!
-        updateMarkedDays()
-    }
-    
-    private func weekdaySymbol(for index: Int) -> String {
-        let weekdays = calendar.shortWeekdaySymbols
-        return weekdays[index]
     }
     
     private func loadUserData() {
@@ -118,26 +125,32 @@ struct CalendarView: View {
         
         markedDays.removeAll()
         
-        // Mark periods and ovulations for the next 6 months
         var currentPeriodStart = lastPeriodStartDate
         let endDate = calendar.date(byAdding: .month, value: 6, to: Date())!
         
         while currentPeriodStart <= endDate {
-            // Mark period days
             for day in 0..<periodLength {
                 if let date = calendar.date(byAdding: .day, value: day, to: currentPeriodStart) {
-                    markedDays[date] = .period
+                    let components = calendar.dateComponents([.year, .month, .day], from: date)
+                    let normalizedDate = calendar.date(from: components)!
+                    markedDays[normalizedDate] = day == 0 ? .periodStart : .period
                 }
             }
             
-            // Mark ovulation day (14 days before the next period)
             if let ovulationDate = calendar.date(byAdding: .day, value: cycleLength - 14, to: currentPeriodStart) {
-                markedDays[ovulationDate] = .ovulation
+                let components = calendar.dateComponents([.year, .month, .day], from: ovulationDate)
+                let normalizedDate = calendar.date(from: components)!
+                markedDays[normalizedDate] = .ovulation
             }
             
-            // Move to next cycle
-            currentPeriodStart = calendar.date(byAdding: .day, value: cycleLength, to: currentPeriodStart)!
+            currentPeriodStart = calendar.date(byAdding: .day, value: cycleLength + periodLength, to: currentPeriodStart)!
         }
+    }
+    
+    private func periodTypeForDate(_ date: Date) -> PeriodType? {
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        let normalizedDate = calendar.date(from: components)!
+        return markedDays[normalizedDate]
     }
 }
 
@@ -149,7 +162,7 @@ struct DayView: View {
     
     var body: some View {
         Text("\(calendar.component(.day, from: date))")
-            .frame(width: 40, height: 40)
+            .frame(width: 35, height: 35)
             .background(backgroundForPeriodType())
             .clipShape(Circle())
             .foregroundColor(foregroundForPeriodType())
@@ -157,7 +170,7 @@ struct DayView: View {
     
     private func backgroundForPeriodType() -> Color {
         switch periodType {
-        case .period:
+        case .periodStart, .period:
             return .red
         case .ovulation:
             return .purple
@@ -167,12 +180,7 @@ struct DayView: View {
     }
     
     private func foregroundForPeriodType() -> Color {
-        switch periodType {
-        case .period, .ovulation:
-            return .white
-        case .none:
-            return .primary
-        }
+        periodType != nil ? .white : .primary
     }
 }
 
@@ -189,4 +197,8 @@ struct LegendItem: View {
                 .font(.caption)
         }
     }
+}
+
+enum PeriodType {
+    case periodStart, period, ovulation
 }

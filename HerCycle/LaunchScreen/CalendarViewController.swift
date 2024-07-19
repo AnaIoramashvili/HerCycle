@@ -25,7 +25,7 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = .white
         
         setupCalendarHostingController()
     }

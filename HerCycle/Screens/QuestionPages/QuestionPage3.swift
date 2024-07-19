@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuestionPage3: View {
+    @Binding var path: NavigationPath
     @State private var lastPeriodStartDate: Date = Date()
     @State private var navigateToMainTabBar = false
     @EnvironmentObject var viewModel: AuthViewModel
@@ -58,12 +59,24 @@ struct QuestionPage3: View {
             }
             .padding()
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
         .onChange(of: navigateToMainTabBar) { _, newValue in
             if newValue {
                 Task {
                     await coordinator.userDidCompleteQuestions()
                 }
             }
+        }
+    }
+
+    private var backButton: some View {
+        Button(action: {
+            path.removeLast()
+        }) {
+            Image(systemName: "chevron.left")
+                .foregroundColor(.white)
+                .imageScale(.large)
         }
     }
 

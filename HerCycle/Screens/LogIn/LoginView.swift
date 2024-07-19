@@ -109,7 +109,24 @@ struct LoginView: View {
 // MARK: - AuthenticationFormProtocol
 extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
-        return !email.isEmpty && email.contains("@") && !password.isEmpty && password.count > 5
+        return isValidEmail(email) && isValidPassword(password)
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = #"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    private func isValidPassword(_ password: String) -> Bool {
+        // At least 8 characters long
+        // Contains at least one uppercase letter
+        // Contains at least one lowercase letter
+        // Contains at least one digit
+        // Contains at least one special character
+        let passwordRegex = #"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"#
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordPredicate.evaluate(with: password)
     }
 }
 

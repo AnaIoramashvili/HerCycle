@@ -25,10 +25,13 @@
 		592E19172C468695007BA699 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19162C468695007BA699 /* ChatViewModel.swift */; };
 		592E19192C4686CD007BA699 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19182C4686CD007BA699 /* Message.swift */; };
 		592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */; };
+		592E191D2C4808B8007BA699 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191C2C4808B8007BA699 /* CustomTabBarView.swift */; };
+		592E191F2C483500007BA699 /* InsightDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191E2C483500007BA699 /* InsightDetailModel.swift */; };
+		592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19202C483519007BA699 /* InsightDetailViewModel.swift */; };
+		592E19232C48353C007BA699 /* InsightDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19222C48353C007BA699 /* InsightDetailViewController.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08A2C402A4C00DC13DE /* HerCycle.swift */; };
 		595FA08F2C402AA100DC13DE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08E2C402AA100DC13DE /* InputView.swift */; };
-		595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0902C402AB600DC13DE /* SettingRowView.swift */; };
 		595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */; };
 		595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09E2C402BBF00DC13DE /* OnboardingView.swift */; };
 		595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A02C402BD300DC13DE /* LoginView.swift */; };
@@ -40,7 +43,6 @@
 		59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */; };
 		59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59624E212C3487E800D0D4C4 /* Assets.xcassets */; };
 		59624E252C3487E800D0D4C4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 59624E242C3487E800D0D4C4 /* Base */; };
-		59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,10 +59,13 @@
 		592E19162C468695007BA699 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		592E19182C4686CD007BA699 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		592E191C2C4808B8007BA699 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
+		592E191E2C483500007BA699 /* InsightDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailModel.swift; sourceTree = "<group>"; };
+		592E19202C483519007BA699 /* InsightDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailViewModel.swift; sourceTree = "<group>"; };
+		592E19222C48353C007BA699 /* InsightDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailViewController.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
-		595FA0902C402AB600DC13DE /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
 		595FA09B2C402B8B00DC13DE /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		595FA09E2C402BBF00DC13DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		595FA0A02C402BD300DC13DE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -74,7 +79,6 @@
 		59624E212C3487E800D0D4C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59624E242C3487E800D0D4C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59624E262C3487E800D0D4C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodTrackingCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
+				592E191C2C4808B8007BA699 /* CustomTabBarView.swift */,
 				592E18EA2C42C6B0007BA699 /* HomeViewController.swift */,
+				592E191E2C483500007BA699 /* InsightDetailModel.swift */,
+				592E19202C483519007BA699 /* InsightDetailViewModel.swift */,
+				592E19222C48353C007BA699 /* InsightDetailViewController.swift */,
 				592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */,
 			);
 			path = UIKitViews;
@@ -126,7 +134,6 @@
 				592E18F92C45A412007BA699 /* CalendarViewController.swift */,
 				592E18FD2C45AA88007BA699 /* CalendarHostingController.swift */,
 				592E18FF2C45AAAB007BA699 /* CalendarView.swift */,
-				59624E3C2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift */,
 			);
 			name = Calendar;
 			path = LaunchScreen;
@@ -156,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				595FA08E2C402AA100DC13DE /* InputView.swift */,
-				595FA0902C402AB600DC13DE /* SettingRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -362,11 +368,11 @@
 				595FA08F2C402AA100DC13DE /* InputView.swift in Sources */,
 				592E19002C45AAAB007BA699 /* CalendarView.swift in Sources */,
 				592E18E92C42C699007BA699 /* MainTabBarController.swift in Sources */,
-				595FA0912C402AB600DC13DE /* SettingRowView.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
-				59624E3D2C35E5B900D0D4C4 /* PeriodTrackingCalendarView.swift in Sources */,
 				592E19192C4686CD007BA699 /* Message.swift in Sources */,
+				592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */,
 				592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */,
+				592E191D2C4808B8007BA699 /* CustomTabBarView.swift in Sources */,
 				592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */,
 				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
 				592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */,
@@ -376,8 +382,10 @@
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
 				592E18FE2C45AA88007BA699 /* CalendarHostingController.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
+				592E19232C48353C007BA699 /* InsightDetailViewController.swift in Sources */,
 				595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */,
 				595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */,
+				592E191F2C483500007BA699 /* InsightDetailModel.swift in Sources */,
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
 				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,

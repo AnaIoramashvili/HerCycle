@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct QuestionPage2: View {
+    @Binding var path: NavigationPath
     @State private var periodLength: Int? = nil
-    @State private var navigateToNextPage = false
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var coordinator: AppCoordinator
 
@@ -52,7 +52,7 @@ struct QuestionPage2: View {
                 Button(action: {
                     if let periodLength = periodLength {
                         savePeriodLength(periodLength)
-                        navigateToNextPage = true
+                        path.append("QuestionPage3")
                     }
                 }) {
                     Text("Continue")
@@ -64,12 +64,20 @@ struct QuestionPage2: View {
                 }
                 .padding()
                 .disabled(periodLength == nil)
-                
-                .navigationDestination(isPresented: $navigateToNextPage) {
-                    QuestionPage3().environmentObject(viewModel).environmentObject(coordinator)
-                }
             }
             .padding()
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
+    }
+
+    private var backButton: some View {
+        Button(action: {
+            path.removeLast()
+        }) {
+            Image(systemName: "chevron.left")
+                .foregroundColor(.white)
+                .imageScale(.large)
         }
     }
 

@@ -62,19 +62,6 @@ struct RegistrationView: View {
                                           tittle: "Confirm Password",
                                           plaseholder: "Confirm password",
                                           isSecureField: true)
-                                if !password.isEmpty && !confirmPassword.isEmpty {
-                                    if password == confirmPassword {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .imageScale(.large)
-                                            .bold()
-                                            .foregroundStyle(.green)
-                                    } else {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .imageScale(.large)
-                                            .bold()
-                                            .foregroundStyle(.red)
-                                    }
-                                }
                             }
                         }
                         .padding(.horizontal, 32)
@@ -137,12 +124,28 @@ struct RegistrationView: View {
 // MARK: - AuthenticationFormProtocol
 extension RegistrationView: AuthenticationFormProtocol {
     var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && confirmPassword == password
-        && password.count > 5
-        && !fullName.isEmpty
+        return isValidEmail(email) &&
+               isValidPassword(password) &&
+               password == confirmPassword &&
+               isValidFullName(fullName)
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = #"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = #"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"#
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordPredicate.evaluate(with: password)
+    }
+    
+    private func isValidFullName(_ name: String) -> Bool {
+        let nameRegex = #"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"#
+        let namePredicate = NSPredicate(format: "SELF MATCHES %@", nameRegex)
+        return namePredicate.evaluate(with: name) && name.count >= 2
     }
 }
 

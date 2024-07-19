@@ -9,12 +9,12 @@ import SwiftUI
 
 struct QuestionPage1: View {
     @State private var cycleLength: Int? = nil
-    @State private var navigateToNextPage = false
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var coordinator: AppCoordinator
+    @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ZStack {
                 Color.background
                     .edgesIgnoringSafeArea(.all)
@@ -53,7 +53,7 @@ struct QuestionPage1: View {
                     Button(action: {
                         if let cycleLength = cycleLength {
                             saveCycleLength(cycleLength)
-                            navigateToNextPage = true
+                            path.append("QuestionPage2")
                         }
                     }) {
                         Text("Continue")
@@ -67,8 +67,19 @@ struct QuestionPage1: View {
                     .disabled(cycleLength == nil)
                 }
                 .padding()
-                .navigationDestination(isPresented: $navigateToNextPage) {
-                    QuestionPage2().environmentObject(viewModel).environmentObject(coordinator)
+            }
+            .navigationDestination(for: String.self) { page in
+                switch page {
+                case "QuestionPage2":
+                    QuestionPage2(path: $path)
+                        .environmentObject(viewModel)
+                        .environmentObject(coordinator)
+                case "QuestionPage3":
+                    QuestionPage3(path: $path)
+                        .environmentObject(viewModel)
+                        .environmentObject(coordinator)
+                default:
+                    EmptyView()
                 }
             }
         }
