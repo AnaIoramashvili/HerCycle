@@ -25,13 +25,35 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var remindersButton: UIButton = createButton(title: "Reminders", imageName: "bell", iconColor: .systemYellow)
+    private lazy var themeButton: UIButton = createButton(title: "Theme", imageName: "paintbrush", iconColor: .systemPink)
+    private lazy var feedbackButton: UIButton = createButton(title: "Feedback", imageName: "paperplane", iconColor: .systemBlue)
+
+    private func createColoredImage(systemName: String, color: UIColor) -> UIImage? {
+        let configuration = UIImage.SymbolConfiguration(scale: .medium)
+        if let image = UIImage(systemName: systemName, withConfiguration: configuration) {
+            return image.withTintColor(color, renderingMode: .alwaysOriginal)
+        }
+        return nil
+    }
+
+    
     private lazy var signOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Out", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         button.backgroundColor = .white
-        button.layer.cornerRadius = 22 
+        button.layer.cornerRadius = 22
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(signOutTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -56,14 +78,25 @@ class ProfileViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = UIColor(named: "background")
+        
         view.addSubview(tableView)
+        view.addSubview(buttonsStackView)
         view.addSubview(signOutButton)
         
+        buttonsStackView.addArrangedSubview(remindersButton)
+        buttonsStackView.addArrangedSubview(themeButton)
+        buttonsStackView.addArrangedSubview(feedbackButton)
+        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: signOutButton.topAnchor, constant: -20),
+            tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
+            
+            buttonsStackView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: -180),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 80),
             
             signOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
             signOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
@@ -72,6 +105,28 @@ class ProfileViewController: UIViewController {
         ])
     }
     
+    private func createButton(title: String, imageName: String, iconColor: UIColor) -> UIButton {
+        let button = UIButton(type: .system)
+        
+        var config = UIButton.Configuration.plain()
+        config.title = title
+        config.image = createColoredImage(systemName: imageName, color: iconColor)
+        config.imagePlacement = .top
+        config.imagePadding = 8
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
+        config.baseForegroundColor = .darkGray
+        config.background.backgroundColor = .white
+        config.cornerStyle = .medium
+        
+        button.configuration = config
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        
+        return button
+    }
+
+
     private func fetchUserData() {
         Task {
             await authViewModel.fetchUserData()
@@ -87,8 +142,21 @@ class ProfileViewController: UIViewController {
             await coordinator.userDidLogout()
         }
     }
+    
+    @objc private func buttonTapped(_ sender: UIButton) {
+        switch sender {
+        case remindersButton:
+            let remindersVC = RemindersViewController()
+            navigationController?.pushViewController(remindersVC, animated: true)
+        case themeButton:
+            print("Theme button tapped")
+        case feedbackButton:
+            print("Feedback button tapped")
+        default:
+            break
+        }
+    }
 }
-
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -130,18 +198,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             return UITableViewCell()
+        }
     }
-}
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.section == 2 {
-            Task {
-                await authViewModel.signOut()
-                await coordinator.userDidLogout()
-            }
-        }
     }
 }
 
@@ -152,7 +213,7 @@ class ProfileHeaderCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemPink
+        imageView.backgroundColor = UIColor.color6
         imageView.layer.cornerRadius = 40
         return imageView
     }()
@@ -209,7 +270,7 @@ class ProfileHeaderCell: UITableViewCell {
     func configure(with user: User) {
         nameLabel.text = user.fullName
         emailLabel.text = user.email
-        avatarImageView.backgroundColor = .systemPink
+        avatarImageView.backgroundColor = UIColor.color6
     }
 }
 
@@ -217,7 +278,7 @@ class InfoCell: UITableViewCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .systemPink
+        imageView.tintColor = UIColor.color6
         return imageView
     }()
     
@@ -288,7 +349,7 @@ class SignOutCell: UITableViewCell {
     
     private func setupUI() {
         textLabel?.text = "Sign Out"
-        textLabel?.textColor = .systemRed
+        textLabel?.textColor = UIColor.color6
         textLabel?.textAlignment = .center
         textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
     }

@@ -25,10 +25,12 @@
 		592E19172C468695007BA699 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19162C468695007BA699 /* ChatViewModel.swift */; };
 		592E19192C4686CD007BA699 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19182C4686CD007BA699 /* Message.swift */; };
 		592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */; };
-		592E191D2C4808B8007BA699 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191C2C4808B8007BA699 /* CustomTabBarView.swift */; };
 		592E191F2C483500007BA699 /* InsightDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191E2C483500007BA699 /* InsightDetailModel.swift */; };
 		592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19202C483519007BA699 /* InsightDetailViewModel.swift */; };
 		592E19232C48353C007BA699 /* InsightDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19222C48353C007BA699 /* InsightDetailViewController.swift */; };
+		592E192C2C4D920E007BA699 /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E192B2C4D920E007BA699 /* RemindersViewController.swift */; };
+		592E192E2C4D92A4007BA699 /* RemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E192D2C4D92A4007BA699 /* RemindersView.swift */; };
+		592E19302C4D92CB007BA699 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E192F2C4D92CB007BA699 /* Reminder.swift */; };
 		595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */; };
 		595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08A2C402A4C00DC13DE /* HerCycle.swift */; };
 		595FA08F2C402AA100DC13DE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA08E2C402AA100DC13DE /* InputView.swift */; };
@@ -59,10 +61,12 @@
 		592E19162C468695007BA699 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		592E19182C4686CD007BA699 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		592E191C2C4808B8007BA699 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
 		592E191E2C483500007BA699 /* InsightDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailModel.swift; sourceTree = "<group>"; };
 		592E19202C483519007BA699 /* InsightDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailViewModel.swift; sourceTree = "<group>"; };
 		592E19222C48353C007BA699 /* InsightDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailViewController.swift; sourceTree = "<group>"; };
+		592E192B2C4D920E007BA699 /* RemindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
+		592E192D2C4D92A4007BA699 /* RemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersView.swift; sourceTree = "<group>"; };
+		592E192F2C4D92CB007BA699 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		595FA03A2C3F3C8800DC13DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		595FA08A2C402A4C00DC13DE /* HerCycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerCycle.swift; sourceTree = "<group>"; };
 		595FA08E2C402AA100DC13DE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -108,13 +112,11 @@
 		592E18F12C4302E8007BA699 /* UIKitViews */ = {
 			isa = PBXGroup;
 			children = (
-				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
-				592E191C2C4808B8007BA699 /* CustomTabBarView.swift */,
 				592E18EA2C42C6B0007BA699 /* HomeViewController.swift */,
-				592E191E2C483500007BA699 /* InsightDetailModel.swift */,
-				592E19202C483519007BA699 /* InsightDetailViewModel.swift */,
-				592E19222C48353C007BA699 /* InsightDetailViewController.swift */,
 				592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */,
+				592E192B2C4D920E007BA699 /* RemindersViewController.swift */,
+				592E192D2C4D92A4007BA699 /* RemindersView.swift */,
+				592E192F2C4D92CB007BA699 /* Reminder.swift */,
 			);
 			path = UIKitViews;
 			sourceTree = "<group>";
@@ -149,6 +151,24 @@
 			);
 			name = Chat;
 			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		592E19242C4B0753007BA699 /* InsightView */ = {
+			isa = PBXGroup;
+			children = (
+				592E191E2C483500007BA699 /* InsightDetailModel.swift */,
+				592E19202C483519007BA699 /* InsightDetailViewModel.swift */,
+				592E19222C48353C007BA699 /* InsightDetailViewController.swift */,
+			);
+			path = InsightView;
+			sourceTree = "<group>";
+		};
+		592E19252C4B079D007BA699 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				592E18E82C42C699007BA699 /* MainTabBarController.swift */,
+			);
+			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
 		595FA08C2C402A7C00DC13DE /* App */ = {
@@ -254,6 +274,8 @@
 				595FA09D2C402BA700DC13DE /* Screens */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
 				592E18F12C4302E8007BA699 /* UIKitViews */,
+				592E19252C4B079D007BA699 /* CustomTabBar */,
+				592E19242C4B0753007BA699 /* InsightView */,
 				592E19152C46866A007BA699 /* Chat */,
 				592E19142C45D03F007BA699 /* Calendar */,
 				595FA0A72C404F9100DC13DE /* LaunchScreen */,
@@ -366,14 +388,15 @@
 			files = (
 				592E18FA2C45A412007BA699 /* CalendarViewController.swift in Sources */,
 				595FA08F2C402AA100DC13DE /* InputView.swift in Sources */,
+				592E192E2C4D92A4007BA699 /* RemindersView.swift in Sources */,
 				592E19002C45AAAB007BA699 /* CalendarView.swift in Sources */,
 				592E18E92C42C699007BA699 /* MainTabBarController.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
 				592E19192C4686CD007BA699 /* Message.swift in Sources */,
 				592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */,
 				592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */,
-				592E191D2C4808B8007BA699 /* CustomTabBarView.swift in Sources */,
 				592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */,
+				592E19302C4D92CB007BA699 /* Reminder.swift in Sources */,
 				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
 				592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */,
 				592E19172C468695007BA699 /* ChatViewModel.swift in Sources */,
@@ -389,6 +412,7 @@
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
 				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,
+				592E192C2C4D920E007BA699 /* RemindersViewController.swift in Sources */,
 				595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */,
 				592E18F62C451C32007BA699 /* UserData.swift in Sources */,
 				592E18F42C451C15007BA699 /* User.swift in Sources */,

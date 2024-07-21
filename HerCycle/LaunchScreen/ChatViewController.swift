@@ -29,6 +29,15 @@ class ChatViewController: UIViewController {
         return label
     }()
     
+    let chatImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Chat")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    
     let dividerLine: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -91,10 +100,11 @@ class ChatViewController: UIViewController {
         view.addSubview(statusLabel)
         view.addSubview(dividerLine)
         view.addSubview(tableView)
+        view.addSubview(chatImageView) 
         view.addSubview(messageInputView)
         messageInputView.addSubview(messageTextField)
         messageInputView.addSubview(submitButton)
-        
+
         NSLayoutConstraint.activate([
             headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -112,6 +122,11 @@ class ChatViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor),
             
+            chatImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            chatImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            chatImageView.widthAnchor.constraint(equalToConstant: 150),
+            chatImageView.heightAnchor.constraint(equalToConstant: 150),
+            
             messageInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             messageInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             messageInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
@@ -127,6 +142,7 @@ class ChatViewController: UIViewController {
             submitButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
+
     
     private func setupBindings() {
         viewModel.didUpdateMessages = { [weak self] in
@@ -134,15 +150,20 @@ class ChatViewController: UIViewController {
             if let count = self?.viewModel.messages.count, count > 0 {
                 let indexPath = IndexPath(row: count - 1, section: 0)
                 self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                self?.chatImageView.isHidden = true
+            } else {
+                self?.chatImageView.isHidden = false
             }
         }
     }
-    
+
     @objc func didTapSubmit() {
         guard let text = messageTextField.text, !text.isEmpty else { return }
         viewModel.sendMessage(text)
         messageTextField.text = ""
+        chatImageView.isHidden = true
     }
+
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {

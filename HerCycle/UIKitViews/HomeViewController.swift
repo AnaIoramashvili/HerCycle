@@ -26,10 +26,39 @@ class HomeViewController: UIViewController {
     
     private lazy var periodTrackerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 90
-        view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.systemPink.cgColor
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.systemPink.cgColor, UIColor.systemPurple.cgColor]
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        return layer
+    }()
+     
+    private lazy var outerRingLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.fillColor = UIColor.clear.cgColor
+        layer.lineWidth = 6
+        layer.lineCap = .round
+        return layer
+    }()
+    
+    private lazy var outerRingBackgroundLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.systemGray4.cgColor
+        layer.fillColor = UIColor.clear.cgColor
+        layer.lineWidth = 6
+        return layer
+    }()
+    
+    private lazy var waveView: WaveView = {
+        let view = WaveView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -63,10 +92,10 @@ class HomeViewController: UIViewController {
         return collectionView
     }()
     
-    private let insightTitles = ["Sleep", "Activity", "Mood", "Nutrition", "Symptoms", "Water", "Notes", "Medication"]
+    private let insightTitles = ["Activity", "Medication", "Mood", "Notes", "Nutrition", "Sleep", "Symptoms", "Water"]
     private let insightColors: [UIColor] = [
-        .systemGray4, .systemYellow, .systemPurple, .systemGreen,
-        .systemBlue, .systemTeal, .systemOrange, .systemPink
+        .color1, .color2, .color5, .color6,
+        .color1, .color2, .color5, .color6
     ]
     
     override func viewDidLoad() {
@@ -76,6 +105,21 @@ class HomeViewController: UIViewController {
         setupViews()
         setupConstraints()
         fetchInsights()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = periodTrackerView.bounds
+        
+        let center = CGPoint(x: periodTrackerView.bounds.midX, y: periodTrackerView.bounds.midY)
+        let radius = min(periodTrackerView.bounds.width, periodTrackerView.bounds.height) / 2 - 3
+        let startAngle = -CGFloat.pi / 2
+        let endAngle = startAngle + 2 * CGFloat.pi
+        
+        let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        
+        outerRingBackgroundLayer.path = circlePath.cgPath
+        outerRingLayer.path = circlePath.cgPath
     }
     
     private func generateDates() {
@@ -122,12 +166,12 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.rightBarButtonItems = [bellButton]
-        navigationController?.navigationBar.tintColor = .systemPink
+        navigationController?.navigationBar.tintColor = .color6
         
         let subtitleLabel = UILabel()
         subtitleLabel.text = "How are you feeling today?"
         subtitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        subtitleLabel.textColor = .systemPink
+        subtitleLabel.textColor = .color6
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(subtitleLabel)
         
@@ -148,6 +192,15 @@ class HomeViewController: UIViewController {
     }
     
     private func setupPeriodTrackerView() {
+        periodTrackerView.layer.insertSublayer(gradientLayer, at: 0)
+        periodTrackerView.layer.addSublayer(outerRingBackgroundLayer)
+        periodTrackerView.layer.addSublayer(outerRingLayer)
+        
+        periodTrackerView.layer.shadowColor = UIColor.black.cgColor
+        periodTrackerView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        periodTrackerView.layer.shadowRadius = 10
+        periodTrackerView.layer.shadowOpacity = 0.1
+        
         let label: UILabel = {
             let label = UILabel()
             label.text = "Period in"
@@ -161,22 +214,32 @@ class HomeViewController: UIViewController {
             let daysLabel = UILabel()
             daysLabel.text = "3 Days"
             daysLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-            daysLabel.textColor = .systemPink
+            daysLabel.textColor = .white
             daysLabel.textAlignment = .center
             daysLabel.translatesAutoresizingMaskIntoConstraints = false
             return daysLabel
         }()
         
+        periodTrackerView.addSubview(waveView)
         periodTrackerView.addSubview(label)
         periodTrackerView.addSubview(daysLabel)
         
         NSLayoutConstraint.activate([
+            waveView.leadingAnchor.constraint(equalTo: periodTrackerView.leadingAnchor),
+            waveView.trailingAnchor.constraint(equalTo: periodTrackerView.trailingAnchor),
+            waveView.bottomAnchor.constraint(equalTo: periodTrackerView.bottomAnchor),
+            waveView.heightAnchor.constraint(equalTo: periodTrackerView.heightAnchor, multiplier: 0.5),
+            
             label.centerXAnchor.constraint(equalTo: periodTrackerView.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: periodTrackerView.centerYAnchor, constant: -15),
             
             daysLabel.centerXAnchor.constraint(equalTo: periodTrackerView.centerXAnchor),
             daysLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5)
         ])
+        
+        startPulsatingAnimation()
+        updateColors(days: 3)
+        updateOuterRingProgress(progress: 0.75, days: 3)
     }
     
     private func setupPeriodTrackerViewConstraints() {
@@ -220,6 +283,76 @@ class HomeViewController: UIViewController {
             insightsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             insightsView.heightAnchor.constraint(equalToConstant: 200)
         ])
+    }
+    
+    private func startPulsatingAnimation() {
+        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 1.0
+        pulseAnimation.fromValue = 0.98
+        pulseAnimation.toValue = 1.02
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = .infinity
+        periodTrackerView.layer.add(pulseAnimation, forKey: "pulsing")
+    }
+    
+    private func updateColors(days: Int) {
+        let startColor: UIColor
+        let endColor: UIColor
+
+        switch days {
+        case 0...2:
+            startColor = .systemRed
+            endColor = .systemPink
+        case 3...5:
+            startColor = .systemPink
+            endColor = .systemPurple
+        default:
+            startColor = .systemPurple
+            endColor = .systemBlue
+        }
+
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+    }
+    
+    private func updateOuterRingProgress(progress: CGFloat, days: Int) {
+        let clampedProgress = min(max(progress, 0), 1)
+        
+        let center = CGPoint(x: periodTrackerView.bounds.midX, y: periodTrackerView.bounds.midY)
+        let radius = min(periodTrackerView.bounds.width, periodTrackerView.bounds.height) / 2 - 3
+        let startAngle = -CGFloat.pi / 2
+        let endAngle = startAngle + 2 * CGFloat.pi * clampedProgress
+        
+        let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        outerRingLayer.path = circlePath.cgPath
+
+        let color = self.colorForDays(days)
+        outerRingLayer.strokeColor = color.cgColor
+
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = outerRingLayer.presentation()?.strokeEnd ?? 0
+        animation.toValue = clampedProgress
+        animation.duration = 0.5
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        outerRingLayer.add(animation, forKey: "animateProgress")
+        
+        outerRingLayer.strokeEnd = clampedProgress
+    
+    }
+    
+    private func colorForDays(_ days: Int) -> UIColor {
+        switch days {
+        case 0...2:
+            return .systemRed
+        case 3...5:
+            return .systemPink
+        case 6...10:
+            return .systemPurple
+        case 11...20:
+            return .systemBlue
+        default:
+            return .systemGreen
+        }
     }
     
     @objc private func bellTapped() {
@@ -316,7 +449,6 @@ class CalendarCell: UICollectionViewCell {
         dayLabel.text = day
         dateLabel.text = date
     }
-    
 }
 
 // MARK: - InsightCell
@@ -371,6 +503,52 @@ class InsightCell: UICollectionViewCell {
     }
 }
 
-
-
-
+// MARK: - WaveView
+class WaveView: UIView {
+    private var waveLayer: CAShapeLayer!
+    private var displayLink: CADisplayLink?
+    private var startTime: CFTimeInterval?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() {
+        waveLayer = CAShapeLayer()
+        waveLayer.fillColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        layer.addSublayer(waveLayer)
+        
+        displayLink = CADisplayLink(target: self, selector: #selector(updateWave))
+        displayLink?.add(to: .current, forMode: .common)
+    }
+    
+    @objc private func updateWave() {
+        if startTime == nil {
+            startTime = CACurrentMediaTime()
+        }
+        
+        let elapsed = CACurrentMediaTime() - startTime!
+        let phase = CGFloat(elapsed) * 2
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: bounds.height))
+        
+        for x in stride(from: 0, to: bounds.width, by: 1) {
+            let relativeX = x / bounds.width
+            let sine = sin(relativeX * 4 * .pi + phase)
+            let y = bounds.height * 0.5 + sine * 10
+            path.addLine(to: CGPoint(x: x, y: y))
+        }
+        
+        path.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
+        path.close()
+        
+        waveLayer.path = path.cgPath
+    }
+}

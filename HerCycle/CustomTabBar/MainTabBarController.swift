@@ -23,6 +23,12 @@ class MainTabBarController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setCustomTabBarHidden(_ hidden: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.tabbarView.isHidden = hidden
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllers()
@@ -45,7 +51,6 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setUpCustomTabBar() {
-        // Hide the original tab bar
         tabBar.isHidden = true
         
         view.addSubview(tabbarView)

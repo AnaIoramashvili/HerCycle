@@ -25,8 +25,6 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
         setupCalendarHostingController()
     }
     
@@ -39,7 +37,7 @@ class CalendarViewController: UIViewController {
         
         calendarHostingController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            calendarHostingController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            calendarHostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
             calendarHostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             calendarHostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             calendarHostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
