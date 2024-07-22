@@ -187,7 +187,7 @@ struct MonthlyView: View {
             }
         }
         
-        let totalDays = 42 
+        let totalDays = 42
         if days.count < totalDays {
             days += Array(repeating: nil as Date?, count: totalDays - days.count)
         }
@@ -322,7 +322,7 @@ struct MiniMonthView: View {
             }
         }
         
-        let totalDays = 42 
+        let totalDays = 42
         if days.count < totalDays {
             days += Array(repeating: nil as Date?, count: totalDays - days.count)
         }

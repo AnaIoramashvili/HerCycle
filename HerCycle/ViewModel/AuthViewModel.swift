@@ -34,6 +34,13 @@ class AuthViewModel: ObservableObject {
         return userSession != nil
     }
     
+    func updateUserData(_ newData: UserData) {
+        DispatchQueue.main.async {
+            self.userData = newData
+            self.objectWillChange.send()
+        }
+    }
+    
     func signIn(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -89,5 +96,33 @@ class AuthViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("userData").document(uid).getDocument() else { return }
         self.userData = try? snapshot.data(as: UserData.self)
+    }
+}
+
+
+import FirebaseStorage
+
+extension AuthViewModel {
+    
+    func uploadProfilePicture(_ image: UIImage) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            throw NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "ავტორიზებული მომხმარებელი არ არის"])
+        }
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            throw NSError(domain: "ImageError", code: 0, userInfo: [NSLocalizedDescriptionKey: "სურათის მონაცემებად გარდაქმნა ვერ მოხერხდა"])
+        }
+        
+        let storageRef = Storage.storage().reference().child("profile_pictures/\(uid).jpg")
+        let _ = try await storageRef.putDataAsync(imageData)
+        let downloadURL = try await storageRef.downloadURL()
+        
+        var updatedUserData = self.userData ?? UserData(cycleLength: 0, periodLength: 0, lastPeriodStartDate: Date())
+        updatedUserData.profilePictureURL = downloadURL.absoluteString
+        
+        try await saveUserData(updatedUserData)
+        updateUserData(updatedUserData)
+        
+        
     }
 }

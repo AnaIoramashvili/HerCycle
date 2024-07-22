@@ -37,7 +37,7 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        let homeViewController = HomeViewController()
+        let homeViewController = HomeViewController(authViewModel: coordinator.authViewModel)
         let calendarViewController = CalendarViewController(authViewModel: coordinator.authViewModel)
         let chatViewController = ChatViewController()
         let profileViewController = ProfileViewController(authViewModel: coordinator.authViewModel, coordinator: coordinator)
@@ -51,6 +51,7 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setUpCustomTabBar() {
+        // Hide the original tab bar
         tabBar.isHidden = true
         
         view.addSubview(tabbarView)

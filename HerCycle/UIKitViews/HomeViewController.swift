@@ -9,13 +9,37 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    private let authViewModel: AuthViewModel
+    
+    init(authViewModel: AuthViewModel) {
+        self.authViewModel = authViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let insightsViewModel = InsightsViewModel()
-
+    private var currentDate: Date = Date()
+    private var dates: [Date] = []
+    
+    private var markedDays: [Date: CyclePhase] = [:]
+    private let calendar = Calendar.current
+    private let pmsColor = UIColor.systemBlue.withAlphaComponent(0.4)
+    private let periodColor = UIColor.systemRed.withAlphaComponent(0.7)
+    private let ovulationColor = UIColor.systemYellow
+    
+    var selectedDate: Date?
+    private var daysUntilNextPeriod: Int = 0
+    private var cycleProgress: CGFloat = 0.0
+    private var updateTimer: Timer?
+    
     private lazy var calendarView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 8
+        layout.minimumLineSpacing = 8
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
@@ -40,7 +64,7 @@ class HomeViewController: UIViewController {
         layer.endPoint = CGPoint(x: 1, y: 1)
         return layer
     }()
-     
+    
     private lazy var outerRingLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.fillColor = UIColor.clear.cgColor
@@ -69,13 +93,7 @@ class HomeViewController: UIViewController {
         return view
     }()
     
-    private lazy var bellButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: #selector(bellTapped))
-        return button
-    }()
-    
     private let daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"]
-    private var dates: [Date] = []
     
     private lazy var insightsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -105,6 +123,18 @@ class HomeViewController: UIViewController {
         setupViews()
         setupConstraints()
         fetchInsights()
+        updateMarkedDays()
+        calculateCycleInfo()
+        updatePeriodTrackerView()
+        
+        DispatchQueue.main.async {
+            self.calendarView.performBatchUpdates({
+                let indexSet = IndexSet(integer: 0)
+                self.calendarView.reloadSections(indexSet)
+            }) { _ in
+                self.scrollToCurrentDate()
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -120,15 +150,6 @@ class HomeViewController: UIViewController {
         
         outerRingBackgroundLayer.path = circlePath.cgPath
         outerRingLayer.path = circlePath.cgPath
-    }
-    
-    private func generateDates() {
-        let calendar = Calendar.current
-        let today = Date()
-        
-        dates = (-3...3).compactMap { dayOffset in
-            calendar.date(byAdding: .day, value: dayOffset, to: today)
-        }
     }
     
     private func fetchInsights() {
@@ -154,6 +175,81 @@ class HomeViewController: UIViewController {
         calendarView.delegate = self
     }
     
+    private func generateDates() {
+        let calendar = Calendar.current
+        let currentMonth = calendar.component(.month, from: currentDate)
+        let currentYear = calendar.component(.year, from: currentDate)
+        
+        guard let startOfMonth = calendar.date(from: DateComponents(year: currentYear, month: currentMonth, day: 1)) else { return }
+        guard let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth) else { return }
+        
+        var date = startOfMonth
+        while date <= endOfMonth {
+            dates.append(date)
+            guard let nextDate = calendar.date(byAdding: .day, value: 1, to: date) else { break }
+            date = nextDate
+        }
+    }
+    
+    private func calculateCycleInfo() {
+        guard let userData = authViewModel.userData else { return }
+        
+        let calendar = Calendar.current
+        let today = Date()
+        let lastPeriodStartDate = userData.lastPeriodStartDate
+        let cycleLength = userData.cycleLength
+        
+        // Calculate the start date of the next period
+        let nextPeriodStartDate = calendar.date(byAdding: .day, value: cycleLength, to: lastPeriodStartDate)!
+        
+        // Calculate days until next period
+        daysUntilNextPeriod = calendar.dateComponents([.day], from: today, to: nextPeriodStartDate).day ?? 0
+        
+        // Calculate cycle progress
+        let daysSinceLastPeriod = calendar.dateComponents([.day], from: lastPeriodStartDate, to: today).day ?? 0
+        cycleProgress = CGFloat(daysSinceLastPeriod) / CGFloat(cycleLength)
+    }
+    
+    private func updatePeriodTrackerView() {
+        let label = periodTrackerView.subviews.compactMap { $0 as? UILabel }.first { $0.text == "Period in" }
+        let daysLabel = periodTrackerView.subviews.compactMap { $0 as? UILabel }.first { $0.text?.contains("Days") == true }
+        
+        label?.text = daysUntilNextPeriod == 0 ? "Period starts" : "Period in"
+        daysLabel?.text = daysUntilNextPeriod == 0 ? "Today" : "\(daysUntilNextPeriod) Days"
+        
+        updateColors(days: daysUntilNextPeriod)
+        updateOuterRingProgress(progress: cycleProgress, days: daysUntilNextPeriod)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startUpdateTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopUpdateTimer()
+    }
+    
+    private func startUpdateTimer() {
+        updateTimer = Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { [weak self] _ in
+            self?.calculateCycleInfo()
+            self?.updatePeriodTrackerView()
+        }
+    }
+    
+    private func stopUpdateTimer() {
+        updateTimer?.invalidate()
+        updateTimer = nil
+    }
+    
+    private func scrollToCurrentDate() {
+        let calendar = Calendar.current
+        guard let currentDateIndex = dates.firstIndex(where: { calendar.isDate($0, inSameDayAs: currentDate) }) else { return }
+        let indexPath = IndexPath(item: max(0, currentDateIndex - 2), section: 0) // 2 days before current date
+        calendarView.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
+    
     private func setupConstraints() {
         setupCalendarViewConstraints()
         setupPeriodTrackerViewConstraints()
@@ -165,7 +261,6 @@ class HomeViewController: UIViewController {
         navigationItem.title = "Welcome Back!"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationItem.rightBarButtonItems = [bellButton]
         navigationController?.navigationBar.tintColor = .color6
         
         let subtitleLabel = UILabel()
@@ -185,9 +280,9 @@ class HomeViewController: UIViewController {
     private func setupCalendarViewConstraints() {
         NSLayoutConstraint.activate([
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            calendarView.heightAnchor.constraint(equalToConstant: 100)
+            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            calendarView.heightAnchor.constraint(equalToConstant: 110)
         ])
     }
     
@@ -297,21 +392,29 @@ class HomeViewController: UIViewController {
     }
     
     private func updateColors(days: Int) {
+        guard let userData = authViewModel.userData else { return }
+        let cycleLength = userData.cycleLength
+        
+        let percentageOfCycle = Double(cycleLength - days) / Double(cycleLength)
+        
         let startColor: UIColor
         let endColor: UIColor
-
-        switch days {
-        case 0...2:
+        
+        switch percentageOfCycle {
+        case 0.9...1.0:  // Last 10% of cycle
             startColor = .systemRed
             endColor = .systemPink
-        case 3...5:
+        case 0.75..<0.9:  // 75-90% of cycle
             startColor = .systemPink
             endColor = .systemPurple
-        default:
+        case 0.5..<0.75:
             startColor = .systemPurple
             endColor = .systemBlue
+        default:  // First half of cycle
+            startColor = .systemBlue
+            endColor = .systemTeal
         }
-
+        
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
     }
     
@@ -325,10 +428,10 @@ class HomeViewController: UIViewController {
         
         let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         outerRingLayer.path = circlePath.cgPath
-
+        
         let color = self.colorForDays(days)
         outerRingLayer.strokeColor = color.cgColor
-
+        
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = outerRingLayer.presentation()?.strokeEnd ?? 0
         animation.toValue = clampedProgress
@@ -337,7 +440,6 @@ class HomeViewController: UIViewController {
         outerRingLayer.add(animation, forKey: "animateProgress")
         
         outerRingLayer.strokeEnd = clampedProgress
-    
     }
     
     private func colorForDays(_ days: Int) -> UIColor {
@@ -353,14 +455,52 @@ class HomeViewController: UIViewController {
         default:
             return .systemGreen
         }
+        
     }
     
-    @objc private func bellTapped() {
-        // Handle bell tap
+    
+    private func updateMarkedDays() {
+        guard let userData = authViewModel.userData else { return }
+        
+        let cycleLength = userData.cycleLength
+        let periodLength = userData.periodLength
+        let lastPeriodStartDate = userData.lastPeriodStartDate
+        
+        markedDays.removeAll()
+        
+        var currentPeriodStart = lastPeriodStartDate
+        let endDate = calendar.date(byAdding: .year, value: 2, to: Date())!
+        
+        while currentPeriodStart <= endDate {
+            for day in 0..<periodLength {
+                if let date = calendar.date(byAdding: .day, value: day, to: currentPeriodStart) {
+                    let components = calendar.dateComponents([.year, .month, .day], from: date)
+                    let normalizedDate = calendar.date(from: components)!
+                    markedDays[normalizedDate] = .period
+                }
+            }
+            
+            if let ovulationDate = calendar.date(byAdding: .day, value: cycleLength - 14, to: currentPeriodStart) {
+                let components = calendar.dateComponents([.year, .month, .day], from: ovulationDate)
+                let normalizedDate = calendar.date(from: components)!
+                markedDays[normalizedDate] = .ovulation
+            }
+            
+            for day in 1...5 {
+                if let pmsDate = calendar.date(byAdding: .day, value: -day, to: currentPeriodStart) {
+                    let components = calendar.dateComponents([.year, .month, .day], from: pmsDate)
+                    let normalizedDate = calendar.date(from: components)!
+                    markedDays[normalizedDate] = .pms
+                }
+            }
+            
+            currentPeriodStart = calendar.date(byAdding: .day, value: cycleLength, to: currentPeriodStart)!
+        }
+        calendarView.reloadData()
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate for Calendar
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionView == calendarView ? dates.count : insightTitles.count
@@ -370,8 +510,14 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         if collectionView == calendarView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
             let date = dates[indexPath.item]
-            let dayOfWeek = Calendar.current.component(.weekday, from: date)
-            cell.configure(day: daysOfWeek[dayOfWeek - 1], date: String(Calendar.current.component(.day, from: date)))
+            let calendar = Calendar.current
+            let dayOfWeek = calendar.component(.weekday, from: date)
+            let dayOfMonth = calendar.component(.day, from: date)
+            let cyclePhase = markedDays[date]
+            
+            let isSelected = (selectedDate == date)
+            
+            cell.configure(day: daysOfWeek[dayOfWeek - 1], date: String(dayOfMonth), cyclePhase: cyclePhase, isSelected: isSelected)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InsightCell", for: indexPath) as! InsightCell
@@ -381,16 +527,30 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == calendarView, let cell = cell as? CalendarCell {
+            let date = dates[indexPath.item]
+            let calendar = Calendar.current
+            let dayOfWeek = calendar.component(.weekday, from: date)
+            let dayOfMonth = calendar.component(.day, from: date)
+            let cyclePhase = markedDays[date]
+            
+            let isSelected = (selectedDate == date)
+            
+            cell.configure(day: daysOfWeek[dayOfWeek - 1], date: String(dayOfMonth), cyclePhase: cyclePhase, isSelected: isSelected)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == calendarView {
-            let width = collectionView.bounds.width / CGFloat(dates.count)
-            return CGSize(width: width, height: collectionView.bounds.height)
+            let width = collectionView.bounds.width / 6 // Show 5 days at a time
+            return CGSize(width: width - 8, height: 80) // Subtract 8 for spacing
         }
         return CGSize(width: 100, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return collectionView == calendarView ? 0 : 15
+        return collectionView == calendarView ? 8 : 15
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -404,9 +564,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 }
-
 // MARK: - CalendarCell
 class CalendarCell: UICollectionViewCell {
+    private let containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 24 // Adjust for desired pill shape
+        view.clipsToBounds = true
+        return view
+    }()
+    
     private let dayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
@@ -417,7 +584,128 @@ class CalendarCell: UICollectionViewCell {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        return layer
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        setDefaultAppearance()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupViews() {
+        contentView.addSubview(containerView)
+        containerView.addSubview(dayLabel)
+        containerView.addSubview(dateLabel)
+        containerView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+            
+            dayLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            dayLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            dateLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 4),
+            dateLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
+        ])
+    }
+    
+    private func setDefaultAppearance() {
+        containerView.backgroundColor = .white
+        dayLabel.textColor = .black
+        dateLabel.textColor = .black
+        gradientLayer.removeFromSuperlayer() // Remove any existing gradient
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = containerView.bounds
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setDefaultAppearance()
+    }
+    
+    func configure(day: String, date: String, cyclePhase: CyclePhase?, isSelected: Bool) {
+        dayLabel.text = day
+        dateLabel.text = date
+        
+        setDefaultAppearance() // Reset to default before applying specific styling
+        updateCellAppearance(cyclePhase: cyclePhase, isSelected: isSelected)
+    }
+    
+    private func updateCellAppearance(cyclePhase: CyclePhase?, isSelected: Bool) {
+        if isSelected {
+            setupGradient(colors: [UIColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 1.0),
+                                   UIColor(red: 1.0, green: 0.2, blue: 0.4, alpha: 1.0)])
+            dayLabel.textColor = .white
+            dateLabel.textColor = .white
+        } else {
+            switch cyclePhase {
+            case .pms:
+                setupGradient(colors: [UIColor.systemBlue.withAlphaComponent(0.3), UIColor.systemBlue.withAlphaComponent(0.6)])
+            case .period:
+                setupGradient(colors: [UIColor.systemRed.withAlphaComponent(0.5), UIColor.systemRed.withAlphaComponent(0.8)])
+            case .ovulation:
+                setupGradient(colors: [UIColor.systemYellow.withAlphaComponent(0.3), UIColor.systemYellow.withAlphaComponent(0.6)])
+            case .none:
+                setDefaultAppearance()
+            }
+        }
+    }
+    
+    private func setupGradient(colors: [UIColor]) {
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.locations = [0, 1]
+        
+        // Ensure the gradient layer covers the entire cell
+        gradientLayer.frame = containerView.bounds
+        
+        // Add the gradient layer if it's not already added
+        if gradientLayer.superlayer == nil {
+            containerView.layer.insertSublayer(gradientLayer, at: 0)
+        }
+        
+        // Apply corner radius to match the cell's rounded corners
+        gradientLayer.cornerRadius = containerView.layer.cornerRadius
+    }
+}
+
+
+class InsightCell: UICollectionViewCell {
+    private let iconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .white
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -433,55 +721,6 @@ class CalendarCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(dayLabel)
-        contentView.addSubview(dateLabel)
-        
-        NSLayoutConstraint.activate([
-            dayLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            dayLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            dateLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 8),
-            dateLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-        ])
-    }
-    
-    func configure(day: String, date: String) {
-        dayLabel.text = day
-        dateLabel.text = date
-    }
-}
-
-// MARK: - InsightCell
-class InsightCell: UICollectionViewCell {
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupCell()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupCell() {
-        contentView.layer.cornerRadius = 15
-        contentView.clipsToBounds = true
-        
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         
@@ -491,19 +730,22 @@ class InsightCell: UICollectionViewCell {
             iconImageView.widthAnchor.constraint(equalToConstant: 40),
             iconImageView.heightAnchor.constraint(equalToConstant: 40),
             
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 10)
+            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
+            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -8)
         ])
     }
     
     func configure(with title: String, color: UIColor, iconName: String) {
         titleLabel.text = title
         contentView.backgroundColor = color
+        contentView.layer.cornerRadius = 15
         iconImageView.image = UIImage(systemName: iconName)
     }
 }
 
-// MARK: - WaveView
+
 class WaveView: UIView {
     private var waveLayer: CAShapeLayer!
     private var displayLink: CADisplayLink?
