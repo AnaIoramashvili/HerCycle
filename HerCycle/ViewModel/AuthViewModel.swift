@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 protocol AuthenticationFormProtocol {
     var formIsValid: Bool { get }
@@ -98,9 +99,6 @@ class AuthViewModel: ObservableObject {
         self.userData = try? snapshot.data(as: UserData.self)
     }
 }
-
-
-import FirebaseStorage
 
 extension AuthViewModel {
     

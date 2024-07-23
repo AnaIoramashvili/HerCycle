@@ -204,11 +204,7 @@ struct GetStartedButton: View {
     }
 }
 
-struct OnboardingPage {
-    let title: String
-    let subtitle: String
-    let imageName: String
-}
+
 
 #Preview {
     OnboardingView(hasSeenOnboarding: .constant(false))

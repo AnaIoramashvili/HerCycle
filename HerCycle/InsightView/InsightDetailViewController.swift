@@ -28,10 +28,21 @@ class InsightDetailViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 30
-        imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    private let containerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 20
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 0, height: -3)
+        view.layer.shadowRadius = 10
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let titleLabel: UILabel = {
@@ -86,18 +97,6 @@ class InsightDetailViewController: UIViewController {
         return stackView
     }()
     
-    private let containerView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 12
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
-        view.layer.shadowOffset = CGSize(width: 0, height: 1)
-        view.layer.shadowRadius = 8
-        view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     init(insight: Insight, title: String) {
         self.insight = insight
         self.insightTitle = title
@@ -113,9 +112,11 @@ class InsightDetailViewController: UIViewController {
         setupViews()
         configureViews()
         
-        let backButton = UIBarButtonItem()
-        backButton.title = ""
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        navigationItem.largeTitleDisplayMode = .never
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+        
+        navigationItem.title = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,8 +138,8 @@ class InsightDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        contentView.addSubview(imageView)
         contentView.addSubview(containerView)
-        containerView.addSubview(imageView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(informationLabel)
         containerView.addSubview(tipsLabel)
@@ -147,7 +148,7 @@ class InsightDetailViewController: UIViewController {
         containerView.addSubview(articlesStackView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),   
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -158,46 +159,44 @@ class InsightDetailViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 300),
             
-            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
-            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            imageView.heightAnchor.constraint(equalToConstant: 270),
+            containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -40),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             
             informationLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            informationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            informationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            informationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            informationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             
             tipsLabel.topAnchor.constraint(equalTo: informationLabel.bottomAnchor, constant: 16),
-            tipsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            tipsLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            tipsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            tipsLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             
             tipsStackView.topAnchor.constraint(equalTo: tipsLabel.bottomAnchor, constant: 8),
-            tipsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            tipsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            tipsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            tipsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             
             articlesLabel.topAnchor.constraint(equalTo: tipsStackView.bottomAnchor, constant: 16),
-            articlesLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            articlesLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            articlesLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            articlesLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             
             articlesStackView.topAnchor.constraint(equalTo: articlesLabel.bottomAnchor, constant: 8),
-            articlesStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            articlesStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            articlesStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16)
+            articlesStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            articlesStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            articlesStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30)
         ])
     }
     
     private func configureViews() {
-        navigationItem.title = nil
-        
         if let imageUrl = URL(string: insight.image) {
             URLSession.shared.dataTask(with: imageUrl) { [weak self] data, _, error in
                 if let data = data, let image = UIImage(data: data) {
@@ -237,5 +236,9 @@ class InsightDetailViewController: UIViewController {
         }
         
         UIApplication.shared.open(url)
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }

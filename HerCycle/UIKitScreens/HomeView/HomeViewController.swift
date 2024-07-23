@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: "CalendarCell")
+        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -105,7 +105,7 @@ class HomeViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(InsightCell.self, forCellWithReuseIdentifier: "InsightCell")
+        collectionView.register(InsightCell.self, forCellWithReuseIdentifier: InsightCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -126,6 +126,8 @@ class HomeViewController: UIViewController {
         updateMarkedDays()
         calculateCycleInfo()
         updatePeriodTrackerView()
+        startPulsatingAnimation()
+
         
         DispatchQueue.main.async {
             self.calendarView.performBatchUpdates({
@@ -199,13 +201,10 @@ class HomeViewController: UIViewController {
         let lastPeriodStartDate = userData.lastPeriodStartDate
         let cycleLength = userData.cycleLength
         
-        // Calculate the start date of the next period
         let nextPeriodStartDate = calendar.date(byAdding: .day, value: cycleLength, to: lastPeriodStartDate)!
         
-        // Calculate days until next period
         daysUntilNextPeriod = calendar.dateComponents([.day], from: today, to: nextPeriodStartDate).day ?? 0
         
-        // Calculate cycle progress
         let daysSinceLastPeriod = calendar.dateComponents([.day], from: lastPeriodStartDate, to: today).day ?? 0
         cycleProgress = CGFloat(daysSinceLastPeriod) / CGFloat(cycleLength)
     }
@@ -246,7 +245,7 @@ class HomeViewController: UIViewController {
     private func scrollToCurrentDate() {
         let calendar = Calendar.current
         guard let currentDateIndex = dates.firstIndex(where: { calendar.isDate($0, inSameDayAs: currentDate) }) else { return }
-        let indexPath = IndexPath(item: max(0, currentDateIndex - 2), section: 0) // 2 days before current date
+        let indexPath = IndexPath(item: max(0, currentDateIndex - 2), section: 0)
         calendarView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
     
@@ -299,6 +298,7 @@ class HomeViewController: UIViewController {
         let label: UILabel = {
             let label = UILabel()
             label.text = "Period in"
+            label.textColor = .white
             label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             label.textAlignment = .center
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -402,17 +402,17 @@ class HomeViewController: UIViewController {
         
         switch percentageOfCycle {
         case 0.9...1.0:  // Last 10% of cycle
-            startColor = .systemRed
-            endColor = .systemPink
+            startColor = .grad5
+            endColor = .color6
         case 0.75..<0.9:  // 75-90% of cycle
-            startColor = .systemPink
-            endColor = .systemPurple
+            startColor = .color6
+            endColor = .grad3
         case 0.5..<0.75:
-            startColor = .systemPurple
-            endColor = .systemBlue
+            startColor = .grad3
+            endColor = .grad4
         default:  // First half of cycle
-            startColor = .systemBlue
-            endColor = .systemTeal
+            startColor = .grad2
+            endColor = .color1
         }
         
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
@@ -443,6 +443,8 @@ class HomeViewController: UIViewController {
     }
     
     private func colorForDays(_ days: Int) -> UIColor {
+        
+        
         switch days {
         case 0...2:
             return .systemRed
@@ -451,13 +453,12 @@ class HomeViewController: UIViewController {
         case 6...10:
             return .systemPurple
         case 11...20:
-            return .systemBlue
+            return .grad6
         default:
             return .systemGreen
         }
         
     }
-    
     
     private func updateMarkedDays() {
         guard let userData = authViewModel.userData else { return }
@@ -498,6 +499,10 @@ class HomeViewController: UIViewController {
         }
         calendarView.reloadData()
     }
+    
+    func updateBackground(with theme: Theme) {
+        view.backgroundColor = UIColor(patternImage: theme.image)
+    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -508,7 +513,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == calendarView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
             let date = dates[indexPath.item]
             let calendar = Calendar.current
             let dayOfWeek = calendar.component(.weekday, from: date)
@@ -520,8 +525,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.configure(day: daysOfWeek[dayOfWeek - 1], date: String(dayOfMonth), cyclePhase: cyclePhase, isSelected: isSelected)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InsightCell", for: indexPath) as! InsightCell
-            let iconNames = ["bed.double.fill", "figure.walk", "face.smiling", "fork.knife", "bandage", "drop.fill", "note.text", "pills"]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InsightCell.identifier, for: indexPath) as! InsightCell
+            let iconNames = ["figure.walk", "pills", "face.smiling", "note.text", "fork.knife", "bed.double.fill", "bandage", "drop.fill"]
             cell.configure(with: insightTitles[indexPath.item], color: insightColors[indexPath.item], iconName: iconNames[indexPath.item])
             return cell
         }
@@ -543,8 +548,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == calendarView {
-            let width = collectionView.bounds.width / 6 // Show 5 days at a time
-            return CGSize(width: width - 8, height: 80) // Subtract 8 for spacing
+            let width = collectionView.bounds.width / 6
+            return CGSize(width: width - 8, height: 80)
         }
         return CGSize(width: 100, height: 150)
     }
@@ -564,233 +569,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 }
-// MARK: - CalendarCell
-class CalendarCell: UICollectionViewCell {
-    private let containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 24 // Adjust for desired pill shape
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let dayLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let gradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer()
-        layer.startPoint = CGPoint(x: 0, y: 0)
-        layer.endPoint = CGPoint(x: 1, y: 1)
-        return layer
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-        setDefaultAppearance()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupViews() {
-        contentView.addSubview(containerView)
-        containerView.addSubview(dayLabel)
-        containerView.addSubview(dateLabel)
-        containerView.layer.insertSublayer(gradientLayer, at: 0)
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-            
-            dayLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-            dayLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            
-            dateLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 4),
-            dateLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
-        ])
-    }
-    
-    private func setDefaultAppearance() {
-        containerView.backgroundColor = .white
-        dayLabel.textColor = .black
-        dateLabel.textColor = .black
-        gradientLayer.removeFromSuperlayer() // Remove any existing gradient
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradientLayer.frame = containerView.bounds
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        setDefaultAppearance()
-    }
-    
-    func configure(day: String, date: String, cyclePhase: CyclePhase?, isSelected: Bool) {
-        dayLabel.text = day
-        dateLabel.text = date
-        
-        setDefaultAppearance() // Reset to default before applying specific styling
-        updateCellAppearance(cyclePhase: cyclePhase, isSelected: isSelected)
-    }
-    
-    private func updateCellAppearance(cyclePhase: CyclePhase?, isSelected: Bool) {
-        if isSelected {
-            setupGradient(colors: [UIColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 1.0),
-                                   UIColor(red: 1.0, green: 0.2, blue: 0.4, alpha: 1.0)])
-            dayLabel.textColor = .white
-            dateLabel.textColor = .white
-        } else {
-            switch cyclePhase {
-            case .pms:
-                setupGradient(colors: [UIColor.systemBlue.withAlphaComponent(0.3), UIColor.systemBlue.withAlphaComponent(0.6)])
-            case .period:
-                setupGradient(colors: [UIColor.systemRed.withAlphaComponent(0.5), UIColor.systemRed.withAlphaComponent(0.8)])
-            case .ovulation:
-                setupGradient(colors: [UIColor.systemYellow.withAlphaComponent(0.3), UIColor.systemYellow.withAlphaComponent(0.6)])
-            case .none:
-                setDefaultAppearance()
-            }
-        }
-    }
-    
-    private func setupGradient(colors: [UIColor]) {
-        gradientLayer.colors = colors.map { $0.cgColor }
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        gradientLayer.locations = [0, 1]
-        
-        // Ensure the gradient layer covers the entire cell
-        gradientLayer.frame = containerView.bounds
-        
-        // Add the gradient layer if it's not already added
-        if gradientLayer.superlayer == nil {
-            containerView.layer.insertSublayer(gradientLayer, at: 0)
-        }
-        
-        // Apply corner radius to match the cell's rounded corners
-        gradientLayer.cornerRadius = containerView.layer.cornerRadius
-    }
-}
 
 
-class InsightCell: UICollectionViewCell {
-    private let iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupViews() {
-        contentView.addSubview(iconImageView)
-        contentView.addSubview(titleLabel)
-        
-        NSLayoutConstraint.activate([
-            iconImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20),
-            iconImageView.widthAnchor.constraint(equalToConstant: 40),
-            iconImageView.heightAnchor.constraint(equalToConstant: 40),
-            
-            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -8)
-        ])
-    }
-    
-    func configure(with title: String, color: UIColor, iconName: String) {
-        titleLabel.text = title
-        contentView.backgroundColor = color
-        contentView.layer.cornerRadius = 15
-        iconImageView.image = UIImage(systemName: iconName)
-    }
-}
 
-
-class WaveView: UIView {
-    private var waveLayer: CAShapeLayer!
-    private var displayLink: CADisplayLink?
-    private var startTime: CFTimeInterval?
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    private func setup() {
-        waveLayer = CAShapeLayer()
-        waveLayer.fillColor = UIColor.white.withAlphaComponent(0.3).cgColor
-        layer.addSublayer(waveLayer)
-        
-        displayLink = CADisplayLink(target: self, selector: #selector(updateWave))
-        displayLink?.add(to: .current, forMode: .common)
-    }
-    
-    @objc private func updateWave() {
-        if startTime == nil {
-            startTime = CACurrentMediaTime()
-        }
-        
-        let elapsed = CACurrentMediaTime() - startTime!
-        let phase = CGFloat(elapsed) * 2
-        
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: bounds.height))
-        
-        for x in stride(from: 0, to: bounds.width, by: 1) {
-            let relativeX = x / bounds.width
-            let sine = sin(relativeX * 4 * .pi + phase)
-            let y = bounds.height * 0.5 + sine * 10
-            path.addLine(to: CGPoint(x: x, y: y))
-        }
-        
-        path.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
-        path.close()
-        
-        waveLayer.path = path.cgPath
-    }
-}

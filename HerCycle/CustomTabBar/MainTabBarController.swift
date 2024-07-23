@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+protocol ThemeUpdateDelegate: AnyObject {
+    func didUpdateTheme(_ theme: Theme)
+}
+
+class MainTabBarController: UITabBarController, ThemeUpdateDelegate {
     private let coordinator: AppCoordinator
     private let tabbarView = UIView()
     private var buttons: [UIButton] = []
@@ -23,17 +27,18 @@ class MainTabBarController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCustomTabBarHidden(_ hidden: Bool) {
-        UIView.animate(withDuration: 0.3) {
-            self.tabbarView.isHidden = hidden
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllers()
         setUpCustomTabBar()
         generateButtons()
+        applyPreviouslySelectedTheme()
+    }
+    
+    func setCustomTabBarHidden(_ hidden: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.tabbarView.isHidden = hidden
+        }
     }
     
     private func setupViewControllers() {
@@ -41,7 +46,7 @@ class MainTabBarController: UITabBarController {
         let calendarViewController = CalendarViewController(authViewModel: coordinator.authViewModel)
         let chatViewController = ChatViewController()
         let profileViewController = ProfileViewController(authViewModel: coordinator.authViewModel, coordinator: coordinator)
-        
+                
         viewControllers = [
             UINavigationController(rootViewController: homeViewController),
             UINavigationController(rootViewController: calendarViewController),
@@ -51,7 +56,6 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setUpCustomTabBar() {
-        // Hide the original tab bar
         tabBar.isHidden = true
         
         view.addSubview(tabbarView)
@@ -131,6 +135,37 @@ class MainTabBarController: UITabBarController {
             self.buttons[sender.tag].tintColor = .white
             self.view.layoutIfNeeded()
         }
+    }
+    
+    // MARK: - Theme Update Methods
+    
+    func didUpdateTheme(_ theme: Theme) {
+        viewControllers?.forEach { viewController in
+            if let navController = viewController as? UINavigationController {
+                if let homeVC = navController.viewControllers.first as? HomeViewController {
+                    homeVC.updateBackground(with: theme)
+                } else if let profileVC = navController.viewControllers.first as? ProfileViewController {
+                    profileVC.updateBackground(with: theme)
+                } else if let chatVC = navController.viewControllers.first as? ChatViewController {
+                    chatVC.updateBackground(with: theme)
+                }
+            }
+        }
+        
+        ThemeManager.shared.saveSelectedTheme(theme)
+    }
+
+    private func applyPreviouslySelectedTheme() {
+        if let savedTheme = ThemeManager.shared.getSelectedTheme() {
+            didUpdateTheme(savedTheme)
+        }
+    }
+    
+    func presentThemeViewController() {
+        let themeVC = ThemeViewController()
+        themeVC.delegate = self
+        let navController = UINavigationController(rootViewController: themeVC)
+        present(navController, animated: true)
     }
 }
 

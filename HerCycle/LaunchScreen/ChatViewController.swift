@@ -93,6 +93,8 @@ class ChatViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        applyCurrentTheme()
     }
     
     private func configureUI() {
@@ -162,6 +164,23 @@ class ChatViewController: UIViewController {
         viewModel.sendMessage(text)
         messageTextField.text = ""
         chatImageView.isHidden = true
+    }
+    
+    
+    private func applyCurrentTheme() {
+        if let currentTheme = ThemeManager.shared.getSelectedTheme() {
+            updateBackground(with: currentTheme)
+        }
+    }
+
+    func didUpdateTheme(_ theme: Theme) {
+        updateBackground(with: theme)
+    }
+
+    func updateBackground(with theme: Theme) {
+        let backgroundImage = theme.image
+        view.backgroundColor = UIColor(patternImage: backgroundImage)
+        tableView.backgroundColor = .clear
     }
 
 }
