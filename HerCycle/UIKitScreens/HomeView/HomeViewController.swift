@@ -179,8 +179,8 @@ class HomeViewController: UIViewController {
     
     private func generateDates() {
         let calendar = Calendar.current
-        let currentMonth = calendar.component(.month, from: currentDate)
-        let currentYear = calendar.component(.year, from: currentDate)
+        let currentMonth = calendar.component(.month, from: Date())
+        let currentYear = calendar.component(.year, from: Date())
         
         guard let startOfMonth = calendar.date(from: DateComponents(year: currentYear, month: currentMonth, day: 1)) else { return }
         guard let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth) else { return }
@@ -196,13 +196,12 @@ class HomeViewController: UIViewController {
     private func calculateCycleInfo() {
         guard let userData = authViewModel.userData else { return }
         
-        let calendar = Calendar.current
-        let today = Date()
-        let lastPeriodStartDate = userData.lastPeriodStartDate
         let cycleLength = userData.cycleLength
+        let lastPeriodStartDate = userData.lastPeriodStartDate
         
         let nextPeriodStartDate = calendar.date(byAdding: .day, value: cycleLength, to: lastPeriodStartDate)!
         
+        let today = Date()
         daysUntilNextPeriod = calendar.dateComponents([.day], from: today, to: nextPeriodStartDate).day ?? 0
         
         let daysSinceLastPeriod = calendar.dateComponents([.day], from: lastPeriodStartDate, to: today).day ?? 0
@@ -469,34 +468,43 @@ class HomeViewController: UIViewController {
         
         markedDays.removeAll()
         
-        var currentPeriodStart = lastPeriodStartDate
-        let endDate = calendar.date(byAdding: .year, value: 2, to: Date())!
+        // Calculate the next period start date
+        let nextPeriodStartDate = calendar.date(byAdding: .day, value: cycleLength, to: lastPeriodStartDate)!
         
-        while currentPeriodStart <= endDate {
-            for day in 0..<periodLength {
-                if let date = calendar.date(byAdding: .day, value: day, to: currentPeriodStart) {
-                    let components = calendar.dateComponents([.year, .month, .day], from: date)
-                    let normalizedDate = calendar.date(from: components)!
-                    markedDays[normalizedDate] = .period
-                }
-            }
-            
-            if let ovulationDate = calendar.date(byAdding: .day, value: cycleLength - 14, to: currentPeriodStart) {
-                let components = calendar.dateComponents([.year, .month, .day], from: ovulationDate)
+        // Mark period days for current period
+        for day in 0..<periodLength {
+            if let date = calendar.date(byAdding: .day, value: day, to: lastPeriodStartDate) {
+                let components = calendar.dateComponents([.year, .month, .day], from: date)
                 let normalizedDate = calendar.date(from: components)!
-                markedDays[normalizedDate] = .ovulation
+                markedDays[normalizedDate] = .period
             }
-            
-            for day in 1...5 {
-                if let pmsDate = calendar.date(byAdding: .day, value: -day, to: currentPeriodStart) {
-                    let components = calendar.dateComponents([.year, .month, .day], from: pmsDate)
-                    let normalizedDate = calendar.date(from: components)!
-                    markedDays[normalizedDate] = .pms
-                }
-            }
-            
-            currentPeriodStart = calendar.date(byAdding: .day, value: cycleLength, to: currentPeriodStart)!
         }
+        
+        // Mark PMS days (5 days before current period)
+        for day in 1...5 {
+            if let pmsDate = calendar.date(byAdding: .day, value: -day, to: lastPeriodStartDate) {
+                let components = calendar.dateComponents([.year, .month, .day], from: pmsDate)
+                let normalizedDate = calendar.date(from: components)!
+                markedDays[normalizedDate] = .pms
+            }
+        }
+        
+        // Mark PMS days (5 days before next period)
+        for day in 1...5 {
+            if let pmsDate = calendar.date(byAdding: .day, value: -day, to: nextPeriodStartDate) {
+                let components = calendar.dateComponents([.year, .month, .day], from: pmsDate)
+                let normalizedDate = calendar.date(from: components)!
+                markedDays[normalizedDate] = .pms
+            }
+        }
+        
+        // Mark ovulation day (14 days before the next period)
+        if let ovulationDate = calendar.date(byAdding: .day, value: -14, to: nextPeriodStartDate) {
+            let components = calendar.dateComponents([.year, .month, .day], from: ovulationDate)
+            let normalizedDate = calendar.date(from: components)!
+            markedDays[normalizedDate] = .ovulation
+        }
+        
         calendarView.reloadData()
     }
     
@@ -515,12 +523,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         if collectionView == calendarView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as! CalendarCell
             let date = dates[indexPath.item]
-            let calendar = Calendar.current
             let dayOfWeek = calendar.component(.weekday, from: date)
             let dayOfMonth = calendar.component(.day, from: date)
             let cyclePhase = markedDays[date]
             
-            let isSelected = (selectedDate == date)
+            let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
             
             cell.configure(day: daysOfWeek[dayOfWeek - 1], date: String(dayOfMonth), cyclePhase: cyclePhase, isSelected: isSelected)
             return cell

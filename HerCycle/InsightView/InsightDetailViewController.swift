@@ -56,10 +56,16 @@ class InsightDetailViewController: UIViewController {
     
     private let informationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .darkGray
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        let attributedText = NSMutableAttributedString(string: "Placeholder")
+        attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+        label.attributedText = attributedText
         return label
     }()
     
@@ -213,7 +219,7 @@ class InsightDetailViewController: UIViewController {
         for tip in insight.tips {
             let tipLabel = UILabel()
             tipLabel.text = "✨ " + tip
-            tipLabel.font = UIFont.systemFont(ofSize: 14)
+            tipLabel.font = UIFont.systemFont(ofSize: 18)
             tipLabel.textColor = .darkGray
             tipLabel.numberOfLines = 0
             tipsStackView.addArrangedSubview(tipLabel)
@@ -222,7 +228,7 @@ class InsightDetailViewController: UIViewController {
         for article in insight.articles {
             let articleButton = UIButton(type: .system)
             articleButton.setTitle(article.title, for: .normal)
-            articleButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+            articleButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
             articleButton.contentHorizontalAlignment = .left
             articleButton.addTarget(self, action: #selector(openArticle(_:)), for: .touchUpInside)
             articlesStackView.addArrangedSubview(articleButton)

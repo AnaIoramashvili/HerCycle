@@ -148,6 +148,8 @@ class MainTabBarController: UITabBarController, ThemeUpdateDelegate {
                     profileVC.updateBackground(with: theme)
                 } else if let chatVC = navController.viewControllers.first as? ChatViewController {
                     chatVC.updateBackground(with: theme)
+                } else if let calendarVC = navController.viewControllers.first as? CalendarViewController {
+                    calendarVC.updateTheme(theme)
                 }
             }
         }

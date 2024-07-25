@@ -7,16 +7,21 @@
 
 import Foundation
 
-class ThemeManager {
+class ThemeManager: ObservableObject {
     static let shared = ThemeManager()
+    
+    @Published var currentTheme: Theme?
     
     private let defaults = UserDefaults.standard
     private let selectedThemeKey = "SelectedTheme"
     
-    private init() {}
+    private init() {
+        currentTheme = getSelectedTheme()
+    }
     
     func saveSelectedTheme(_ theme: Theme) {
         defaults.set(theme.name, forKey: selectedThemeKey)
+        currentTheme = theme
     }
     
     func getSelectedTheme() -> Theme? {

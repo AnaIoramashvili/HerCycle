@@ -9,8 +9,7 @@ import UIKit
 import SwiftUI
 
 class CalendarViewController: UIViewController {
-    
-    private var calendarHostingController: CalendarHostingController!
+    private var calendarHostingController: UIHostingController<AnyView>?
     private let authViewModel: AuthViewModel
     
     init(authViewModel: AuthViewModel) {
@@ -24,23 +23,35 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCalendarHostingController()
     }
     
     private func setupCalendarHostingController() {
-        calendarHostingController = CalendarHostingController(authViewModel: authViewModel)
+        let calendarView = CalendarView().environmentObject(authViewModel)
+        calendarHostingController = UIHostingController(rootView: AnyView(calendarView))
         
-        addChild(calendarHostingController)
-        view.addSubview(calendarHostingController.view)
-        calendarHostingController.didMove(toParent: self)
-        
-        calendarHostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            calendarHostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            calendarHostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            calendarHostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            calendarHostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        if let hostingController = calendarHostingController {
+            addChild(hostingController)
+            view.addSubview(hostingController.view)
+            hostingController.didMove(toParent: self)
+            
+            hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+                hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        }
+    }
+    
+    func updateTheme(_ theme: Theme) {
+        ThemeManager.shared.saveSelectedTheme(theme)
+        if let hostingController = calendarHostingController {
+            hostingController.rootView = AnyView(
+                CalendarView()
+                    .environmentObject(authViewModel)
+            )
+        }
     }
 }

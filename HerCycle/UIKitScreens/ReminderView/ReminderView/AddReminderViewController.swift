@@ -8,41 +8,10 @@
 import UIKit
 
 class AddReminderViewController: UIViewController {
-    
+    private let titleTextField = UITextField()
+    private let datePicker = UIDatePicker()
+    private let addButton = UIButton(type: .system)
     private let completion: (Reminder) -> Void
-    
-    private lazy var titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Reminder Title"
-        textField.borderStyle = .none
-        textField.backgroundColor = .systemBackground
-        textField.layer.cornerRadius = 10
-        textField.layer.masksToBounds = true
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
-        textField.leftViewMode = .always
-        return textField
-    }()
-    
-    private lazy var datePicker: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.datePickerMode = .dateAndTime
-        picker.preferredDatePickerStyle = .inline
-        picker.minimumDate = Date()
-        picker.tintColor = .color1
-        return picker
-    }()
-    
-    private lazy var addButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Add Reminder", for: .normal)
-        button.backgroundColor = .color1
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
-        return button
-    }()
     
     init(completion: @escaping (Reminder) -> Void) {
         self.completion = completion
@@ -62,12 +31,6 @@ class AddReminderViewController: UIViewController {
         view.backgroundColor = UIColor(named: "background")
         title = "Add Reminder"
         
-        setupNavigationBar()
-        setupSubviews()
-        setupConstraints()
-    }
-    
-    private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.largeTitleTextAttributes = [
@@ -77,16 +40,34 @@ class AddReminderViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(cancelTapped))
         backButton.tintColor = .color1
         navigationItem.leftBarButtonItem = backButton
-    }
-    
-    private func setupSubviews() {
-        [titleTextField, datePicker, addButton].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    private func setupConstraints() {
+        
+        titleTextField.placeholder = "Reminder Title"
+        titleTextField.borderStyle = .none
+        titleTextField.backgroundColor = .systemBackground
+        titleTextField.layer.cornerRadius = 10
+        titleTextField.layer.masksToBounds = true
+        titleTextField.font = UIFont.systemFont(ofSize: 16)
+        titleTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: titleTextField.frame.height))
+        titleTextField.leftViewMode = .always
+        view.addSubview(titleTextField)
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.minimumDate = Date()
+        datePicker.tintColor = .color1
+        view.addSubview(datePicker)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        
+        addButton.setTitle("Add Reminder", for: .normal)
+        addButton.backgroundColor = .color1
+        addButton.setTitleColor(.white, for: .normal)
+        addButton.layer.cornerRadius = 25
+        addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        addButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+        view.addSubview(addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -105,23 +86,17 @@ class AddReminderViewController: UIViewController {
     }
     
     @objc private func cancelTapped() {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func addTapped() {
         guard let title = titleTextField.text, !title.isEmpty else {
-            showAlert(message: "Please enter a reminder title")
             return
         }
         
         let newReminder = Reminder(title: title, date: datePicker.date)
         completion(newReminder)
-        dismiss(animated: true)
-    }
-    
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        dismiss(animated: true, completion: nil)
     }
 }
+

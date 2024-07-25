@@ -9,15 +9,7 @@ import UIKit
 import SwiftUI
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeUpdateDelegate {
-    
-    func didUpdateTheme(_ theme: Theme) {
-        updateBackground(with: theme)
-        
-        if let mainTabBarController = self.tabBarController as? MainTabBarController {
-            mainTabBarController.didUpdateTheme(theme)
-        }
-    }
-    
+
     private let authViewModel: AuthViewModel
     private let coordinator: AppCoordinator
     
@@ -27,8 +19,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-        tableView.register(ProfileHeaderCell.self, forCellReuseIdentifier: "ProfileHeaderCell")
-        tableView.register(InfoCell.self, forCellReuseIdentifier: "InfoCell")
+        tableView.register(ProfileHeaderCell.self, forCellReuseIdentifier: ProfileHeaderCell.identifier)
+        tableView.register(InfoCell.self, forCellReuseIdentifier: InfoCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -78,6 +70,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         fatalError("init(coder:) has not been implemented")
     }
     
+    func didUpdateTheme(_ theme: Theme) {
+        updateBackground(with: theme)
+        
+        if let mainTabBarController = self.tabBarController as? MainTabBarController {
+            mainTabBarController.didUpdateTheme(theme)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -103,14 +103,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             
-            buttonsStackView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: -180),
+            buttonsStackView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: -140),
             buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             buttonsStackView.heightAnchor.constraint(equalToConstant: 80),
             
-            signOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
-            signOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
-            signOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            signOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 90),
+            signOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -90),
+            signOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             signOutButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
@@ -193,7 +193,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let navController = UINavigationController(rootViewController: themeVC)
             present(navController, animated: true)
         case feedbackButton:
-            print("Feedback button tapped")
+            let ratingVC = RatingViewController()
+            let navController = UINavigationController(rootViewController: ratingVC)
+            present(navController, animated: true)
         default:
             break
         }
@@ -233,11 +235,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 case 0:
                     cell.configure(title: "Cycle Length", value: "\(userData.cycleLength) days", icon: "calendar")
                 case 1:
-                    cell.configure(title: "Period Length", value: "\(userData.periodLength) days", icon: "clock")
+                    cell.configure(title: "Period Length", value: "\(userData.periodLength) days", icon: "drop")
                 case 2:
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = .medium
-                    cell.configure(title: "Last Period Start", value: dateFormatter.string(from: userData.lastPeriodStartDate), icon: "calendar.badge.clock")
+                    cell.configure(title: "Last Period Start", value: dateFormatter.string(from: userData.lastPeriodStartDate), icon: "clock")
                 default:
                     break
                 }

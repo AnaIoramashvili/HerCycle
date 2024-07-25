@@ -17,6 +17,9 @@ class ThemeCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        
+        contentView.layer.cornerRadius = 10
+        contentView.layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +32,7 @@ class ThemeCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         
         nameLabel.textAlignment = .center
-        nameLabel.font = UIFont.systemFont(ofSize: 12)
+        nameLabel.font = UIFont.systemFont(ofSize: 15)
         contentView.addSubview(nameLabel)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false

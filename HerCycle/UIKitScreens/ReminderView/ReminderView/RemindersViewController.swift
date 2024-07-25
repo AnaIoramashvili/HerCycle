@@ -9,58 +9,38 @@ import UIKit
 import UserNotifications
 
 class RemindersViewController: UIViewController {
-    
     private var reminders: [Reminder] = []
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ModernReminderCell.self, forCellReuseIdentifier: ModernReminderCell.identifier)
-        tableView.backgroundColor = UIColor(named: "background")
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-        return tableView
-    }()
+    private let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         loadReminders()
+        
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .color6
+        navigationItem.leftBarButtonItem = backButton
     }
     
     private func setupUI() {
         view.backgroundColor = UIColor(named: "background")
         title = "Reminders"
         
-        setupNavigationBar()
-        setupTableView()
-    }
-    
-    private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.largeTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.color1
         ]
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.left"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonTapped)
-        )
-        navigationItem.leftBarButtonItem?.tintColor = .color6
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(addReminderTapped)
-        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addReminderTapped))
         navigationItem.rightBarButtonItem?.tintColor = .color1
-    }
-    
-    private func setupTableView() {
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ModernReminderCell.self, forCellReuseIdentifier: "ModernReminderCell")
+        tableView.backgroundColor = UIColor(named: "background")
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -74,30 +54,26 @@ class RemindersViewController: UIViewController {
     
     @objc private func addReminderTapped() {
         let addReminderVC = AddReminderViewController { [weak self] reminder in
-            self?.handleNewReminder(reminder)
+            self?.reminders.append(reminder)
+            self?.saveReminders()
+            self?.tableView.reloadData()
+            self?.scheduleNotification(for: reminder)
         }
         let navController = UINavigationController(rootViewController: addReminderVC)
-        present(navController, animated: true)
-    }
-    
-    private func handleNewReminder(_ reminder: Reminder) {
-        reminders.append(reminder)
-        saveReminders()
-        tableView.reloadData()
-        scheduleNotification(for: reminder)
+        present(navController, animated: true, completion: nil)
     }
     
     private func loadReminders() {
         if let data = UserDefaults.standard.data(forKey: "reminders") {
             do {
                 reminders = try JSONDecoder().decode([Reminder].self, from: data)
-                tableView.reloadData()
             } catch {
                 print("Error loading reminders: \(error)")
             }
         }
+        tableView.reloadData()
     }
-
+    
     private func saveReminders() {
         do {
             let data = try JSONEncoder().encode(reminders)
@@ -141,9 +117,12 @@ extension RemindersViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let reminder = reminders[indexPath.row]
-        let dateTimeString = DateFormatter.reminderDateTimeFormatter.string(from: reminder.date)
         
-        cell.configure(with: reminder.title, dateTime: dateTimeString)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        let timeString = dateFormatter.string(from: reminder.date)
+        
+        cell.configure(with: reminder.title, time: timeString)
         cell.selectionStyle = .none
         
         return cell
@@ -159,7 +138,7 @@ extension RemindersViewController: UITableViewDelegate, UITableViewDataSource {
         saveReminders()
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let reminderToRemove = reminders[indexPath.row]
@@ -172,10 +151,4 @@ extension RemindersViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DateFormatter {
-    static let reminderDateTimeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy 'at' h:mm a"
-        return formatter
-    }()
-}
+

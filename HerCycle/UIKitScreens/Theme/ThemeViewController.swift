@@ -21,8 +21,8 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(ThemeCell.self, forCellWithReuseIdentifier: "ThemeCell")
-        collectionView.backgroundColor = .systemBackground
+        collectionView.register(ThemeCell.self, forCellWithReuseIdentifier: ThemeCell.identifier)
+        collectionView.backgroundColor = .background
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -34,10 +34,10 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     private func setupUI() {
         title = "Choose Theme"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .background
         
         view.addSubview(collectionView)
-        
+
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -45,7 +45,9 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        cancelButton.tintColor = .color1
+        navigationItem.leftBarButtonItem = cancelButton
     }
     
     @objc private func cancelTapped() {
@@ -57,7 +59,7 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ThemeCell", for: indexPath) as? ThemeCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThemeCell.identifier, for: indexPath) as? ThemeCell else {
             fatalError("Unable to dequeue ThemeCell")
         }
         

@@ -93,7 +93,7 @@ class ProfileHeaderCell: UITableViewCell {
             }.resume()
         } else {
             avatarImageView.image = UIImage(systemName: "person.circle.fill")
-            avatarImageView.tintColor = .gray
+            avatarImageView.tintColor = .color1
         }
     }
     

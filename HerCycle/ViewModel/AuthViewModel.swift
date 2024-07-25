@@ -104,11 +104,11 @@ extension AuthViewModel {
     
     func uploadProfilePicture(_ image: UIImage) async throws {
         guard let uid = Auth.auth().currentUser?.uid else {
-            throw NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "ავტორიზებული მომხმარებელი არ არის"])
+            throw NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User is not authorized"])
         }
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            throw NSError(domain: "ImageError", code: 0, userInfo: [NSLocalizedDescriptionKey: "სურათის მონაცემებად გარდაქმნა ვერ მოხერხდა"])
+            throw NSError(domain: "ImageError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Cannot upload Image"])
         }
         
         let storageRef = Storage.storage().reference().child("profile_pictures/\(uid).jpg")
