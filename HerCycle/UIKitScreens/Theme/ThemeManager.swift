@@ -30,11 +30,13 @@ class ThemeManager: ObservableObject {
     }
     
     let allThemes: [Theme] = [
-        Theme(name: "Flower", imageName: "flowerBackground"),
+        Theme(name: "Stars", imageName: "starsBackground"),
         Theme(name: "Aura", imageName: "auraBackground"),
         Theme(name: "Heart", imageName: "heartBackground"),
         Theme(name: "Sea", imageName: "seaBackground"),
         Theme(name: "Flowers", imageName: "flowersBackground"),
-        Theme(name: "Bows", imageName: "bowsBackground")
+        Theme(name: "Fun", imageName: "funBackground"),
+        Theme(name: "Blue Aura", imageName: "blueAuraBackrground"),
+        Theme(name: "Lemons", imageName: "lemonBackground"),
     ]
 }

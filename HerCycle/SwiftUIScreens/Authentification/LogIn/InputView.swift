@@ -9,10 +9,10 @@ import SwiftUI
 
 struct InputView: View {
     @Binding var text: String
+    @State private var isSecureTextVisible = false
     var tittle: String
     var plaseholder: String
     var isSecureField = false
-    @State private var isSecureTextVisible = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -29,7 +29,7 @@ struct InputView: View {
                             SecureField(plaseholder, text: $text)
                         }
                     }
-                    .font(.system(size: 14))
+                    .font(.system(size: 16))
                     
                     Button(action: {
                         isSecureTextVisible.toggle()
@@ -40,7 +40,7 @@ struct InputView: View {
                 }
             } else {
                 TextField(plaseholder, text: $text)
-                    .font(.system(size: 14))
+                    .font(.system(size: 16))
             }
             Divider()
         }

@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject private var viewModel = LoginViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var coordinator: AppCoordinator
-    
-    @State private var isRotating = false
-    @State private var showAlert = false
-    @State private var errorMessage = ""
     
     var body: some View {
         NavigationStack {
@@ -31,21 +26,21 @@ struct LoginView: View {
                             .foregroundColor(.gray)
                             .scaledToFill()
                             .frame(width: 100, height: 150)
-                            .rotationEffect(.degrees(isRotating ? 360 : 0))
+                            .rotationEffect(.degrees(viewModel.isRotating ? 360 : 0))
                             .onAppear {
                                 withAnimation(Animation.linear(duration: 10).repeatForever(autoreverses: false)) {
-                                    isRotating = true
+                                    viewModel.isRotating = true
                                 }
                             }
                             .padding(.top, 40)
                         
                         VStack(spacing: 24) {
-                            InputView(text: $email,
+                            InputView(text: $viewModel.email,
                                       tittle: "Email Address",
                                       plaseholder: "Enter your email")
                             .autocapitalization(.none)
                             
-                            InputView(text: $password,
+                            InputView(text: $viewModel.password,
                                       tittle: "Password",
                                       plaseholder: "Enter your password",
                                       isSecureField: true)
@@ -56,11 +51,11 @@ struct LoginView: View {
                         Button(action: {
                             Task {
                                 do {
-                                    try await viewModel.signIn(withEmail: email, password: password)
+                                    try await authViewModel.signIn(withEmail: viewModel.email, password: viewModel.password)
                                     await coordinator.userDidLogin()
                                 } catch {
-                                    errorMessage = error.localizedDescription
-                                    showAlert = true
+                                    viewModel.errorMessage = error.localizedDescription
+                                    viewModel.showAlert = true
                                 }
                             }
                         }, label: {
@@ -71,14 +66,14 @@ struct LoginView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
                         })
-                        .disabled(!formIsValid)
-                        .opacity(formIsValid ? 1.0 : 0.5)
+                        .disabled(!viewModel.formIsValid)
+                        .opacity(viewModel.formIsValid ? 1.0 : 0.5)
                         .padding(.top, 60)
                         
                         Spacer()
                         
                         NavigationLink {
-                            RegistrationView()
+                            RegistrationView(authViewModel: authViewModel, coordinator: coordinator)
                                 .navigationBarBackButtonHidden()
                         } label: {
                             HStack(spacing: 3) {
@@ -87,7 +82,7 @@ struct LoginView: View {
                                 Text("Sign Up")
                                     .bold()
                             }
-                            .font(.system(size: 15))
+                            .font(.system(size: 16))
                         }
                         .padding(.bottom, 20)
                     }
@@ -100,33 +95,9 @@ struct LoginView: View {
                 .padding()
             }
         }
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("Error"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
         }
-    }
-}
-
-// MARK: - AuthenticationFormProtocol
-extension LoginView: AuthenticationFormProtocol {
-    var formIsValid: Bool {
-        return isValidEmail(email) && isValidPassword(password)
-    }
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = #"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
-    }
-    
-    private func isValidPassword(_ password: String) -> Bool {
-        // At least 8 characters long
-        // Contains at least one uppercase letter
-        // Contains at least one lowercase letter
-        // Contains at least one digit
-        // Contains at least one special character
-        let passwordRegex = #"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"#
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return passwordPredicate.evaluate(with: password)
     }
 }
 

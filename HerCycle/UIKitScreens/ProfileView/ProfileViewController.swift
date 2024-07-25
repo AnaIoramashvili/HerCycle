@@ -133,7 +133,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.tableView.reloadData()
                 }
             } catch {
-                print("პროფილის სურათის ატვირთვა ვერ მოხერხდა: \(error.localizedDescription)")
+                print("Could not upload profile picture: \(error.localizedDescription)")
             }
         }
         

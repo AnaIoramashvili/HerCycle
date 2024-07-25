@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import UserNotifications
 
 class RemindersViewController: UIViewController {
     
-    private var reminders: [Reminder] = []
+    private let viewModel = ReminderViewModel()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -26,7 +25,8 @@ class RemindersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadReminders()
+        viewModel.loadReminders()
+        tableView.reloadData()
     }
     
     private func setupUI() {
@@ -74,55 +74,11 @@ class RemindersViewController: UIViewController {
     
     @objc private func addReminderTapped() {
         let addReminderVC = AddReminderViewController { [weak self] reminder in
-            self?.handleNewReminder(reminder)
+            self?.viewModel.addReminder(reminder)
+            self?.tableView.reloadData()
         }
         let navController = UINavigationController(rootViewController: addReminderVC)
         present(navController, animated: true)
-    }
-    
-    private func handleNewReminder(_ reminder: Reminder) {
-        reminders.append(reminder)
-        saveReminders()
-        tableView.reloadData()
-        scheduleNotification(for: reminder)
-    }
-    
-    private func loadReminders() {
-        if let data = UserDefaults.standard.data(forKey: "reminders") {
-            do {
-                reminders = try JSONDecoder().decode([Reminder].self, from: data)
-                tableView.reloadData()
-            } catch {
-                print("Error loading reminders: \(error)")
-            }
-        }
-    }
-
-    private func saveReminders() {
-        do {
-            let data = try JSONEncoder().encode(reminders)
-            UserDefaults.standard.set(data, forKey: "reminders")
-        } catch {
-            print("Error saving reminders: \(error)")
-        }
-    }
-    
-    private func scheduleNotification(for reminder: Reminder) {
-        let content = UNMutableNotificationContent()
-        content.title = "Reminder"
-        content.body = reminder.title
-        content.sound = .default
-        
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: reminder.date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: reminder.id.uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error scheduling notification: \(error)")
-            }
-        }
     }
     
     @objc private func backButtonTapped() {
@@ -132,7 +88,7 @@ class RemindersViewController: UIViewController {
 
 extension RemindersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reminders.count
+        return viewModel.reminders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,7 +96,7 @@ extension RemindersViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let reminder = reminders[indexPath.row]
+        let reminder = viewModel.reminders[indexPath.row]
         let dateTimeString = DateFormatter.reminderDateTimeFormatter.string(from: reminder.date)
         
         cell.configure(with: reminder.title, dateTime: dateTimeString)
@@ -155,27 +111,15 @@ extension RemindersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        reminders[indexPath.row].isCompleted.toggle()
-        saveReminders()
+        viewModel.toggleReminderCompletion(at: indexPath.row)
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let reminderToRemove = reminders[indexPath.row]
-            reminders.remove(at: indexPath.row)
-            saveReminders()
+            viewModel.deleteReminder(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [reminderToRemove.id.uuidString])
         }
     }
 }
 
-extension DateFormatter {
-    static let reminderDateTimeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy 'at' h:mm a"
-        return formatter
-    }()
-}
