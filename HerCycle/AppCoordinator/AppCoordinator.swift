@@ -62,9 +62,14 @@ class AppCoordinator: ObservableObject {
         }
     }
     
-    func userDidCompleteOnboarding() async {
+    private func userDidCompleteOnboarding() async {
         hasSeenOnboarding = true
         await showLogin()
+    }
+    
+    private func hasCompletedQuestions() async -> Bool {
+        await authViewModel.fetchUserData()
+        return authViewModel.userData != nil
     }
     
     func userDidLogin() async {
@@ -81,10 +86,5 @@ class AppCoordinator: ObservableObject {
     
     func userDidLogout() async {
         await showLogin()
-    }
-    
-    private func hasCompletedQuestions() async -> Bool {
-        await authViewModel.fetchUserData()
-        return authViewModel.userData != nil
     }
 }

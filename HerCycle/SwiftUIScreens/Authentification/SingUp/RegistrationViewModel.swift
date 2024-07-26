@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class RegistrationViewModel: ObservableObject {
+final class RegistrationViewModel: ObservableObject {
     @Published var email = ""
     @Published var fullName = ""
     @Published var password = ""
@@ -19,16 +19,16 @@ class RegistrationViewModel: ObservableObject {
     var authViewModel: AuthViewModel
     var coordinator: AppCoordinator
     
-    init(authViewModel: AuthViewModel, coordinator: AppCoordinator) {
-        self.authViewModel = authViewModel
-        self.coordinator = coordinator
-    }
-    
     var formIsValid: Bool {
         isValidEmail(email) &&
         isValidPassword(password) &&
         password == confirmPassword &&
         isValidFullName(fullName)
+    }
+    
+    init(authViewModel: AuthViewModel, coordinator: AppCoordinator) {
+        self.authViewModel = authViewModel
+        self.coordinator = coordinator
     }
     
     func createUser() async {

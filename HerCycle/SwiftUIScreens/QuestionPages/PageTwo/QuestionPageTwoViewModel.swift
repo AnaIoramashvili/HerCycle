@@ -1,5 +1,5 @@
 //
-//  QuestionPage2ViewModel.swift
+//  QuestionPageTwoViewModel.swift
 //  HerCycle
 //
 //  Created by Ana on 7/26/24.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-class QuestionPage2ViewModel: ObservableObject {
+final class QuestionPageTwoViewModel: ObservableObject {
     @Published var periodLength: Int?
     @Binding var path: NavigationPath
     
     private let authViewModel: AuthViewModel
     private let coordinator: AppCoordinator
     
+    var isContinueButtonEnabled: Bool {
+        periodLength != nil
+    }
+    
     init(path: Binding<NavigationPath>, authViewModel: AuthViewModel, coordinator: AppCoordinator) {
         self._path = path
         self.authViewModel = authViewModel
         self.coordinator = coordinator
-    }
-    
-    var isContinueButtonEnabled: Bool {
-        periodLength != nil
     }
     
     func savePeriodLength() async {

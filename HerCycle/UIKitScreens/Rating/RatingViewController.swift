@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RatingViewController: UIViewController, UITextViewDelegate {
+final class RatingViewController: UIViewController, UITextViewDelegate {
 
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()

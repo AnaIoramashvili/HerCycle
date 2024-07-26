@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class OnboardingViewModel: ObservableObject {
+final class OnboardingViewModel: ObservableObject {
     @Published var currentPage = 0
     @Published var showLoginView = false
     

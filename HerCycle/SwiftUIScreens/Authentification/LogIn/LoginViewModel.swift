@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class LoginViewModel: ObservableObject, AuthenticationFormProtocol {
+final class LoginViewModel: ObservableObject, AuthenticationFormProtocol {
     @Published var email = ""
     @Published var password = ""
     @Published var isRotating = false

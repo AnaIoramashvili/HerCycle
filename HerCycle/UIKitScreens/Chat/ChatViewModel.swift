@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChatViewModel {
+final class ChatViewModel {
     private let apiKey = "sk-proj-gKisHXSQ1fTPOxFjo3VLT3BlbkFJPIHRBeYBtUGBdhH7mtte"
     var messages: [Message] = []
     

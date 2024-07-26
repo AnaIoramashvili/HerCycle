@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-class QuestionPage1ViewModel: ObservableObject {
+final class QuestionPage1ViewModel: ObservableObject {
     @Published var cycleLength: Int?
     @Published var path = NavigationPath()
     
     private let authViewModel: AuthViewModel
     let coordinator: AppCoordinator
     
-    init(authViewModel: AuthViewModel, coordinator: AppCoordinator) {
-        self.authViewModel = authViewModel
-        self.coordinator = coordinator
-    }
-    
     var isContinueButtonEnabled: Bool {
         cycleLength != nil
     }
     
+    init(authViewModel: AuthViewModel, coordinator: AppCoordinator) {
+        self.authViewModel = authViewModel
+        self.coordinator = coordinator
+    }
+
     func saveCycleLength() async {
         guard let cycleLength = cycleLength else { return }
         

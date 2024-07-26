@@ -15,7 +15,7 @@ protocol AuthenticationFormProtocol {
 }
 
 @MainActor
-class AuthViewModel: ObservableObject {
+final class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var userData: UserData?
@@ -101,7 +101,6 @@ class AuthViewModel: ObservableObject {
 }
 
 extension AuthViewModel {
-    
     func uploadProfilePicture(_ image: UIImage) async throws {
         guard let uid = Auth.auth().currentUser?.uid else {
             throw NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User is not authorized"])
@@ -120,7 +119,5 @@ extension AuthViewModel {
         
         try await saveUserData(updatedUserData)
         updateUserData(updatedUserData)
-        
-        
     }
 }
