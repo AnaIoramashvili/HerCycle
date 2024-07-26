@@ -11,4 +11,5 @@ struct UserData: Codable {
     var cycleLength: Int
     var periodLength: Int
     var lastPeriodStartDate: Date
+    var profilePictureURL: String?
 }
