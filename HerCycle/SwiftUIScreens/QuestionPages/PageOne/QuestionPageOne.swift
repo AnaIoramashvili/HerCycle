@@ -16,8 +16,7 @@ struct QuestionPage1: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                Color("mainBackground")
-                    .edgesIgnoringSafeArea(.all)
+                Color.mainBackground.edgesIgnoringSafeArea(.all)
                 VStack {
                     Image("woman1")
                         .resizable()

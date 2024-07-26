@@ -15,8 +15,7 @@ struct QuestionPage2: View {
 
     var body: some View {
         ZStack {
-            Color("mainBackground")
-                .edgesIgnoringSafeArea(.all)
+            Color.mainBackground.edgesIgnoringSafeArea(.all)
             VStack {
                 Image("woman2")
                     .resizable()

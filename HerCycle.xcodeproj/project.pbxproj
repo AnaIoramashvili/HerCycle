@@ -28,9 +28,9 @@
 		595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA09E2C402BBF00DC13DE /* OnboardingView.swift */; };
 		595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A02C402BD300DC13DE /* LoginView.swift */; };
 		595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0A22C402BEB00DC13DE /* RegistrationView.swift */; };
-		595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B62C415D2000DC13DE /* QuestionPage1.swift */; };
-		595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B82C415D3100DC13DE /* QuestionPage2.swift */; };
-		595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */; };
+		595FA0B72C415D2000DC13DE /* QuestionPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B62C415D2000DC13DE /* QuestionPageOne.swift */; };
+		595FA0B92C415D3100DC13DE /* QuestionPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0B82C415D3100DC13DE /* QuestionPageTwo.swift */; };
+		595FA0BB2C415D3B00DC13DE /* QuestionPageThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FA0BA2C415D3B00DC13DE /* QuestionPageThree.swift */; };
 		59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E182C3487E600D0D4C4 /* AppDelegate.swift */; };
 		59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */; };
 		59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59624E212C3487E800D0D4C4 /* Assets.xcassets */; };
@@ -55,9 +55,9 @@
 		59AEE8612C51889200A1D694 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8602C51889200A1D694 /* LoginViewModel.swift */; };
 		59AEE86F2C52FA4600A1D694 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE86E2C52FA4600A1D694 /* OnboardingViewModel.swift */; };
 		59AEE8712C53015000A1D694 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8702C53015000A1D694 /* RegistrationViewModel.swift */; };
-		59AEE8732C53052300A1D694 /* QuestionPage1ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8722C53052300A1D694 /* QuestionPage1ViewModel.swift */; };
-		59AEE8752C5305DA00A1D694 /* QuestionPage2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8742C5305DA00A1D694 /* QuestionPage2ViewModel.swift */; };
-		59AEE8772C53062800A1D694 /* QuestionPage3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8762C53062800A1D694 /* QuestionPage3ViewModel.swift */; };
+		59AEE8732C53052300A1D694 /* QuestionPageOneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8722C53052300A1D694 /* QuestionPageOneViewModel.swift */; };
+		59AEE8752C5305DA00A1D694 /* QuestionPageTwoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8742C5305DA00A1D694 /* QuestionPageTwoViewModel.swift */; };
+		59AEE8772C53062800A1D694 /* QuestionPageThreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8762C53062800A1D694 /* QuestionPageThreeViewModel.swift */; };
 		59AEE87E2C53163700A1D694 /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE87D2C53163700A1D694 /* ReminderViewModel.swift */; };
 		59AEE8822C5316B300A1D694 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8812C5316B300A1D694 /* DateFormatter+Extensions.swift */; };
 		59AEE8842C5319EC00A1D694 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8832C5319EC00A1D694 /* ProfileViewModel.swift */; };
@@ -96,9 +96,9 @@
 		595FA09E2C402BBF00DC13DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		595FA0A02C402BD300DC13DE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		595FA0A22C402BEB00DC13DE /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		595FA0B62C415D2000DC13DE /* QuestionPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage1.swift; sourceTree = "<group>"; };
-		595FA0B82C415D3100DC13DE /* QuestionPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage2.swift; sourceTree = "<group>"; };
-		595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage3.swift; sourceTree = "<group>"; };
+		595FA0B62C415D2000DC13DE /* QuestionPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPageOne.swift; sourceTree = "<group>"; };
+		595FA0B82C415D3100DC13DE /* QuestionPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPageTwo.swift; sourceTree = "<group>"; };
+		595FA0BA2C415D3B00DC13DE /* QuestionPageThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPageThree.swift; sourceTree = "<group>"; };
 		59624E152C3487E600D0D4C4 /* HerCycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HerCycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59624E182C3487E600D0D4C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59624E1A2C3487E600D0D4C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,9 +125,9 @@
 		59AEE8602C51889200A1D694 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		59AEE86E2C52FA4600A1D694 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		59AEE8702C53015000A1D694 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
-		59AEE8722C53052300A1D694 /* QuestionPage1ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage1ViewModel.swift; sourceTree = "<group>"; };
-		59AEE8742C5305DA00A1D694 /* QuestionPage2ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage2ViewModel.swift; sourceTree = "<group>"; };
-		59AEE8762C53062800A1D694 /* QuestionPage3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPage3ViewModel.swift; sourceTree = "<group>"; };
+		59AEE8722C53052300A1D694 /* QuestionPageOneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPageOneViewModel.swift; sourceTree = "<group>"; };
+		59AEE8742C5305DA00A1D694 /* QuestionPageTwoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPageTwoViewModel.swift; sourceTree = "<group>"; };
+		59AEE8762C53062800A1D694 /* QuestionPageThreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPageThreeViewModel.swift; sourceTree = "<group>"; };
 		59AEE87D2C53163700A1D694 /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModel.swift; sourceTree = "<group>"; };
 		59AEE8812C5316B300A1D694 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		59AEE8832C5319EC00A1D694 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				59AEE8AF2C53C35F00A1D694 /* Chat */,
-				59AEE8852C538E2F00A1D694 /* Calendar */,
+				59AEE8852C538E2F00A1D694 /* CalendarComponents */,
 				59AEE8282C4FDF8400A1D694 /* ReminderView */,
 				59AEE81E2C4FCA0E00A1D694 /* HomeView */,
 				59AEE8272C4FDF7B00A1D694 /* ProfileView */,
@@ -299,13 +299,13 @@
 		59624E172C3487E600D0D4C4 /* HerCycle */ = {
 			isa = PBXGroup;
 			children = (
-				59AEE8A22C53BF1D00A1D694 /* LaunchScreen */,
 				595FA08C2C402A7C00DC13DE /* App */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
 				592E18F22C451BFF007BA699 /* Model */,
 				595FA09D2C402BA700DC13DE /* SwiftUIScreens */,
 				592E18F12C4302E8007BA699 /* UIKitScreens */,
 				592E19252C4B079D007BA699 /* CustomTabBar */,
+				59AEE8A22C53BF1D00A1D694 /* LaunchScreen */,
 				59624E302C35D81E00D0D4C4 /* Supporting */,
 				59624E312C35D88800D0D4C4 /* Resources */,
 			);
@@ -391,8 +391,8 @@
 		59AEE8782C530A5900A1D694 /* PageOne */ = {
 			isa = PBXGroup;
 			children = (
-				595FA0B62C415D2000DC13DE /* QuestionPage1.swift */,
-				59AEE8722C53052300A1D694 /* QuestionPage1ViewModel.swift */,
+				595FA0B62C415D2000DC13DE /* QuestionPageOne.swift */,
+				59AEE8722C53052300A1D694 /* QuestionPageOneViewModel.swift */,
 			);
 			path = PageOne;
 			sourceTree = "<group>";
@@ -400,8 +400,8 @@
 		59AEE8792C530A6700A1D694 /* PageTwo */ = {
 			isa = PBXGroup;
 			children = (
-				595FA0B82C415D3100DC13DE /* QuestionPage2.swift */,
-				59AEE8742C5305DA00A1D694 /* QuestionPage2ViewModel.swift */,
+				595FA0B82C415D3100DC13DE /* QuestionPageTwo.swift */,
+				59AEE8742C5305DA00A1D694 /* QuestionPageTwoViewModel.swift */,
 			);
 			path = PageTwo;
 			sourceTree = "<group>";
@@ -409,8 +409,8 @@
 		59AEE87A2C530A6F00A1D694 /* PageThree */ = {
 			isa = PBXGroup;
 			children = (
-				595FA0BA2C415D3B00DC13DE /* QuestionPage3.swift */,
-				59AEE8762C53062800A1D694 /* QuestionPage3ViewModel.swift */,
+				595FA0BA2C415D3B00DC13DE /* QuestionPageThree.swift */,
+				59AEE8762C53062800A1D694 /* QuestionPageThreeViewModel.swift */,
 			);
 			path = PageThree;
 			sourceTree = "<group>";
@@ -425,22 +425,16 @@
 			path = Authentification;
 			sourceTree = "<group>";
 		};
-		59AEE8852C538E2F00A1D694 /* Calendar */ = {
+		59AEE8852C538E2F00A1D694 /* CalendarComponents */ = {
 			isa = PBXGroup;
 			children = (
-				59AEE8862C538E3F00A1D694 /* CalendarViewController.swift */,
-				59AEE8882C538E6A00A1D694 /* CalendarHostingController.swift */,
-				59AEE88A2C538E7D00A1D694 /* CalendarView.swift */,
-				59AEE88C2C538EBD00A1D694 /* MonthlyView.swift */,
-				59AEE88E2C538EDB00A1D694 /* YearlyView.swift */,
-				59AEE8902C538EF100A1D694 /* MiniMonthView.swift */,
-				59AEE8922C538F0100A1D694 /* MiniDayView.swift */,
-				59AEE8942C538F1300A1D694 /* DayView.swift */,
-				59AEE8962C538F2C00A1D694 /* LegendView.swift */,
-				59AEE8982C538F4D00A1D694 /* LegendItem.swift */,
-				59AEE89A2C538F5E00A1D694 /* DashedCircle.swift */,
+				59AEE8B42C53E22A00A1D694 /* CalendarViews */,
+				59AEE8B32C53E1FE00A1D694 /* DayViewComponents */,
+				59AEE8B22C53E0F500A1D694 /* LegendViews */,
+				59AEE8B12C53E0A000A1D694 /* MiniDateViews */,
+				59AEE8B02C53E06400A1D694 /* DateViews */,
 			);
-			path = Calendar;
+			path = CalendarComponents;
 			sourceTree = "<group>";
 		};
 		59AEE8A22C53BF1D00A1D694 /* LaunchScreen */ = {
@@ -460,6 +454,52 @@
 				59AEE8AD2C53C20A00A1D694 /* ChatTableViewCell.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		59AEE8B02C53E06400A1D694 /* DateViews */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE88C2C538EBD00A1D694 /* MonthlyView.swift */,
+				59AEE88E2C538EDB00A1D694 /* YearlyView.swift */,
+			);
+			path = DateViews;
+			sourceTree = "<group>";
+		};
+		59AEE8B12C53E0A000A1D694 /* MiniDateViews */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE8922C538F0100A1D694 /* MiniDayView.swift */,
+				59AEE8902C538EF100A1D694 /* MiniMonthView.swift */,
+			);
+			path = MiniDateViews;
+			sourceTree = "<group>";
+		};
+		59AEE8B22C53E0F500A1D694 /* LegendViews */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE8962C538F2C00A1D694 /* LegendView.swift */,
+				59AEE8982C538F4D00A1D694 /* LegendItem.swift */,
+			);
+			path = LegendViews;
+			sourceTree = "<group>";
+		};
+		59AEE8B32C53E1FE00A1D694 /* DayViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE8942C538F1300A1D694 /* DayView.swift */,
+				59AEE89A2C538F5E00A1D694 /* DashedCircle.swift */,
+			);
+			path = DayViewComponents;
+			sourceTree = "<group>";
+		};
+		59AEE8B42C53E22A00A1D694 /* CalendarViews */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE88A2C538E7D00A1D694 /* CalendarView.swift */,
+				59AEE8882C538E6A00A1D694 /* CalendarHostingController.swift */,
+				59AEE8862C538E3F00A1D694 /* CalendarViewController.swift */,
+			);
+			path = CalendarViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,12 +608,12 @@
 				59AEE88F2C538EDB00A1D694 /* YearlyView.swift in Sources */,
 				59AEE8892C538E6A00A1D694 /* CalendarHostingController.swift in Sources */,
 				592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */,
-				59AEE8732C53052300A1D694 /* QuestionPage1ViewModel.swift in Sources */,
+				59AEE8732C53052300A1D694 /* QuestionPageOneViewModel.swift in Sources */,
 				592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */,
 				59AEE8712C53015000A1D694 /* RegistrationViewModel.swift in Sources */,
 				592E18EB2C42C6B0007BA699 /* HomeViewController.swift in Sources */,
 				59AEE8912C538EF100A1D694 /* MiniMonthView.swift in Sources */,
-				595FA0B72C415D2000DC13DE /* QuestionPage1.swift in Sources */,
+				595FA0B72C415D2000DC13DE /* QuestionPageOne.swift in Sources */,
 				59AEE82A2C4FE62C00A1D694 /* ProfileHeaderCell.swift in Sources */,
 				59AEE8542C51728B00A1D694 /* AddReminderViewController.swift in Sources */,
 				59AEE86F2C52FA4600A1D694 /* OnboardingViewModel.swift in Sources */,
@@ -585,9 +625,9 @@
 				59AEE85A2C51732200A1D694 /* Rating.swift in Sources */,
 				59AEE88B2C538E7D00A1D694 /* CalendarView.swift in Sources */,
 				59AEE8822C5316B300A1D694 /* DateFormatter+Extensions.swift in Sources */,
-				59AEE8752C5305DA00A1D694 /* QuestionPage2ViewModel.swift in Sources */,
+				59AEE8752C5305DA00A1D694 /* QuestionPageTwoViewModel.swift in Sources */,
 				595FA09C2C402B8B00DC13DE /* AuthViewModel.swift in Sources */,
-				595FA0B92C415D3100DC13DE /* QuestionPage2.swift in Sources */,
+				595FA0B92C415D3100DC13DE /* QuestionPageTwo.swift in Sources */,
 				59AEE8352C4FF7A400A1D694 /* ThemeViewController.swift in Sources */,
 				59AEE8992C538F4D00A1D694 /* LegendItem.swift in Sources */,
 				59AEE8332C4FF78800A1D694 /* Theme.swift in Sources */,
@@ -596,7 +636,7 @@
 				59AEE8562C5172B300A1D694 /* ModernReminderCell.swift in Sources */,
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
-				595FA0BB2C415D3B00DC13DE /* QuestionPage3.swift in Sources */,
+				595FA0BB2C415D3B00DC13DE /* QuestionPageThree.swift in Sources */,
 				595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */,
 				59AEE8582C5172CC00A1D694 /* RemindersView.swift in Sources */,
 				592E18F62C451C32007BA699 /* UserData.swift in Sources */,
@@ -605,7 +645,7 @@
 				59AEE87E2C53163700A1D694 /* ReminderViewModel.swift in Sources */,
 				592E18F42C451C15007BA699 /* User.swift in Sources */,
 				59AEE8AA2C53C1E600A1D694 /* ChatViewModel.swift in Sources */,
-				59AEE8772C53062800A1D694 /* QuestionPage3ViewModel.swift in Sources */,
+				59AEE8772C53062800A1D694 /* QuestionPageThreeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

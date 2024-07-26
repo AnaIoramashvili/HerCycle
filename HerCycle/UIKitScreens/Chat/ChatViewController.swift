@@ -31,7 +31,7 @@ class ChatViewController: UIViewController {
     
     let chatImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "Chat")
+        imageView.image = UIImage(named: "chatPhoto")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

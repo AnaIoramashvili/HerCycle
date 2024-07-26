@@ -18,8 +18,8 @@ struct RegistrationView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("mainBackground").edgesIgnoringSafeArea(.all)
-                
+                Color.mainBackground.edgesIgnoringSafeArea(.all)
+
                 VStack {
                     Spacer()
                     
