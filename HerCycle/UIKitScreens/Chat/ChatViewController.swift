@@ -15,7 +15,7 @@ class ChatViewController: UIViewController {
         let label = UILabel()
         label.text = "Chatty AI"
         label.font = .systemFont(ofSize: 30, weight: .bold)
-        label.textColor = UIColor.color6
+        label.textColor = UIColor.tertiaryPink
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -86,7 +86,7 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .background
+        view.backgroundColor = .mainBackground
         
         configureUI()
         setupBindings()
@@ -102,7 +102,7 @@ class ChatViewController: UIViewController {
         view.addSubview(statusLabel)
         view.addSubview(dividerLine)
         view.addSubview(tableView)
-        view.addSubview(chatImageView) 
+        view.addSubview(chatImageView)
         view.addSubview(messageInputView)
         messageInputView.addSubview(messageTextField)
         messageInputView.addSubview(submitButton)

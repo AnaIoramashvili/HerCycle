@@ -15,8 +15,8 @@ struct OnboardingPage {
 
 struct OnboardingModel {
     let pages: [OnboardingPage] = [
-        OnboardingPage(title: "Accurate Predictions", subtitle: "Our expert-backed algorithms bring you accurate menstrual cycle predictions.", imageName: "Period1"),
-        OnboardingPage(title: "Cycle Harmony", subtitle: "Based on your inputs and data, you'll have guidance and knowledge relevant to your unique patterns.", imageName: "Period2"),
+        OnboardingPage(title: "Accurate Predictions", subtitle: "Our expert-backed algorithms bring you accurate menstrual cycle predictions.", imageName: "period1"),
+        OnboardingPage(title: "Cycle Harmony", subtitle: "Based on your inputs and data, you'll have guidance and knowledge relevant to your unique patterns.", imageName: "period2"),
         OnboardingPage(title: "Keep track of your period", subtitle: "Easily and accurately track each phase of your menstrual cycle.", imageName: "")
     ]
 }

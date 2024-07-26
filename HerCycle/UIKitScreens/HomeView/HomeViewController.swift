@@ -112,13 +112,13 @@ class HomeViewController: UIViewController {
     
     private let insightTitles = ["Activity", "Medication", "Mood", "Notes", "Nutrition", "Sleep", "Symptoms", "Water"]
     private let insightColors: [UIColor] = [
-        .color1, .color2, .color5, .color6,
-        .color1, .color2, .color5, .color6
+        .primaryPink, .secondaryPink, .insightPink, .tertiaryPink,
+        .primaryPink, .secondaryPink, .insightPink, .tertiaryPink
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: "mainBackgroundColor")
         generateDates()
         setupViews()
         setupConstraints()
@@ -259,12 +259,12 @@ class HomeViewController: UIViewController {
         navigationItem.title = "Welcome Back!"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.tintColor = .color6
+        navigationController?.navigationBar.tintColor = UIColor(named: "tertiaryPink")
         
         let subtitleLabel = UILabel()
         subtitleLabel.text = "How are you feeling today?"
         subtitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        subtitleLabel.textColor = .color6
+        subtitleLabel.textColor = UIColor(named: "tertiaryPink")
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(subtitleLabel)
         
@@ -401,17 +401,17 @@ class HomeViewController: UIViewController {
         
         switch percentageOfCycle {
         case 0.9...1.0:  // Last 10% of cycle
-            startColor = .grad5
-            endColor = .color6
+            startColor = UIColor(named: "gradLightRed")!
+            endColor = .tertiaryPink
         case 0.75..<0.9:  // 75-90% of cycle
-            startColor = .color6
-            endColor = .grad3
+            startColor = .tertiaryPink
+            endColor = UIColor(named: "gradLightPurple")!
         case 0.5..<0.75:
-            startColor = .grad3
-            endColor = .grad4
+            startColor = UIColor(named: "gradLightPurple")!
+            endColor = UIColor(named: "gradDarkPurple")!
         default:  // First half of cycle
-            startColor = .grad2
-            endColor = .color1
+            startColor = .circleDefaultGrad
+            endColor = .primaryPink
         }
         
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
@@ -452,7 +452,7 @@ class HomeViewController: UIViewController {
         case 6...10:
             return .systemPurple
         case 11...20:
-            return .grad6
+            return UIColor(named: "gradDarkRed")!
         default:
             return .systemGreen
         }
@@ -468,10 +468,8 @@ class HomeViewController: UIViewController {
         
         markedDays.removeAll()
         
-        // Calculate the next period start date
         let nextPeriodStartDate = calendar.date(byAdding: .day, value: cycleLength, to: lastPeriodStartDate)!
         
-        // Mark period days for current period
         for day in 0..<periodLength {
             if let date = calendar.date(byAdding: .day, value: day, to: lastPeriodStartDate) {
                 let components = calendar.dateComponents([.year, .month, .day], from: date)
@@ -480,7 +478,6 @@ class HomeViewController: UIViewController {
             }
         }
         
-        // Mark PMS days (5 days before current period)
         for day in 1...5 {
             if let pmsDate = calendar.date(byAdding: .day, value: -day, to: lastPeriodStartDate) {
                 let components = calendar.dateComponents([.year, .month, .day], from: pmsDate)
@@ -489,7 +486,6 @@ class HomeViewController: UIViewController {
             }
         }
         
-        // Mark PMS days (5 days before next period)
         for day in 1...5 {
             if let pmsDate = calendar.date(byAdding: .day, value: -day, to: nextPeriodStartDate) {
                 let components = calendar.dateComponents([.year, .month, .day], from: pmsDate)
@@ -498,7 +494,6 @@ class HomeViewController: UIViewController {
             }
         }
         
-        // Mark ovulation day (14 days before the next period)
         if let ovulationDate = calendar.date(byAdding: .day, value: -14, to: nextPeriodStartDate) {
             let components = calendar.dateComponents([.year, .month, .day], from: ovulationDate)
             let normalizedDate = calendar.date(from: components)!

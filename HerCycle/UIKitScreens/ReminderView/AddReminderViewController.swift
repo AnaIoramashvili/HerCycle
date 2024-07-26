@@ -29,14 +29,14 @@ class AddReminderViewController: UIViewController {
         picker.datePickerMode = .dateAndTime
         picker.preferredDatePickerStyle = .inline
         picker.minimumDate = Date()
-        picker.tintColor = .color1
+        picker.tintColor = UIColor(named: "primaryPink")
         return picker
     }()
     
     private lazy var addButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Add Reminder", for: .normal)
-        button.backgroundColor = .color1
+        button.backgroundColor = UIColor(named: "primaryPink")
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 25
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -59,7 +59,7 @@ class AddReminderViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: "mainBackgroundColor")
         title = "Add Reminder"
         
         setupNavigationBar()
@@ -71,11 +71,11 @@ class AddReminderViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.largeTitleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.color1
+            NSAttributedString.Key.foregroundColor: UIColor(named: "primaryPink")!
         ]
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(cancelTapped))
-        backButton.tintColor = .color1
+        backButton.tintColor = UIColor(named: "primaryPink")
         navigationItem.leftBarButtonItem = backButton
     }
     

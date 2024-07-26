@@ -183,7 +183,7 @@ struct PageView: View {
 
 struct GradientBackground: View {
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [.white, Color("Color1"), Color("Color2"), Color("Color3")]),
+        LinearGradient(gradient: Gradient(colors: [.white, Color("primaryPink"), Color("secondaryPink"), Color("primaryPurple")]),
                        startPoint: .top,
                        endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)

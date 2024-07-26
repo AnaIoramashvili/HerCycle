@@ -43,7 +43,7 @@ struct YearlyView: View {
             .padding()
         }
         .adjustScrollContentInsetForTabBar()
-        .background(Color("background"))
+        .background(Color("mainBackgroundColor"))
     }
 }
 

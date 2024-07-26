@@ -140,7 +140,7 @@ class InsightDetailViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = UIColor.background
+        view.backgroundColor = UIColor.mainBackground
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         

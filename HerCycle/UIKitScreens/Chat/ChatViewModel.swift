@@ -8,7 +8,7 @@
 import Foundation
 
 class ChatViewModel {
-    private let apiKey = "sk-proj-gKisHXSQ1fTPOxFjo3VLT3BlbkFJPIHRBeYBtUGBdhH7mtte" 
+    private let apiKey = "sk-proj-gKisHXSQ1fTPOxFjo3VLT3BlbkFJPIHRBeYBtUGBdhH7mtte"
     var messages: [Message] = []
     
     var didUpdateMessages: (() -> Void)?

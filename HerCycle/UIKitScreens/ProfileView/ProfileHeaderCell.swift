@@ -15,7 +15,7 @@ class ProfileHeaderCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.color6
+        imageView.backgroundColor = UIColor(named: "tertiaryPink")
         imageView.layer.cornerRadius = 40
         return imageView
     }()
@@ -72,7 +72,7 @@ class ProfileHeaderCell: UITableViewCell {
     func configure(with user: User) {
         nameLabel.text = user.fullName
         emailLabel.text = user.email
-        avatarImageView.backgroundColor = UIColor.color6
+        avatarImageView.backgroundColor = UIColor(named: "tertiaryPink")
     }
     
     func configure(with user: User, profilePictureURL: String?) {
@@ -93,7 +93,7 @@ class ProfileHeaderCell: UITableViewCell {
             }.resume()
         } else {
             avatarImageView.image = UIImage(systemName: "person.circle.fill")
-            avatarImageView.tintColor = .color1
+            avatarImageView.tintColor = UIColor(named: "primaryPink")
         }
     }
     

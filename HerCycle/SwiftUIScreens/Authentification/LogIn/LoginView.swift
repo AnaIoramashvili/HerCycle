@@ -15,13 +15,13 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.background.edgesIgnoringSafeArea(.all)
+                Color("mainBackground").edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()
                     
                     VStack {
-                        Image(.logo)
+                        Image("logo")
                             .resizable()
                             .foregroundColor(.gray)
                             .scaledToFill()

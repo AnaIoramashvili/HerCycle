@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     private func setupUI() {
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: "mainBackgroundColor")
         
         view.addSubview(tableView)
         view.addSubview(buttonsStackView)

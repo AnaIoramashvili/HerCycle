@@ -77,7 +77,7 @@ class MainTabBarController: UITabBarController, ThemeUpdateDelegate {
             tabbarItemBackgroundView.centerYAnchor.constraint(equalTo: tabbarView.centerYAnchor)
         ])
         tabbarItemBackgroundView.layer.cornerRadius = 25
-        tabbarItemBackgroundView.backgroundColor = .color6
+        tabbarItemBackgroundView.backgroundColor = UIColor(named: "tertiaryPink")
     }
     
     private func generateButtons() {

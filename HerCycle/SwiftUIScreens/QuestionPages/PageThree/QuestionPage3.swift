@@ -16,12 +16,12 @@ struct QuestionPage3: View {
 
     var body: some View {
         ZStack {
-            Color.background
+            Color("mainBackground")
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Spacer()
                 
-                Image("Calendar")
+                Image("calendarPhoto")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
@@ -50,7 +50,7 @@ struct QuestionPage3: View {
                     Text("Continue")
                         .bold()
                         .frame(width: 200, height: 50)
-                        .background(Color.color1)
+                        .background(Color("primaryPink"))
                         .foregroundColor(.white)
                         .cornerRadius(25)
                         .padding(.horizontal, 40)

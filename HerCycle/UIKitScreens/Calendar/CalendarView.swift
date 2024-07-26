@@ -35,7 +35,7 @@ struct CalendarView: View {
                         .aspectRatio(contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
                 } else {
-                    Color("background")
+                    Color("mainBackgroundColor")
                         .ignoresSafeArea(.all)
                 }
                 

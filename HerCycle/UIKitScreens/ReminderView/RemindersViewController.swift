@@ -16,7 +16,7 @@ class RemindersViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ModernReminderCell.self, forCellReuseIdentifier: ModernReminderCell.identifier)
-        tableView.backgroundColor = UIColor(named: "background")
+        tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         return tableView
@@ -30,7 +30,7 @@ class RemindersViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: "mainBackgroundColor")
         title = "Reminders"
         
         setupNavigationBar()
@@ -41,7 +41,7 @@ class RemindersViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.largeTitleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.color1
+            NSAttributedString.Key.foregroundColor: UIColor(named: "primaryPink")!
         ]
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -50,14 +50,14 @@ class RemindersViewController: UIViewController {
             target: self,
             action: #selector(backButtonTapped)
         )
-        navigationItem.leftBarButtonItem?.tintColor = .color6
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "gradDarkRed")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(addReminderTapped)
         )
-        navigationItem.rightBarButtonItem?.tintColor = .color1
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "primaryPink")
     }
     
     private func setupTableView() {

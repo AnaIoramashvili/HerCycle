@@ -61,7 +61,7 @@ class ChatTableViewCell: UITableViewCell {
         chatLabel.text = message.content
         
         if isUser {
-            bubbleView.backgroundColor = UIColor.color6
+            bubbleView.backgroundColor = UIColor.tertiaryPink
             chatLabel.textColor = .white
             lead.isActive = false
             trail.isActive = true

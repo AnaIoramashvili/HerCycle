@@ -22,7 +22,7 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ThemeCell.self, forCellWithReuseIdentifier: ThemeCell.identifier)
-        collectionView.backgroundColor = .background
+        collectionView.backgroundColor = UIColor(named: "mainBackground")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -34,8 +34,8 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     private func setupUI() {
         title = "Choose Theme"
-        view.backgroundColor = .background
-        
+        view.backgroundColor = .mainBackground
+
         view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([
@@ -46,7 +46,7 @@ class ThemeViewController: UIViewController, UICollectionViewDataSource, UIColle
         ])
         
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
-        cancelButton.tintColor = .color1
+        cancelButton.tintColor = UIColor(named: "primaryPink")
         navigationItem.leftBarButtonItem = cancelButton
     }
     

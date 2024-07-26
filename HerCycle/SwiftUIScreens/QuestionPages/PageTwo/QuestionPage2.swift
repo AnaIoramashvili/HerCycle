@@ -15,10 +15,10 @@ struct QuestionPage2: View {
 
     var body: some View {
         ZStack {
-            Color.background
+            Color("mainBackground")
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                Image("Woman2")
+                Image("woman2")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 250)
@@ -32,7 +32,7 @@ struct QuestionPage2: View {
                     HStack(spacing: 16) {
                         ForEach(1...10, id: \.self) { day in
                             Circle()
-                                .fill(day == periodLength ? Color.pink : Color.color3)
+                                .fill(day == periodLength ? Color.pink : Color("primaryPurple"))
                                 .frame(width: 60, height: 60)
                                 .overlay(Text("\(day)").foregroundColor(.white).font(.headline))
                                 .onTapGesture {
@@ -58,7 +58,7 @@ struct QuestionPage2: View {
                     Text("Continue")
                         .bold()
                         .frame(width: 200, height: 50)
-                        .background(Color.color1)
+                        .background(Color("primaryPink"))
                         .foregroundColor(.white)
                         .cornerRadius(25)
                 }

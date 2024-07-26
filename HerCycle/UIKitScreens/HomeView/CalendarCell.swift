@@ -100,8 +100,8 @@ class CalendarCell: UICollectionViewCell {
     
     private func updateCellAppearance(cyclePhase: CyclePhase?, isSelected: Bool) {
         if isSelected {
-            setupGradient(colors: [UIColor(.color1),
-                                   UIColor(.color2)])
+            setupGradient(colors: [UIColor(named: "primaryPink")!,
+                                   UIColor(named: "secondaryPink")!])
             dayLabel.textColor = .white
             dateLabel.textColor = .white
         } else {
@@ -109,7 +109,7 @@ class CalendarCell: UICollectionViewCell {
             case .pms:
                 setupGradient(colors: [UIColor.systemBlue.withAlphaComponent(0.6), UIColor.white])
             case .period:
-                setupGradient(colors: [UIColor.grad6.withAlphaComponent(0.6), UIColor.white])
+                setupGradient(colors: [UIColor(named: "gradDarkRed")!.withAlphaComponent(0.6), UIColor.white])
             case .ovulation:
                 setupGradient(colors: [UIColor.systemYellow.withAlphaComponent(0.6), UIColor.white])
             case .none:

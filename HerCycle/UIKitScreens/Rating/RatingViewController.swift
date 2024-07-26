@@ -53,7 +53,7 @@ class RatingViewController: UIViewController, UITextViewDelegate {
         button.setTitle("Submit", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .color1
+        button.backgroundColor = UIColor(named: "primaryPink")
         button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         return button
@@ -87,7 +87,7 @@ class RatingViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setupUI() {
-        view.backgroundColor = .background
+        view.backgroundColor = .mainBackground
         
         for i in 1...5 {
             let button = UIButton(type: .custom)

@@ -13,15 +13,11 @@
 		592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */; };
 		592E18F42C451C15007BA699 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F32C451C15007BA699 /* User.swift */; };
 		592E18F62C451C32007BA699 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18F52C451C32007BA699 /* UserData.swift */; };
-		592E18FC2C45A4C2007BA699 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E18FB2C45A4C2007BA699 /* ChatViewController.swift */; };
 		592E190A2C45C609007BA699 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 592E19092C45C609007BA699 /* FirebaseAuth */; };
 		592E190C2C45C609007BA699 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 592E190B2C45C609007BA699 /* FirebaseFirestore */; };
 		592E190E2C45C609007BA699 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 592E190D2C45C609007BA699 /* FirebaseFirestoreSwift */; };
 		592E19102C45C609007BA699 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 592E190F2C45C609007BA699 /* FirebaseStorage */; };
 		592E19132C45C6B6007BA699 /* myNetworkPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 592E19122C45C6B6007BA699 /* myNetworkPackage */; };
-		592E19172C468695007BA699 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19162C468695007BA699 /* ChatViewModel.swift */; };
-		592E19192C4686CD007BA699 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19182C4686CD007BA699 /* Message.swift */; };
-		592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */; };
 		592E191F2C483500007BA699 /* InsightDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E191E2C483500007BA699 /* InsightDetailModel.swift */; };
 		592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19202C483519007BA699 /* InsightDetailViewModel.swift */; };
 		592E19232C48353C007BA699 /* InsightDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E19222C48353C007BA699 /* InsightDetailViewController.swift */; };
@@ -76,7 +72,11 @@
 		59AEE8972C538F2C00A1D694 /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8962C538F2C00A1D694 /* LegendView.swift */; };
 		59AEE8992C538F4D00A1D694 /* LegendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8982C538F4D00A1D694 /* LegendItem.swift */; };
 		59AEE89B2C538F5E00A1D694 /* DashedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE89A2C538F5E00A1D694 /* DashedCircle.swift */; };
-		59AEE89D2C53903F00A1D694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59AEE89C2C53903F00A1D694 /* LaunchScreen.storyboard */; };
+		59AEE8A42C53BF4800A1D694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59AEE8A32C53BF4800A1D694 /* LaunchScreen.storyboard */; };
+		59AEE8A82C53C1D700A1D694 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8A72C53C1D700A1D694 /* ChatViewController.swift */; };
+		59AEE8AA2C53C1E600A1D694 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8A92C53C1E600A1D694 /* ChatViewModel.swift */; };
+		59AEE8AC2C53C1FC00A1D694 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8AB2C53C1FC00A1D694 /* Message.swift */; };
+		59AEE8AE2C53C20A00A1D694 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8AD2C53C20A00A1D694 /* ChatTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,10 +86,6 @@
 		592E18EC2C42C6C3007BA699 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		592E18F32C451C15007BA699 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		592E18F52C451C32007BA699 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		592E18FB2C45A4C2007BA699 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		592E19162C468695007BA699 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
-		592E19182C4686CD007BA699 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		592E191E2C483500007BA699 /* InsightDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailModel.swift; sourceTree = "<group>"; };
 		592E19202C483519007BA699 /* InsightDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailViewModel.swift; sourceTree = "<group>"; };
 		592E19222C48353C007BA699 /* InsightDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDetailViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +142,11 @@
 		59AEE8962C538F2C00A1D694 /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		59AEE8982C538F4D00A1D694 /* LegendItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendItem.swift; sourceTree = "<group>"; };
 		59AEE89A2C538F5E00A1D694 /* DashedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedCircle.swift; sourceTree = "<group>"; };
-		59AEE89C2C53903F00A1D694 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = HerCycle/UIKitScreens/Calendar/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		59AEE8A32C53BF4800A1D694 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		59AEE8A72C53C1D700A1D694 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		59AEE8A92C53C1E600A1D694 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		59AEE8AB2C53C1FC00A1D694 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		59AEE8AD2C53C20A00A1D694 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +176,7 @@
 		592E18F12C4302E8007BA699 /* UIKitScreens */ = {
 			isa = PBXGroup;
 			children = (
+				59AEE8AF2C53C35F00A1D694 /* Chat */,
 				59AEE8852C538E2F00A1D694 /* Calendar */,
 				59AEE8282C4FDF8400A1D694 /* ReminderView */,
 				59AEE81E2C4FCA0E00A1D694 /* HomeView */,
@@ -183,7 +184,6 @@
 				59AEE8312C4FF77200A1D694 /* Theme */,
 				59AEE85B2C51732700A1D694 /* Rating */,
 				592E19242C4B0753007BA699 /* InsightView */,
-				592E19152C46866A007BA699 /* Chat */,
 			);
 			path = UIKitScreens;
 			sourceTree = "<group>";
@@ -195,18 +195,6 @@
 				592E18F32C451C15007BA699 /* User.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		592E19152C46866A007BA699 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				592E18FB2C45A4C2007BA699 /* ChatViewController.swift */,
-				592E19162C468695007BA699 /* ChatViewModel.swift */,
-				592E19182C4686CD007BA699 /* Message.swift */,
-				592E191A2C46BEA7007BA699 /* ChatTableViewCell.swift */,
-			);
-			name = Chat;
-			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		592E19242C4B0753007BA699 /* InsightView */ = {
@@ -251,14 +239,6 @@
 				595FA0B52C415C4500DC13DE /* QuestionPages */,
 			);
 			path = SwiftUIScreens;
-			sourceTree = "<group>";
-		};
-		595FA0A72C404F9100DC13DE /* LaunchScreen */ = {
-			isa = PBXGroup;
-			children = (
-				59AEE89C2C53903F00A1D694 /* LaunchScreen.storyboard */,
-			);
-			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		595FA0A82C4051B000DC13DE /* SingUp */ = {
@@ -319,13 +299,13 @@
 		59624E172C3487E600D0D4C4 /* HerCycle */ = {
 			isa = PBXGroup;
 			children = (
+				59AEE8A22C53BF1D00A1D694 /* LaunchScreen */,
 				595FA08C2C402A7C00DC13DE /* App */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
 				592E18F22C451BFF007BA699 /* Model */,
 				595FA09D2C402BA700DC13DE /* SwiftUIScreens */,
 				592E18F12C4302E8007BA699 /* UIKitScreens */,
 				592E19252C4B079D007BA699 /* CustomTabBar */,
-				595FA0A72C404F9100DC13DE /* LaunchScreen */,
 				59624E302C35D81E00D0D4C4 /* Supporting */,
 				59624E312C35D88800D0D4C4 /* Resources */,
 			);
@@ -463,6 +443,25 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		59AEE8A22C53BF1D00A1D694 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE8A32C53BF4800A1D694 /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		59AEE8AF2C53C35F00A1D694 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				59AEE8A72C53C1D700A1D694 /* ChatViewController.swift */,
+				59AEE8A92C53C1E600A1D694 /* ChatViewModel.swift */,
+				59AEE8AB2C53C1FC00A1D694 /* Message.swift */,
+				59AEE8AD2C53C20A00A1D694 /* ChatTableViewCell.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -532,8 +531,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59AEE8A42C53BF4800A1D694 /* LaunchScreen.storyboard in Resources */,
 				59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */,
-				59AEE89D2C53903F00A1D694 /* LaunchScreen.storyboard in Resources */,
 				595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59AEE88D2C538EBD00A1D694 /* MonthlyView.swift in Sources */,
+				59AEE8AC2C53C1FC00A1D694 /* Message.swift in Sources */,
 				59AEE85D2C51734600A1D694 /* RatingManager.swift in Sources */,
 				59AEE8202C4FCA4A00A1D694 /* CalendarCell.swift in Sources */,
 				59AEE83B2C503D2A00A1D694 /* ThemeManager.swift in Sources */,
@@ -560,13 +560,13 @@
 				59AEE8612C51889200A1D694 /* LoginViewModel.swift in Sources */,
 				59AEE89B2C538F5E00A1D694 /* DashedCircle.swift in Sources */,
 				59AEE8262C4FD17700A1D694 /* WaveView.swift in Sources */,
+				59AEE8A82C53C1D700A1D694 /* ChatViewController.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
 				59AEE8502C51725200A1D694 /* RemindersViewController.swift in Sources */,
 				59AEE8522C51727200A1D694 /* Reminder.swift in Sources */,
 				59AEE8952C538F1300A1D694 /* DayView.swift in Sources */,
 				59AEE88F2C538EDB00A1D694 /* YearlyView.swift in Sources */,
 				59AEE8892C538E6A00A1D694 /* CalendarHostingController.swift in Sources */,
-				592E19192C4686CD007BA699 /* Message.swift in Sources */,
 				592E19212C483519007BA699 /* InsightDetailViewModel.swift in Sources */,
 				59AEE8732C53052300A1D694 /* QuestionPage1ViewModel.swift in Sources */,
 				592E18ED2C42C6C3007BA699 /* ProfileViewController.swift in Sources */,
@@ -578,10 +578,7 @@
 				59AEE8542C51728B00A1D694 /* AddReminderViewController.swift in Sources */,
 				59AEE86F2C52FA4600A1D694 /* OnboardingViewModel.swift in Sources */,
 				59AEE8872C538E3F00A1D694 /* CalendarViewController.swift in Sources */,
-				592E191B2C46BEA8007BA699 /* ChatTableViewCell.swift in Sources */,
-				592E19172C468695007BA699 /* ChatViewModel.swift in Sources */,
 				592E18E72C42C65B007BA699 /* AppCoordinator.swift in Sources */,
-				592E18FC2C45A4C2007BA699 /* ChatViewController.swift in Sources */,
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
 				592E19232C48353C007BA699 /* InsightDetailViewController.swift in Sources */,
@@ -604,8 +601,10 @@
 				59AEE8582C5172CC00A1D694 /* RemindersView.swift in Sources */,
 				592E18F62C451C32007BA699 /* UserData.swift in Sources */,
 				59AEE8372C4FF84800A1D694 /* ThemeCell.swift in Sources */,
+				59AEE8AE2C53C20A00A1D694 /* ChatTableViewCell.swift in Sources */,
 				59AEE87E2C53163700A1D694 /* ReminderViewModel.swift in Sources */,
 				592E18F42C451C15007BA699 /* User.swift in Sources */,
+				59AEE8AA2C53C1E600A1D694 /* ChatViewModel.swift in Sources */,
 				59AEE8772C53062800A1D694 /* QuestionPage3ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -35,7 +35,7 @@ struct InputView: View {
                         isSecureTextVisible.toggle()
                     }) {
                         Image(systemName: isSecureTextVisible ? "eye.slash.fill" : "eye.fill")
-                            .foregroundColor(.color6)
+                            .foregroundColor(Color("tertiaryPink"))
                     }
                 }
             } else {

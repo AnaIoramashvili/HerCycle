@@ -14,7 +14,7 @@ class InfoCell: UITableViewCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = UIColor.color6
+        imageView.tintColor = UIColor(named: "tertiaryPink")
         return imageView
     }()
     
@@ -85,7 +85,7 @@ class SignOutCell: UITableViewCell {
     
     private func setupUI() {
         textLabel?.text = "Sign Out"
-        textLabel?.textColor = UIColor.color6
+        textLabel?.textColor = UIColor(named: "tertiaryPink")
         textLabel?.textAlignment = .center
         textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
     }
