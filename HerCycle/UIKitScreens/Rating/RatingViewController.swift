@@ -59,7 +59,6 @@ final class RatingViewController: UIViewController, UITextViewDelegate {
         return button
     }()
 
-
     private var selectedRating: Int = 0
 
     override func viewDidLoad() {
@@ -95,21 +94,28 @@ final class RatingViewController: UIViewController, UITextViewDelegate {
             button.setImage(UIImage(named: "star_filled")?.withRenderingMode(.alwaysOriginal), for: .selected)
             button.tag = i
             button.addTarget(self, action: #selector(ratingButtonTapped(_:)), for: .touchUpInside)
-            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 35).isActive = true
             ratingStackView.addArrangedSubview(button)
         }
         
-        [titleLabel, ratingStackView, commentTextView, submitButton].forEach { stackView.addArrangedSubview($0) }
+        [titleLabel, ratingStackView, commentTextView].forEach { stackView.addArrangedSubview($0) }
         
         view.addSubview(stackView)
+        view.addSubview(submitButton)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             commentTextView.heightAnchor.constraint(equalToConstant: 120),
-            submitButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            submitButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
+            submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            submitButton.widthAnchor.constraint(equalToConstant: 200),
+            submitButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 

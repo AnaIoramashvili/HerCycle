@@ -28,6 +28,8 @@ final class HomeViewController: UIViewController {
     private var cycleProgress: CGFloat = 0.0
     private var updateTimer: Timer?
     
+    private var hasInitiallyLoaded = false
+    
     // MARK: - Components
     private lazy var calendarView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -124,10 +126,8 @@ final class HomeViewController: UIViewController {
         setupViews()
         setupConstraints()
         fetchInsights()
-        updateMarkedDays()
-        calculateCycleInfo()
-        updatePeriodTrackerView()
-        startPulsatingAnimation()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPeriodTrackerView), name: .userDataDidChange, object: nil)
 
         DispatchQueue.main.async {
             self.calendarView.performBatchUpdates({
@@ -141,7 +141,10 @@ final class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startUpdateTimer()
+        if !hasInitiallyLoaded {
+            loadUserData()
+            hasInitiallyLoaded = true
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -204,17 +207,32 @@ final class HomeViewController: UIViewController {
         let label = periodTrackerView.subviews.compactMap { $0 as? UILabel }.first { $0.text == "Period in" }
         let daysLabel = periodTrackerView.subviews.compactMap { $0 as? UILabel }.first { $0.text?.contains("Days") == true }
         
-        label?.text = daysUntilNextPeriod == 0 ? "Period starts" : "Period in"
-        daysLabel?.text = daysUntilNextPeriod == 0 ? "Today" : "\(daysUntilNextPeriod) Days"
+        UIView.transition(with: periodTrackerView, duration: 0.3, options: .transitionCrossDissolve) {
+            label?.text = self.daysUntilNextPeriod == 0 ? "Period starts" : "Period in"
+            daysLabel?.text = self.daysUntilNextPeriod == 0 ? "Today" : "\(self.daysUntilNextPeriod) Days"
+        }
         
         updateColors(days: daysUntilNextPeriod)
         updateOuterRingProgress(progress: cycleProgress, days: daysUntilNextPeriod)
     }
     
+    @objc private func refreshPeriodTrackerView() {
+        calculateCycleInfo()
+        updatePeriodTrackerView()
+        updateMarkedDays()
+        calendarView.reloadData()
+    }
+    
+    private func loadUserData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.refreshPeriodTrackerView()
+            self?.startUpdateTimer()
+        }
+    }
+    
     private func startUpdateTimer() {
         updateTimer = Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { [weak self] _ in
-            self?.calculateCycleInfo()
-            self?.updatePeriodTrackerView()
+            self?.refreshPeriodTrackerView()
         }
     }
     
@@ -288,7 +306,7 @@ final class HomeViewController: UIViewController {
         
         let daysLabel: UILabel = {
             let daysLabel = UILabel()
-            daysLabel.text = "3 Days"
+            daysLabel.text = "0 Days"
             daysLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             daysLabel.textColor = .white
             daysLabel.textAlignment = .center
@@ -314,8 +332,6 @@ final class HomeViewController: UIViewController {
         ])
         
         startPulsatingAnimation()
-        updateColors(days: 3)
-        updateOuterRingProgress(progress: 0.75, days: 3)
     }
     
     private func setupPeriodTrackerViewConstraints() {
@@ -380,19 +396,15 @@ final class HomeViewController: UIViewController {
         let endAngle = startAngle + 2 * CGFloat.pi * clampedProgress
         
         let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(0.5)
+        
         outerRingLayer.path = circlePath.cgPath
-        
-        let color = self.colorForDays(days)
-        outerRingLayer.strokeColor = color.cgColor
-        
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = outerRingLayer.presentation()?.strokeEnd ?? 0
-        animation.toValue = clampedProgress
-        animation.duration = 0.5
-        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        outerRingLayer.add(animation, forKey: "animateProgress")
-        
+        outerRingLayer.strokeColor = colorForDays(days).cgColor
         outerRingLayer.strokeEnd = clampedProgress
+        
+        CATransaction.commit()
     }
     
     private func colorForDays(_ days: Int) -> UIColor {
@@ -402,11 +414,11 @@ final class HomeViewController: UIViewController {
         case 3...5:
             return .systemPink
         case 6...10:
-            return .systemPurple
+            return .systemPink
         case 11...20:
             return UIColor(named: "gradDarkRed")!
         default:
-            return .systemGreen
+            return .systemRed
         }
     }
     
@@ -490,4 +502,9 @@ extension HomeViewController {
     struct Constants {
         static let daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"]
     }
+}
+
+// MARK: - Notification.Name Extension
+extension Notification.Name {
+    static let userDataDidChange = Notification.Name("userDataDidChange")
 }

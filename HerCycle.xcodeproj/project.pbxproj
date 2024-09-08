@@ -78,6 +78,18 @@
 		59AEE8AE2C53C20A00A1D694 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8AD2C53C20A00A1D694 /* ChatTableViewCell.swift */; };
 		59AEE8B62C53E8BC00A1D694 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AEE8B52C53E8BC00A1D694 /* CalendarViewModel.swift */; };
 		59C123682C53FECE006D2E32 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C123672C53FECE006D2E32 /* HomeViewModel.swift */; };
+		59EBF25E2C8DE2E200B41970 /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF25D2C8DE2E200B41970 /* AudioTrack.swift */; };
+		59EBF2602C8DE2F200B41970 /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */; };
+		59EBF2622C8DE30200B41970 /* AudioPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2612C8DE30200B41970 /* AudioPlayerViewModel.swift */; };
+		59EBF2642C8DE31000B41970 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2632C8DE31000B41970 /* TrackListViewController.swift */; };
+		59EBF2662C8DE31D00B41970 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2652C8DE31D00B41970 /* TrackCollectionViewCell.swift */; };
+		59EBF26A2C8DE41E00B41970 /* podcast1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2672C8DE41D00B41970 /* podcast1.mp3 */; };
+		59EBF26B2C8DE41E00B41970 /* podcast2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2682C8DE41D00B41970 /* podcast2.mp3 */; };
+		59EBF26C2C8DE41E00B41970 /* podcast3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2692C8DE41E00B41970 /* podcast3.mp3 */; };
+		59EBF26E2C8E06B200B41970 /* podcast4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF26D2C8E06B200B41970 /* podcast4.mp3 */; };
+		59EBF2702C8E077E00B41970 /* podcast5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF26F2C8E077E00B41970 /* podcast5.mp3 */; };
+		59EBF2722C8E081900B41970 /* podcast6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2712C8E081900B41970 /* podcast6.mp3 */; };
+		59EBF2742C8E08AE00B41970 /* podcast7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2732C8E08AE00B41970 /* podcast7.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +161,18 @@
 		59AEE8AD2C53C20A00A1D694 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		59AEE8B52C53E8BC00A1D694 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		59C123672C53FECE006D2E32 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		59EBF25D2C8DE2E200B41970 /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
+		59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
+		59EBF2612C8DE30200B41970 /* AudioPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewModel.swift; sourceTree = "<group>"; };
+		59EBF2632C8DE31000B41970 /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
+		59EBF2652C8DE31D00B41970 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
+		59EBF2672C8DE41D00B41970 /* podcast1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast1.mp3; sourceTree = "<group>"; };
+		59EBF2682C8DE41D00B41970 /* podcast2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast2.mp3; sourceTree = "<group>"; };
+		59EBF2692C8DE41E00B41970 /* podcast3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast3.mp3; sourceTree = "<group>"; };
+		59EBF26D2C8E06B200B41970 /* podcast4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast4.mp3; sourceTree = "<group>"; };
+		59EBF26F2C8E077E00B41970 /* podcast5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast5.mp3; sourceTree = "<group>"; };
+		59EBF2712C8E081900B41970 /* podcast6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast6.mp3; sourceTree = "<group>"; };
+		59EBF2732C8E08AE00B41970 /* podcast7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast7.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +327,7 @@
 		59624E172C3487E600D0D4C4 /* HerCycle */ = {
 			isa = PBXGroup;
 			children = (
+				59EBF25C2C8DE2A500B41970 /* Podcast */,
 				595FA08C2C402A7C00DC13DE /* ApplicationLayer */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
 				592E18F22C451BFF007BA699 /* Model */,
@@ -479,6 +504,25 @@
 				59AEE89A2C538F5E00A1D694 /* DashedCircle.swift */,
 			);
 			path = DayViewComponents;
+			sourceTree = "<group>";
+		};
+		59EBF25C2C8DE2A500B41970 /* Podcast */ = {
+			isa = PBXGroup;
+			children = (
+				59EBF2672C8DE41D00B41970 /* podcast1.mp3 */,
+				59EBF2682C8DE41D00B41970 /* podcast2.mp3 */,
+				59EBF26D2C8E06B200B41970 /* podcast4.mp3 */,
+				59EBF2732C8E08AE00B41970 /* podcast7.mp3 */,
+				59EBF2712C8E081900B41970 /* podcast6.mp3 */,
+				59EBF26F2C8E077E00B41970 /* podcast5.mp3 */,
+				59EBF2692C8DE41E00B41970 /* podcast3.mp3 */,
+				59EBF25D2C8DE2E200B41970 /* AudioTrack.swift */,
+				59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */,
+				59EBF2612C8DE30200B41970 /* AudioPlayerViewModel.swift */,
+				59EBF2632C8DE31000B41970 /* TrackListViewController.swift */,
+				59EBF2652C8DE31D00B41970 /* TrackCollectionViewCell.swift */,
+			);
+			path = Podcast;
 			sourceTree = "<group>";
 		};
 		FF425BF02C541F49003068F0 /* Views */ = {
@@ -702,8 +746,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59EBF26B2C8DE41E00B41970 /* podcast2.mp3 in Resources */,
 				59AEE8A42C53BF4800A1D694 /* LaunchScreen.storyboard in Resources */,
+				59EBF26E2C8E06B200B41970 /* podcast4.mp3 in Resources */,
+				59EBF26A2C8DE41E00B41970 /* podcast1.mp3 in Resources */,
+				59EBF26C2C8DE41E00B41970 /* podcast3.mp3 in Resources */,
+				59EBF2702C8E077E00B41970 /* podcast5.mp3 in Resources */,
+				59EBF2742C8E08AE00B41970 /* podcast7.mp3 in Resources */,
 				59624E222C3487E800D0D4C4 /* Assets.xcassets in Resources */,
+				59EBF2722C8E081900B41970 /* podcast6.mp3 in Resources */,
 				595FA03B2C3F3C8800DC13DE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,6 +766,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59EBF2662C8DE31D00B41970 /* TrackCollectionViewCell.swift in Sources */,
 				59AEE88D2C538EBD00A1D694 /* MonthlyView.swift in Sources */,
 				59AEE8AC2C53C1FC00A1D694 /* Message.swift in Sources */,
 				59AEE85D2C51734600A1D694 /* RatingManager.swift in Sources */,
@@ -733,6 +785,7 @@
 				59AEE89B2C538F5E00A1D694 /* DashedCircle.swift in Sources */,
 				59AEE8262C4FD17700A1D694 /* WaveView.swift in Sources */,
 				59AEE8A82C53C1D700A1D694 /* ChatViewController.swift in Sources */,
+				59EBF25E2C8DE2E200B41970 /* AudioTrack.swift in Sources */,
 				595FA0A32C402BEB00DC13DE /* RegistrationView.swift in Sources */,
 				59AEE8502C51725200A1D694 /* RemindersViewController.swift in Sources */,
 				59AEE8522C51727200A1D694 /* Reminder.swift in Sources */,
@@ -754,6 +807,7 @@
 				59624E192C3487E600D0D4C4 /* AppDelegate.swift in Sources */,
 				59624E1B2C3487E600D0D4C4 /* SceneDelegate.swift in Sources */,
 				592E19232C48353C007BA699 /* InsightDetailViewController.swift in Sources */,
+				59EBF2622C8DE30200B41970 /* AudioPlayerViewModel.swift in Sources */,
 				59AEE85A2C51732200A1D694 /* Rating.swift in Sources */,
 				59AEE88B2C538E7D00A1D694 /* CalendarView.swift in Sources */,
 				59AEE8822C5316B300A1D694 /* DateFormatter+Extensions.swift in Sources */,
@@ -776,6 +830,8 @@
 				59AEE8AE2C53C20A00A1D694 /* ChatTableViewCell.swift in Sources */,
 				59AEE87E2C53163700A1D694 /* ReminderViewModel.swift in Sources */,
 				592E18F42C451C15007BA699 /* User.swift in Sources */,
+				59EBF2642C8DE31000B41970 /* TrackListViewController.swift in Sources */,
+				59EBF2602C8DE2F200B41970 /* AudioPlayerViewController.swift in Sources */,
 				59AEE8AA2C53C1E600A1D694 /* ChatViewModel.swift in Sources */,
 				59AEE8772C53062800A1D694 /* QuestionPageThreeViewModel.swift in Sources */,
 			);

@@ -19,6 +19,8 @@ class ThemeManager: ObservableObject {
         currentTheme = getSelectedTheme()
     }
     
+    let defaultTheme = Theme(name: "Default", imageName: "")
+    
     func saveSelectedTheme(_ theme: Theme) {
         defaults.set(theme.name, forKey: selectedThemeKey)
         currentTheme = theme
@@ -30,7 +32,7 @@ class ThemeManager: ObservableObject {
     }
     
     let allThemes: [Theme] = [
-        Theme(name: "Stars", imageName: "starsBackground"),
+        Theme(name: "Default", imageName: "mainBackgroundColorImage"),
         Theme(name: "Aura", imageName: "auraBackground"),
         Theme(name: "Heart", imageName: "heartBackground"),
         Theme(name: "Sea", imageName: "seaBackground"),
@@ -38,5 +40,6 @@ class ThemeManager: ObservableObject {
         Theme(name: "Fun", imageName: "funBackground"),
         Theme(name: "Blue Aura", imageName: "blueAuraBackrground"),
         Theme(name: "Lemons", imageName: "lemonBackground"),
+        Theme(name: "Sparckles", imageName: "sparcklesBackground"),
     ]
 }

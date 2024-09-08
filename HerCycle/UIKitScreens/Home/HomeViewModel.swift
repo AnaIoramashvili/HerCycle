@@ -79,9 +79,6 @@ final class HomeViewModel {
     func getCalculatedCycleInfo(userData: UserData?) -> (Int, CGFloat) {
         guard let userData else { return (0, 0) }
         
-        var daysUntilNextPeriod: Int = 0
-        var cycleProgress: CGFloat = 0.0
-        
         let cycleLength = userData.cycleLength
         let lastPeriodStartDate = userData.lastPeriodStartDate
         
@@ -89,10 +86,10 @@ final class HomeViewModel {
         
         let today = Date()
         
-        daysUntilNextPeriod = calendar.dateComponents([.day], from: today, to: nextPeriodStartDate).day ?? 0
+        let daysUntilNextPeriod = max(0, calendar.dateComponents([.day], from: today, to: nextPeriodStartDate).day ?? 0)
         
         let daysSinceLastPeriod = calendar.dateComponents([.day], from: lastPeriodStartDate, to: today).day ?? 0
-        cycleProgress = CGFloat(daysSinceLastPeriod) / CGFloat(cycleLength)
+        let cycleProgress = min(1, max(0, CGFloat(daysSinceLastPeriod) / CGFloat(cycleLength)))
         
         return (daysUntilNextPeriod, cycleProgress)
     }
@@ -113,8 +110,8 @@ final class HomeViewModel {
             startColor = .tertiaryPink
             endColor = UIColor(named: "gradLightPurple")!
         case 0.5..<0.75:
-            startColor = UIColor(named: "gradLightPurple")!
-            endColor = UIColor(named: "gradDarkPurple")!
+            startColor = UIColor(named: "primaryPink")!
+            endColor = UIColor(named: "primaryPink")!
         default:  // First half of cycle
             startColor = .circleDefaultGrad
             endColor = .primaryPink

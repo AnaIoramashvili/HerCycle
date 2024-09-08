@@ -107,7 +107,7 @@ class CalendarCell: UICollectionViewCell {
         } else {
             switch cyclePhase {
             case .pms:
-                setupGradient(colors: [UIColor.systemBlue.withAlphaComponent(0.6), UIColor.white])
+                setupGradient(colors: [UIColor(named: "gradDarkRed")!.withAlphaComponent(0.6), UIColor.white])
             case .period:
                 setupGradient(colors: [UIColor(named: "gradDarkRed")!.withAlphaComponent(0.6), UIColor.white])
             case .ovulation:

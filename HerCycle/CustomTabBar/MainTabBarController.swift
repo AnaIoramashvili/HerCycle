@@ -45,12 +45,14 @@ class MainTabBarController: UITabBarController, ThemeUpdateDelegate {
         let homeViewController = HomeViewController(authViewModel: coordinator.authViewModel)
         let calendarViewController = CalendarViewController(authViewModel: coordinator.authViewModel)
         let chatViewController = ChatViewController()
+        let trackListViewController = TrackListViewController()
         let profileViewController = ProfileViewController(authViewModel: coordinator.authViewModel, coordinator: coordinator)
                 
         viewControllers = [
             UINavigationController(rootViewController: homeViewController),
             UINavigationController(rootViewController: calendarViewController),
             UINavigationController(rootViewController: chatViewController),
+            UINavigationController(rootViewController: trackListViewController),
             UINavigationController(rootViewController: profileViewController)
         ]
     }
@@ -85,6 +87,7 @@ class MainTabBarController: UITabBarController, ThemeUpdateDelegate {
             ("house", "Home"),
             ("calendar", "Calendar"),
             ("message", "Chat"),
+            ("airpodsmax", "Podcasts"),
             ("person", "Profile")
         ]
         
@@ -95,7 +98,7 @@ class MainTabBarController: UITabBarController, ThemeUpdateDelegate {
             
             NSLayoutConstraint.activate([
                 button.centerYAnchor.constraint(equalTo: tabbarView.centerYAnchor),
-                button.widthAnchor.constraint(equalTo: tabbarView.widthAnchor, multiplier: 1/4),
+                button.widthAnchor.constraint(equalTo: tabbarView.widthAnchor, multiplier: 1/5),
                 button.heightAnchor.constraint(equalTo: tabbarView.heightAnchor)
             ])
             

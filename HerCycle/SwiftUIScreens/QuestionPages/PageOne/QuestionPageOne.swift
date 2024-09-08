@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuestionPage1: View {
+struct QuestionPageOne: View {
     @State private var cycleLength: Int? = nil
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var coordinator: AppCoordinator
@@ -70,11 +70,11 @@ struct QuestionPage1: View {
             .navigationDestination(for: String.self) { page in
                 switch page {
                 case "QuestionPage2":
-                    QuestionPage2(path: $path)
+                    QuestionPageTwo(path: $path)
                         .environmentObject(viewModel)
                         .environmentObject(coordinator)
                 case "QuestionPage3":
-                    QuestionPage3(path: $path)
+                    QuestionPageThree(path: $path)
                         .environmentObject(viewModel)
                         .environmentObject(coordinator)
                 default:

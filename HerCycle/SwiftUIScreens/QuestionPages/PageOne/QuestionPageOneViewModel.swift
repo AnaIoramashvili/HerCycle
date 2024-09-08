@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class QuestionPage1ViewModel: ObservableObject {
+final class QuestionPageOneViewModel: ObservableObject {
     @Published var cycleLength: Int?
     @Published var path = NavigationPath()
     

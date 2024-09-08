@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class QuestionPage3ViewModel: ObservableObject {
+final class QuestionPageThreeViewModel: ObservableObject {
     @Published var lastPeriodStartDate = Date()
     @Published var navigateToMainTabBar = false
     @Binding var path: NavigationPath

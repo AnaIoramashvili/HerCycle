@@ -48,7 +48,7 @@ class AppCoordinator: ObservableObject {
     }
     
     private func showQuestions() async {
-        let questionsView = QuestionPage1().environmentObject(authViewModel).environmentObject(self)
+        let questionsView = QuestionPageOne().environmentObject(authViewModel).environmentObject(self)
         let questionsViewController = UIHostingController(rootView: questionsView)
         await MainActor.run {
             window.rootViewController = questionsViewController

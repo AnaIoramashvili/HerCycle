@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuestionPage2: View {
+struct QuestionPageTwo: View {
     @Binding var path: NavigationPath
     @State private var periodLength: Int? = nil
     @EnvironmentObject var viewModel: AuthViewModel

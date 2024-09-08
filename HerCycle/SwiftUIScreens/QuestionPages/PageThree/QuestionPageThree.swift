@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuestionPage3: View {
+struct QuestionPageThree: View {
     @Binding var path: NavigationPath
     @State private var lastPeriodStartDate: Date = Date()
     @State private var navigateToMainTabBar = false
