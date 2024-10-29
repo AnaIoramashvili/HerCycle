@@ -82,7 +82,7 @@
 		59EBF2602C8DE2F200B41970 /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */; };
 		59EBF2622C8DE30200B41970 /* AudioPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2612C8DE30200B41970 /* AudioPlayerViewModel.swift */; };
 		59EBF2642C8DE31000B41970 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2632C8DE31000B41970 /* TrackListViewController.swift */; };
-		59EBF2662C8DE31D00B41970 /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2652C8DE31D00B41970 /* TrackCollectionViewCell.swift */; };
+		59EBF2662C8DE31D00B41970 /* WeeksPodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2652C8DE31D00B41970 /* WeeksPodcastCell.swift */; };
 		59EBF26A2C8DE41E00B41970 /* podcast1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2672C8DE41D00B41970 /* podcast1.mp3 */; };
 		59EBF26B2C8DE41E00B41970 /* podcast2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2682C8DE41D00B41970 /* podcast2.mp3 */; };
 		59EBF26C2C8DE41E00B41970 /* podcast3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2692C8DE41E00B41970 /* podcast3.mp3 */; };
@@ -90,6 +90,8 @@
 		59EBF2702C8E077E00B41970 /* podcast5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF26F2C8E077E00B41970 /* podcast5.mp3 */; };
 		59EBF2722C8E081900B41970 /* podcast6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2712C8E081900B41970 /* podcast6.mp3 */; };
 		59EBF2742C8E08AE00B41970 /* podcast7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 59EBF2732C8E08AE00B41970 /* podcast7.mp3 */; };
+		59EBF2762C8F932900B41970 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2752C8F932900B41970 /* SectionHeaderView.swift */; };
+		59EBF2782C8F934B00B41970 /* PopularNowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBF2772C8F934B00B41970 /* PopularNowCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,7 +167,7 @@
 		59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
 		59EBF2612C8DE30200B41970 /* AudioPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewModel.swift; sourceTree = "<group>"; };
 		59EBF2632C8DE31000B41970 /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
-		59EBF2652C8DE31D00B41970 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
+		59EBF2652C8DE31D00B41970 /* WeeksPodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksPodcastCell.swift; sourceTree = "<group>"; };
 		59EBF2672C8DE41D00B41970 /* podcast1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast1.mp3; sourceTree = "<group>"; };
 		59EBF2682C8DE41D00B41970 /* podcast2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast2.mp3; sourceTree = "<group>"; };
 		59EBF2692C8DE41E00B41970 /* podcast3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast3.mp3; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 		59EBF26F2C8E077E00B41970 /* podcast5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast5.mp3; sourceTree = "<group>"; };
 		59EBF2712C8E081900B41970 /* podcast6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast6.mp3; sourceTree = "<group>"; };
 		59EBF2732C8E08AE00B41970 /* podcast7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = podcast7.mp3; sourceTree = "<group>"; };
+		59EBF2752C8F932900B41970 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		59EBF2772C8F934B00B41970 /* PopularNowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularNowCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 		592E18F12C4302E8007BA699 /* UIKitScreens */ = {
 			isa = PBXGroup;
 			children = (
+				59EBF25C2C8DE2A500B41970 /* Podcast */,
 				59AEE81E2C4FCA0E00A1D694 /* Home */,
 				59AEE8852C538E2F00A1D694 /* Calendar */,
 				59AEE8AF2C53C35F00A1D694 /* Chat */,
@@ -327,7 +332,6 @@
 		59624E172C3487E600D0D4C4 /* HerCycle */ = {
 			isa = PBXGroup;
 			children = (
-				59EBF25C2C8DE2A500B41970 /* Podcast */,
 				595FA08C2C402A7C00DC13DE /* ApplicationLayer */,
 				592E18EE2C4302B0007BA699 /* AppCoordinator */,
 				592E18F22C451BFF007BA699 /* Model */,
@@ -509,20 +513,62 @@
 		59EBF25C2C8DE2A500B41970 /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
-				59EBF2672C8DE41D00B41970 /* podcast1.mp3 */,
-				59EBF2682C8DE41D00B41970 /* podcast2.mp3 */,
-				59EBF26D2C8E06B200B41970 /* podcast4.mp3 */,
-				59EBF2732C8E08AE00B41970 /* podcast7.mp3 */,
-				59EBF2712C8E081900B41970 /* podcast6.mp3 */,
-				59EBF26F2C8E077E00B41970 /* podcast5.mp3 */,
-				59EBF2692C8DE41E00B41970 /* podcast3.mp3 */,
-				59EBF25D2C8DE2E200B41970 /* AudioTrack.swift */,
-				59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */,
+				59EBF27D2C8F94E300B41970 /* Models */,
+				59EBF27C2C8F94CA00B41970 /* Views */,
+				59EBF27B2C8F94A800B41970 /* ReusableView */,
+				59EBF27A2C8F943100B41970 /* Audios */,
+				59EBF2792C8F941000B41970 /* Cells */,
 				59EBF2612C8DE30200B41970 /* AudioPlayerViewModel.swift */,
-				59EBF2632C8DE31000B41970 /* TrackListViewController.swift */,
-				59EBF2652C8DE31D00B41970 /* TrackCollectionViewCell.swift */,
 			);
 			path = Podcast;
+			sourceTree = "<group>";
+		};
+		59EBF2792C8F941000B41970 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				59EBF2652C8DE31D00B41970 /* WeeksPodcastCell.swift */,
+				59EBF2772C8F934B00B41970 /* PopularNowCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		59EBF27A2C8F943100B41970 /* Audios */ = {
+			isa = PBXGroup;
+			children = (
+				59EBF2672C8DE41D00B41970 /* podcast1.mp3 */,
+				59EBF2682C8DE41D00B41970 /* podcast2.mp3 */,
+				59EBF2692C8DE41E00B41970 /* podcast3.mp3 */,
+				59EBF26D2C8E06B200B41970 /* podcast4.mp3 */,
+				59EBF26F2C8E077E00B41970 /* podcast5.mp3 */,
+				59EBF2712C8E081900B41970 /* podcast6.mp3 */,
+				59EBF2732C8E08AE00B41970 /* podcast7.mp3 */,
+			);
+			path = Audios;
+			sourceTree = "<group>";
+		};
+		59EBF27B2C8F94A800B41970 /* ReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				59EBF2752C8F932900B41970 /* SectionHeaderView.swift */,
+			);
+			path = ReusableView;
+			sourceTree = "<group>";
+		};
+		59EBF27C2C8F94CA00B41970 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				59EBF25F2C8DE2F200B41970 /* AudioPlayerViewController.swift */,
+				59EBF2632C8DE31000B41970 /* TrackListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		59EBF27D2C8F94E300B41970 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				59EBF25D2C8DE2E200B41970 /* AudioTrack.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FF425BF02C541F49003068F0 /* Views */ = {
@@ -766,7 +812,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59EBF2662C8DE31D00B41970 /* TrackCollectionViewCell.swift in Sources */,
+				59EBF2662C8DE31D00B41970 /* WeeksPodcastCell.swift in Sources */,
 				59AEE88D2C538EBD00A1D694 /* MonthlyView.swift in Sources */,
 				59AEE8AC2C53C1FC00A1D694 /* Message.swift in Sources */,
 				59AEE85D2C51734600A1D694 /* RatingManager.swift in Sources */,
@@ -776,6 +822,7 @@
 				59AEE8972C538F2C00A1D694 /* LegendView.swift in Sources */,
 				59AEE8B62C53E8BC00A1D694 /* CalendarViewModel.swift in Sources */,
 				59AEE8222C4FCA7E00A1D694 /* InsightCell.swift in Sources */,
+				59EBF2782C8F934B00B41970 /* PopularNowCell.swift in Sources */,
 				595FA08F2C402AA100DC13DE /* InputView.swift in Sources */,
 				59AEE85F2C51735C00A1D694 /* RatingViewController.swift in Sources */,
 				59AEE8392C4FFBA500A1D694 /* OnboardingPage.swift in Sources */,
@@ -821,6 +868,7 @@
 				592E191F2C483500007BA699 /* InsightDetailModel.swift in Sources */,
 				59AEE8562C5172B300A1D694 /* ModernReminderCell.swift in Sources */,
 				595FA09F2C402BBF00DC13DE /* OnboardingView.swift in Sources */,
+				59EBF2762C8F932900B41970 /* SectionHeaderView.swift in Sources */,
 				595FA08B2C402A4C00DC13DE /* HerCycle.swift in Sources */,
 				595FA0BB2C415D3B00DC13DE /* QuestionPageThree.swift in Sources */,
 				595FA0A12C402BD300DC13DE /* LoginView.swift in Sources */,

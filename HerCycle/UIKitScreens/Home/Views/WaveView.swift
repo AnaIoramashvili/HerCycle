@@ -35,7 +35,6 @@ final class WaveView: UIView {
         if startTime == nil {
             startTime = CACurrentMediaTime()
         }
-        
         let elapsed = CACurrentMediaTime() - startTime!
         let phase = CGFloat(elapsed) * 2
         
@@ -48,10 +47,8 @@ final class WaveView: UIView {
             let y = bounds.height * 0.5 + sine * 10
             path.addLine(to: CGPoint(x: x, y: y))
         }
-        
         path.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
         path.close()
-        
         waveLayer.path = path.cgPath
     }
 }
